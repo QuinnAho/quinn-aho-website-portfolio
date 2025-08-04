@@ -19,11 +19,24 @@ body {
   color: #fff;
 }
 
+/* Visual constants */
+:root{
+  /* Cube frame */
+  --frame-radius: 14px;
+  --frame-border: rgba(255,255,255,0.18);
+  --frame-drop-a: rgba(0,0,0,0.22);
+  --frame-drop-b: rgba(0,0,0,0.12);
+  --frame-inset: rgba(0,0,0,0.30);
+
+  /* Flat interior */
+  --surface-gray: #e6e6e6;
+}
+
 /* ===============================
    Header
    =============================== */
 .main-header {
-  position: relative;
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -160,34 +173,45 @@ body {
   margin: 0 auto;
 }
 
-/* Cube sizing */
+/* Cube sizing + flat framed container */
 .cube-wrap {
-  height: 100%;
+  /* Size: smaller than before */
+  width: clamp(160px, 28vmin, 320px);  /* was max(min(60vw, 420px)) */
+  height: auto;                        /* let aspect-ratio set height */
   aspect-ratio: 1 / 1;
-  width: auto;
-  max-width: min(60vw, 420px);  /* smaller footprint */
-  position: relative;
+
+  /* Frame: thinner + softer */
+  border: 1px solid var(--frame-border);  /* was 2px */
+  border-radius: 10px;                    /* was 14px */
+  box-shadow:
+    0 8px 16px var(--frame-drop-a),       /* was 0 12px 24px */
+    0 2px 6px var(--frame-drop-b),        /* was 0 4px 10px */
+    inset 0 0 6px var(--frame-inset);     /* was inset 0 0 10px */
 }
+
 #intro-cube {
   width: 100%;
   height: 100%;
   display: block;
   touch-action: none;
   user-select: none;
+  background: transparent;
+  position: relative;
+  z-index: 1;
 }
 
 /* Bottom: 2/3 height, full-width horizontal pager */
 .intro-bottom {
-  height: 67vh;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  height: 67vh;                  /* no divider subtraction */
+  /* no border line = no divider bar */
   background: #000;
-  overscroll-behavior: contain; /* helps keep scroll within this area */
+  overscroll-behavior: contain;
 }
 
 /* Horizontal scroller spans full viewport width */
 .pages-scroll {
   height: 100%;
-  width: 100vw;                 /* full width */
+  width: 100vw;
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
@@ -201,17 +225,16 @@ body {
 
 /* Each page fills the viewport width and is top-centered */
 .page {
-  flex: 0 0 100vw;              /* full viewport width */
+  flex: 0 0 100vw;
   height: 100%;
   width: 100%;
   scroll-snap-align: start;
   display: flex;
 
-  /* text centered at the top of the 2/3 area */
-  align-items: flex-start;      /* top */
-  justify-content: center;      /* center horizontally */
+  align-items: flex-start;  /* top */
+  justify-content: center;  /* centered horizontally */
 
-  padding: 1rem 1.5rem 1.5rem;  /* space from top */
+  padding: 1rem 1.5rem 1.5rem;
 }
 
 .page-inner {
@@ -220,7 +243,7 @@ body {
   flex-direction: column;
   gap: 1.25rem;
   align-items: center;
-  width: min(100%, 1100px);     /* readable max width */
+  width: min(100%, 1100px);
 }
 
 /* Title + Resume button */
@@ -231,7 +254,7 @@ body {
   font-size: clamp(2.2rem, 5.5vw, 3.5rem);
   line-height: 1.05;
   color: #fff;
-  margin: 0.5rem 0 0 0;         /* breathing room from top */
+  margin: 0.5rem 0 0 0;
 }
 
 #download-resume-btn {
@@ -315,42 +338,88 @@ body {
 /* ===============================
    Scrollbar theming (WebKit/Blink)
    =============================== */
-/* Horizontal pager scrollbar */
-.pages-scroll::-webkit-scrollbar {
-  height: 10px;
-}
-.pages-scroll::-webkit-scrollbar-track {
-  background: #0b0b0b;
-  border-radius: 8px;
-}
-.pages-scroll::-webkit-scrollbar-thumb {
-  background: #343434;
-  border-radius: 8px;
-}
-.pages-scroll::-webkit-scrollbar-thumb:hover {
-  background: #4a4a4a;
-}
+.pages-scroll::-webkit-scrollbar { height: 10px; }
+.pages-scroll::-webkit-scrollbar-track { background: #0b0b0b; border-radius: 8px; }
+.pages-scroll::-webkit-scrollbar-thumb { background: #343434; border-radius: 8px; }
+.pages-scroll::-webkit-scrollbar-thumb:hover { background: #4a4a4a; }
 
 /* Page vertical scrollbar to match */
-html::-webkit-scrollbar {
-  width: 10px;
-}
-html::-webkit-scrollbar-track {
-  background: #0b0b0b;
-}
-html::-webkit-scrollbar-thumb {
-  background: #343434;
-  border-radius: 8px;
-}
-html::-webkit-scrollbar-thumb:hover {
-  background: #4a4a4a;
-}
+html::-webkit-scrollbar { width: 10px; }
+html::-webkit-scrollbar-track { background: #0b0b0b; }
+html::-webkit-scrollbar-thumb { background: #343434; border-radius: 8px; }
+html::-webkit-scrollbar-thumb:hover { background: #4a4a4a; }
 
 /* Firefox vertical scrollbar on page */
-html {
-  scrollbar-color: #343434 #0b0b0b;
-  scrollbar-width: thin;
-}
+html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
 
 /* Keep promo (hidden unless you need it) */
 .promo { display: none; }
+
+/* --- Example blurb under heading --- */
+.page-blurb{
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 28ch;
+  color: #bdbdbd;
+}
+
+/* --- Up arrow button --- */
+.page-up-arrow{
+  margin-top: auto;                 /* push to bottom of .page-inner */
+  font-size: 2.2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.25s;
+}
+.page-up-arrow:hover{ transform: translateY(-4px) scale(1.15); }
+
+/* --- Sliding detail sheet --- */
+.detail-sheet{
+  position: fixed;
+  inset: 0;
+  background: #111;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  transform: translateY(100vh);
+  transition: transform 0.5s ease;
+  z-index: 1200;
+}
+
+/* close button inside sheet */
+.sheet-close{
+  position: absolute;
+  top: 12px; right: 12px;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* when sheet is active */
+.detail-sheet.open{ transform: translateY(0); }
+
+.detail-sheet {
+  overflow: hidden;         /* keep the sheet itself fixed */
+}
+.detail-sheet .sheet-content {
+  max-width: 900px;
+  width: min(90vw, 900px);
+  max-height: calc(100vh - 80px);
+  overflow: auto;           /* content scrolls inside */
+  padding: 2rem 1.25rem;
+  line-height: 1.6;
+}
+.detail-sheet .sheet-content h3 {
+  margin: 0 0 1rem;
+}
+.detail-sheet .sheet-content p,
+.detail-sheet .sheet-content li {
+  color: #d6d6d6;
+}

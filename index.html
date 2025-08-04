@@ -19,21 +19,26 @@
       <meta property="og:url" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/">
       <meta property="og:image" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/logo.png">
 
+      <!-- Your styles -->
       <link rel="stylesheet" href="styles.css">
+
+      <!-- Fonts -->
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&family=DM+Serif+Display&family=JetBrains+Mono:wght@500&family=IBM+Plex+Sans:wght@500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap" rel="stylesheet">
 
+      <!-- Analytics (unchanged) -->
       <script>
-          window.ga = window.ga || function(){ (ga.q = ga.q || []).push(arguments) }; 
-          ga.l = +new Date;
-          ga('create', 'UA-105392568-1', 'auto');
-          ga('send', 'pageview');  
+        window.ga = window.ga || function(){ (ga.q = ga.q || []).push(arguments) };
+        ga.l = +new Date;
+        ga('create', 'UA-105392568-1', 'auto');
+        ga('send', 'pageview');
       </script>
       <script async src="https://www.google-analytics.com/analytics.js"></script>
   </head>
   <body>
+    <!-- Header -->
     <header class="main-header">
       <nav class="left-nav">
         <ul class="nav-links">
@@ -48,6 +53,7 @@
       <div class="right-nav"></div>
     </header>
 
+    <!-- Hero -->
     <section class="hero">
       <canvas></canvas>
       <div class="scroll-arrow">
@@ -67,72 +73,186 @@
       <div class="border-left"></div>
 
       <section class="intro-combined" id="intro">
-  <div class="intro-split">
-    <!-- Top half: CUBE -->
-    <div class="intro-top">
-      <div class="intro-top-inner">
-        <div class="cube-wrap">
-          <canvas id="intro-cube"></canvas>
+        <div class="intro-split">
+          <!-- Top half: CUBE -->
+          <div class="intro-top">
+            <div class="intro-top-inner">
+              <div class="cube-wrap">
+                <canvas id="intro-cube"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom half: HORIZONTAL PAGES -->
+          <div class="intro-bottom">
+            <div class="pages-scroll" id="intro-pages">
+              <!-- Page 0: Home (title + resume) -->
+              <section class="page page-home">
+                <div class="page-inner">
+                  <h1 class="intro-title">QUINN AHO</h1>
+                  <a id="download-resume-btn"
+                     href="media/QuinnAhoResume.pdf"
+                     download="QuinnAhoResume.pdf">Download Resume</a>
+
+                  <p class="page-blurb">
+                    Who I am &amp; what drives me. A quick snapshot of my focus areas and current interests.
+                  </p>
+
+                  <!-- Up arrow (opens Home details) -->
+                  <button class="page-up-arrow"
+                          data-target="home-details"
+                          aria-label="Open home details">
+                    &#x2191;
+                  </button>
+                </div>
+              </section>
+
+              <!-- Page 1: Education -->
+              <section class="page page-education">
+                <div class="page-inner">
+                  <h2>EDUCATION</h2>
+                  <p class="page-blurb">Quick snapshot of my academic background.</p>
+
+                  <button class="page-up-arrow" data-target="education-details" aria-label="Open education details">
+                    &#x2191;
+                  </button>
+                </div>
+              </section>
+
+              <!-- Page 2: Skills -->
+              <section class="page page-skills">
+                <div class="page-inner">
+                  <h2>SKILLS</h2>
+                  <p class="page-blurb">
+                    My favourite engines, tools and languages—at a glance.
+                  </p>
+                  <button class="page-up-arrow"
+                          data-target="skills-details"
+                          aria-label="Open skills details">
+                    &#x2191;
+                  </button>
+                </div>
+              </section>
+
+              <!-- Page 3: Projects -->
+              <section class="page page-projects">
+                <div class="page-inner">
+                  <h2>PROJECTS</h2>
+                  <p class="page-blurb">
+                    A tour of personal and team work—from prototypes to polished builds.
+                  </p>
+                  <button class="page-up-arrow"
+                          data-target="projects-details"
+                          aria-label="Open projects details">
+                    &#x2191;
+                  </button>
+                </div>
+              </section>
+
+              <!-- Page 4: Experience -->
+              <section class="page page-experience">
+                <div class="page-inner">
+                  <h2>EXPERIENCE</h2>
+                  <p class="page-blurb">
+                    Roles, responsibilities and measurable impact across teams.
+                  </p>
+                  <button class="page-up-arrow"
+                          data-target="experience-details"
+                          aria-label="Open experience details">
+                    &#x2191;
+                  </button>
+                </div>
+              </section>
+
+              <!-- Page 5: Contact -->
+              <section class="page page-contact">
+                <div class="page-inner">
+                  <h2>CONTACT</h2>
+                  <p class="page-blurb">
+                    Let's get in touch—open to collaborations and new opportunities.
+                  </p>
+                  <button class="page-up-arrow"
+                          data-target="contact-details"
+                          aria-label="Open contact details">
+                    &#x2191;
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
         </div>
+      </section>
+    </div>
+
+    <!-- Detail sheets (ONE per ID) -->
+    <!-- Home Sheet -->
+    <div class="detail-sheet" id="home-details">
+      <button class="sheet-close" aria-label="Close">&#x2193;</button>
+      <div class="sheet-content">
+        <h3>About Me</h3>
+        <p>I'm Quinn Aho — graphics/XR engineer with a focus on real-time visuals.</p>
       </div>
     </div>
 
-    <!-- Bottom half: HORIZONTAL PAGES -->
-    <div class="intro-bottom">
-      <div class="pages-scroll" id="intro-pages">
-        <!-- Page 0: Home (title + resume) -->
-        <section class="page page-home">
-          <div class="page-inner">
-            <h1 class="intro-title">QUINN AHO</h1>
-            <a id="download-resume-btn" href="media/QuinnAhoResume.pdf" download="QuinnAhoResume.pdf">
-              Download Resume
-            </a>
-          </div>
-        </section>
-
-        <!-- Page 1: Education -->
-        <section class="page page-education">
-          <div class="page-inner">
-            <h2>EDUCATION</h2>
-            <!-- your content -->
-          </div>
-        </section>
-
-        <!-- Page 2: Skills -->
-        <section class="page page-skills">
-          <div class="page-inner">
-            <h2>SKILLS</h2>
-            <!-- your content -->
-          </div>
-        </section>
-
-        <!-- Page 3: Projects -->
-        <section class="page page-projects">
-          <div class="page-inner">
-            <h2>PROJECTS</h2>
-            <!-- your content -->
-          </div>
-        </section>
-
-        <!-- Page 4: Experience -->
-        <section class="page page-experience">
-          <div class="page-inner">
-            <h2>EXPERINCE</h2>
-            <!-- your content -->
-          </div>
-        </section>
-
-        <!-- Page 5: Contact -->
-        <section class="page page-contact">
-          <div class="page-inner">
-            <h2>CONTACT</h2>
-            <!-- your content -->
-          </div>
-        </section>
+    <!-- Education Sheet -->
+    <div class="detail-sheet" id="education-details">
+      <button class="sheet-close" aria-label="Close">&#x2193;</button>
+      <div class="sheet-content">
+        <h3>Education</h3>
+        <p>B.S. in Computer Science, University XYZ</p>
+        <ul>
+          <li>Focus: Graphics, XR, Game Engines</li>
+          <li>Capstone: Real-time fluid simulation in WebGL</li>
+        </ul>
       </div>
     </div>
-  </div>
-</section>
+
+    <!-- Skills Sheet -->
+    <div class="detail-sheet" id="skills-details">
+      <button class="sheet-close" aria-label="Close">&#x2193;</button>
+      <div class="sheet-content">
+        <h3>Skills</h3>
+        <ul>
+          <li>Unreal (C++/Blueprints), Unity (C#)</li>
+          <li>WebGL/Three.js, Shaders (GLSL/HLSL)</li>
+          <li>Tools: Blender, Houdini, Substance</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Projects Sheet -->
+    <div class="detail-sheet" id="projects-details">
+      <button class="sheet-close" aria-label="Close">&#x2193;</button>
+      <div class="sheet-content">
+        <h3>Projects</h3>
+        <p><strong>The Golem’s Curse</strong> — UE project exploring procedural FX.</p>
+        <p><strong>Fluid Sim</strong> — WebGL-based real-time fluid demo.</p>
+      </div>
+    </div>
+
+    <!-- Experience Sheet -->
+    <div class="detail-sheet" id="experience-details">
+      <button class="sheet-close" aria-label="Close">&#x2193;</button>
+      <div class="sheet-content">
+        <h3>Experience</h3>
+        <p>Immersive/Software Dev — built interactive experiences with UE/Unity.</p>
+      </div>
+    </div>
+
+    <!-- Contact Sheet -->
+    <div class="detail-sheet" id="contact-details">
+      <button class="sheet-close" aria-label="Close">&#x2193;</button>
+      <div class="sheet-content">
+        <h3>Contact</h3>
+        <p>Email: quinnaho123@gmail.com</p>
+        <p>LinkedIn: 
+          <a href="https://www.linkedin.com/in/quinn-aho-76b315223/" target="_blank" rel="noopener noreferrer">
+            linkedin.com/in/quinn-aho-76b315223
+          </a>
+        </p>
+      </div>
+    </div>
+
 
     <!-- fluid sim doesnt work without the promo block-->
     <div class="promo">
@@ -151,11 +271,32 @@
       </div>
     </div>
 
-      <!-- scripts -->
+    <!-- Scripts -->
     <script src="scripts/fluid-sim.js"></script>
     <script src="scripts/dynamic-guide.js" defer></script>
     <script src="https://unpkg.com/three@0.158.0/build/three.min.js" defer></script>
     <script src="scripts/intro-cube.js" defer></script>
     <script src="scripts/intro-pages.js" defer></script>
+
+    <!-- Detail-sheet open/close glue -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Open the matching detail sheet
+        document.querySelectorAll('.page-up-arrow').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.dataset.target;
+            const sheet = document.getElementById(id);
+            if (sheet) sheet.classList.add('open');
+          });
+        });
+
+        // Close the sheet
+        document.querySelectorAll('.sheet-close').forEach(btn => {
+          btn.addEventListener('click', () => {
+            btn.parentElement.classList.remove('open');
+          });
+        });
+      });
+    </script>
   </body>
 </html>

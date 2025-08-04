@@ -1,776 +1,356 @@
-
-   @font-face {
-    font-family: 'iconfont';
-    src: url('iconfont.ttf') format('truetype');
+/* ===============================
+   Base / Reset
+   =============================== */
+@font-face {
+  font-family: 'iconfont';
+  src: url('iconfont.ttf') format('truetype');
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body {
-    overflow-x: hidden;
-    background-color: #000;
+  overflow-x: hidden;
+  background-color: #000;
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #000;
-  color: white;
+  color: #fff;
 }
 
-/* Header Styles */
+/* ===============================
+   Header
+   =============================== */
 .main-header {
-  position: relative; /* Ensure the guide can absolutely-position inside */
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 2rem;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0,0,0,0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  top: 0; left: 0; width: 100%;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.header-guide {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%); /* center horizontally & vertically */
-  text-align: center;
-  width: auto;
-  padding: 0.5rem;
-  /* optional styling */
-}
-
-/* Example for the fade-in/fade-out classes */
-.animated-message {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.animated-message.show {
-  opacity: 1;
-}
-
-.animated-message.fade-out-all {
-  opacity: 0;
-}
-.main-header nav ul {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    gap: 3rem;
+.main-header .nav-links {
+  display: flex;
+  list-style: none;
+  gap: 3rem;
 }
 
 .main-header nav a {
-    color: rgba(255, 255, 255, 0.9);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    position: relative;
-    padding: 0.5rem 0;
-    transition: all 0.3s ease;
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
 }
 
-.main-header nav a:hover {
-    color: #fff;
-}
+.main-header nav a:hover { color: #fff; }
 
 .main-header nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: #fff;
-    transition: width 0.3s ease;
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background-color: #fff;
+  transition: width 0.3s ease;
 }
 
-.main-header nav a:hover::after {
-    width: 100%;
+.main-header nav a:hover::after { width: 100%; }
+
+/* Dynamic guide centered in header */
+.header-guide {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 0.5rem;
 }
 
-/* Hero Section */
+.animated-message { opacity: 0; transition: opacity 0.5s ease; }
+.animated-message.show { opacity: 1; }
+.animated-message.fade-out-all { opacity: 0; }
+
+/* ===============================
+   Hero
+   =============================== */
 .hero {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .hero canvas {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
 }
 
-/* Scroll Arrow (Preserved as is) */
+/* Scroll Arrow */
 .scroll-arrow {
   position: absolute;
-  bottom: 40px;
-  left: 50%;
+  bottom: 40px; left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
   animation: bounce 2s infinite;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0,0,0,0.2);
   backdrop-filter: blur(5px);
-  padding: 15px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 15px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
   transition: background 0.3s ease;
 }
-
-.scroll-arrow:hover {
-  background: rgba(0, 0, 0, 0.4);
-}
+.scroll-arrow:hover { background: rgba(0,0,0,0.4); }
 
 .scroll-arrow svg {
-  width: 30px;
-  height: 30px;
-  fill: rgba(255, 255, 255, 0.8);
+  width: 30px; height: 30px;
+  fill: rgba(255,255,255,0.8);
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translate(-50%, 0);
-  }
-  40% {
-    transform: translate(-50%, -10px);
-  }
-  60% {
-    transform: translate(-50%, -5px);
-  }
+  0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+  40% { transform: translate(-50%, -10px); }
+  60% { transform: translate(-50%, -5px); }
 }
 
-/* Content Section */
-.content {
-    position: relative;
-    background-color: #0a0a0a;
-    min-height: 100vh;
-    padding: 4rem 2rem;
-    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8);
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-/* =========================
-   Animated Sections (EXPERIENCE, PROJECTS, EDUCATION)
-   ========================= */
-
-/* Base styling for each animated section */
-.animate-section {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    margin-bottom: 4rem;
-    background-color: #0a0a0a;
-    padding: 2rem;
-}
-
-/* Header container (left-aligned) */
-.section-header-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-/* Section Headers */
-.section-header {
-    font-family: 'Arial', sans-serif;
-    color: #fff;
-    font-size: 3rem;
-    text-align: left;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    margin: 0 0 1rem 0;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    position: relative;
-}
-
-/* Underline added as a pseudo-element */
-.section-header::after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 3px;
-    background: #fff;
-    margin-top: 0.5em;
-}
-
-/* Section Content Styling */
-.section-content {
-    padding-left: 2rem;
-    font-family: 'Arial', sans-serif;
-    color: #fff;
-    font-size: 1.2rem;
-    line-height: 1.6;
-}
-
-/* Each line of content */
-.section-line {
-    margin-bottom: 1.2rem;
-    overflow: hidden;
-}
-
-/* Animate each word from left to right */
-.word {
-    display: inline-block;
-    opacity: 0;
-    transform: translateX(-50px);
-}
-
-/* =========================
-   Animation Triggers (When "animate" class is added)
-   ========================= */
-
-/* Reveal the section itself */
-.animate-section.animate {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Animate the section header with a fade-in */
-.animate-section.animate .section-header {
-    animation: fadeIn 1s forwards;
-    animation-delay: 0.2s;
-}
-
-/* Animate the header underline */
-.animate-section.animate .section-header::after {
-    animation: underlineExpand 1s forwards;
-    animation-delay: 0.8s;
-}
-
-/* Animate each word with a slide-in from left */
-.animate-section.animate .word {
-    animation: slideIn 0.5s forwards;
-}
-
-/* Modify the header animation rules to work on any .animate container */
-.animate .section-header {
-  animation: fadeIn 1s forwards;
-  animation-delay: 0.2s;
-}
-.animate .section-header::after {
-  animation: underlineExpand 1s forwards;
-  animation-delay: 0.8s;
-}
-
-/* Keyframes for fading in the header */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Keyframes for expanding the underline */
-@keyframes underlineExpand {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-/* Keyframes for sliding words in from the left */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-/* Container for 3 vertical columns */
-.section-columns {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    margin-bottom: 2rem;
-  }
-  
-  /* Base style for vertical lines */
-  .v-line {
-    position: absolute;
-    top: 0;
-    width: 2px;
-    height: 0;
-    background: white;
-    opacity: 0.2;
-  }
-  
-  /* Left, center, and right column positions */
-  .v-line-left {
-    left: 20%;
-  }
-  .v-line-center {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .v-line-right {
-    left: 80%;
-  }
-  
-  /* Horizontal connector at bottom */
-  .h-connector {
-    position: absolute;
-    bottom: 0;
-    left: 20%;
-    height: 2px;
-    width: 0;
-    background: white;
-    opacity: 0.2;
-  }
-  
-  /* Animate vertical lines downward */
-  .animate-section.animate .v-line {
-    animation: verticalGrow 1.5s forwards ease-in-out;
-  }
-  .animate-section.animate .v-line-left {
-    animation-delay: 0.2s;
-  }
-  .animate-section.animate .v-line-center {
-    animation-delay: 0.5s;
-  }
-  .animate-section.animate .v-line-right {
-    animation-delay: 0.8s;
-  }
-  
-  /* Animate horizontal connector after verticals finish */
-  .animate-section.animate .h-connector {
-    animation: horizontalGrow 1s forwards ease-in-out;
-    animation-delay: 1.2s;
-  }
-  
-  /* Vertical line animation (top to bottom) */
-  @keyframes verticalGrow {
-    from {
-      height: 0;
-      opacity: 0.2;
-    }
-    to {
-      height: 100%;
-      opacity: 0.5;
-    }
-  }
-  
-  /* Horizontal line animation (left to right) */
-  @keyframes horizontalGrow {
-    from {
-      width: 0;
-      opacity: 0.2;
-    }
-    to {
-      width: 60%;
-      opacity: 0.5;
-    }
-  }
-/* Layout: three columns side-by-side */
-/* Section with subtle gradient, rounded corners, and depth */
-/* Full unified section */
+/* ===============================
+   Full-page section under hero
+   =============================== */
 .intro-combined {
   width: 100%;
-  background-color: #000; /* solid black */
-  color: white;
-  padding: 6rem 2rem;
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Full width so pages span the entire viewport */
+.intro-split {
+  width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+/* Top: 1/3 height (cube) */
+.intro-top {
+  height: 33vh;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  padding: 1rem 1rem 0.5rem;
 }
 
-/* Intro content block */
-.intro-inner {
+/* Optional inner wrapper to keep cube from growing too wide */
+.intro-top-inner {
   width: 100%;
-  max-width: 1200px;
-  margin-bottom: 5rem;
-}
-
-/* Top left-aligned name */
-.intro-left {
-  text-align: left;
-}
-
-.intro-label {
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: #999;
-  margin-bottom: 0.5rem;
-}
-
-.intro-name {
-  font-size: 3.5rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  line-height: 1;
-  color: white;
-  margin-bottom: 2rem; /* <-- Add this */
-}
-
-
-/* Tagline or cursive text */
-.intro-tagline {
-  text-align: center;
-  font-size: 1.4rem;
-  color: #eee;
-  opacity: 0.9;
-  letter-spacing: 0.05em;
-  line-height: 1.6;
-}
-
-.tag-graphics {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 500;
-}
-
-.tag-xr {
-  font-family: 'DM Serif Display', serif;
-  font-weight: 500;
-  font-style: italic;
-}
-
-.tag-engine {
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 500;
-  letter-spacing: -0.5px;
-}
-
-.tag-techart {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 500;
-}
-
-.intro-tagline em {
-  font-family: 'Tangerine', cursive;
-  font-style: normal;
-  font-weight: 500;
-  opacity: 0.9;
-  margin-left: 0.5rem;
-  font-size: 3.0rem;
-}
-
-
-/* Columns section */
-.three-column-layout {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4rem;
-  width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto;
 }
 
-/* Individual column (no cards) */
-.column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Section headers */
-.section-header,
-.intro-name {
-  font-family: 'Inter', sans-serif;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-}
-
-/* Text content under each column */
-.section-content {
-  text-align: center;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #ccc;
-}
-
-/* Text animation (optional) */
-.word {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(10px);
-}
-.animate-section.animate .word {
-  animation: wordUp 0.5s forwards;
-}
-@keyframes wordUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Ensure column section is black */
-.three-column-layout {
-  background-color: #000;
-}
-
-/* Ensure each column is black */
-.column {
-  background-color: #000;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-.word {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: wordUp 0.6s forwards;
-}
-
-/* Optional: smoother easing */
-@keyframes wordUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Modern slide-in for "HI I'M" */
-.intro-hi {
-  display: inline-block;
-  opacity: 0;
-  transform: translateX(-20px);
-  animation: hiSlideIn 0.7s forwards ease-out;
-}
-
-.intro-hi:nth-child(1) { animation-delay: 0.2s; }
-.intro-hi:nth-child(2) { animation-delay: 0.4s; }
-
-@keyframes hiSlideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Clean fade-up for "QUINN AHO" */
-.intro-name-word {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(12px);
-  animation: nameFadeUp 0.8s forwards ease-out;
-}
-
-.intro-name-word:nth-child(1) { animation-delay: 0.7s; }
-.intro-name-word:nth-child(2) { animation-delay: 0.9s; }
-
-@keyframes nameFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Modern Bold Style for the Learn More Button */
-#learn-more-btn {
-  background: transparent;
-  color: #fff;
-  border: none;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-radius: 50px; /* rounded/oval shape */
-  cursor: pointer;
+/* Cube sizing */
+.cube-wrap {
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  width: auto;
+  max-width: min(60vw, 420px);  /* smaller footprint */
   position: relative;
-  transition: transform 0.3s ease;
-  outline: none;
 }
-
-/* Pseudo-element to draw an oval outline on hover */
-#learn-more-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
+#intro-cube {
   width: 100%;
   height: 100%;
-  border: 2px solid #fff;
-  border-radius: 50px;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: block;
+  touch-action: none;
+  user-select: none;
 }
 
-#learn-more-btn:hover::before {
-  opacity: 1;
-  transform: scale(1);
+/* Bottom: 2/3 height, full-width horizontal pager */
+.intro-bottom {
+  height: 67vh;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  background: #000;
+  overscroll-behavior: contain; /* helps keep scroll within this area */
 }
 
-#learn-more-btn:active {
-  transform: translateY(0);
+/* Horizontal scroller spans full viewport width */
+.pages-scroll {
+  height: 100%;
+  width: 100vw;                 /* full width */
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  /* Dark scrollbar (Firefox) */
+  scrollbar-color: #343434 #0b0b0b;
+  scrollbar-width: thin;
 }
 
-.button-group {
-  display: inline-flex;
-  gap: 1.5rem;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+/* Each page fills the viewport width and is top-centered */
+.page {
+  flex: 0 0 100vw;              /* full viewport width */
+  height: 100%;
+  width: 100%;
+  scroll-snap-align: start;
+  display: flex;
+
+  /* text centered at the top of the 2/3 area */
+  align-items: flex-start;      /* top */
+  justify-content: center;      /* center horizontally */
+
+  padding: 1rem 1.5rem 1.5rem;  /* space from top */
 }
 
-.learn-more-container {
+.page-inner {
   text-align: center;
-  margin: 2rem 0;
-}
-
-.button-column {
   display: flex;
   flex-direction: column;
+  gap: 1.25rem;
   align-items: center;
-  gap: 1.5rem;
+  width: min(100%, 1100px);     /* readable max width */
 }
 
-/* Reuse Learn More styles for Resume button */
+/* Title + Resume button */
+.intro-title {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+  line-height: 1.05;
+  color: #fff;
+  margin: 0.5rem 0 0 0;         /* breathing room from top */
+}
+
 #download-resume-btn {
+  display: inline-block;
   background: transparent;
   color: #fff;
-  border: none;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-radius: 50px;
-  cursor: pointer;
-  position: relative;
   text-decoration: none;
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  position: relative;
   outline: none;
-  display: inline-block;
-  transition: transform 0.3s ease;
 }
-
 #download-resume-btn::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   border: 2px solid #fff;
-  border-radius: 50px;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  border-radius: 999px;
+  pointer-events: none;
 }
+#download-resume-btn:active { transform: translateY(1px); }
 
-#download-resume-btn:hover::before {
-  opacity: 1;
-  transform: scale(1);
-}
-
-#download-resume-btn:active {
-  transform: translateY(0);
-}
-/* 1) The wrapper that holds both your actual content AND the animated borders */
+/* ===============================
+   Border wrapper + animated lines
+   =============================== */
 .border-wrapper {
-  position: relative;  /* required so .border-* can absolutely-position inside */
-  width: 100%;         /* ensures full page width inside normal flow */
-  margin: 0 auto;      /* optional, center if you like */
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
   box-sizing: border-box;
-  /* no explicit height needed; it expands based on content */
 }
 
-/* 2) Base styles for all four sides of the border */
 .border-top,
 .border-right,
 .border-bottom,
 .border-left {
   position: absolute;
-  background-color: #fff;  /* the visible color of the border */
-  z-index: 9999;           /* ensure the border sits on top of content */
+  background-color: #fff;
+  z-index: 9999;
 }
 
-/* 3) Top border: starts at zero width, animates to full width */
+/* Top border */
 .border-top {
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 2px;                /* border thickness */
-  animation: drawTop 1s forwards ease-out; 
+  top: 0; left: 0;
+  width: 0%; height: 2px;
+  animation: drawTop 1s forwards ease-out;
 }
+@keyframes drawTop { 0% { width: 0% } 100% { width: 100% } }
 
-@keyframes drawTop {
-  0%   { width: 0%; }
-  100% { width: 100%; }
-}
-
-/* 4) Right border: starts at zero height, animates downward */
+/* Right border */
 .border-right {
-  top: 0;
-  right: 0;
-  width: 2px;
-  height: 0%;      
+  top: 0; right: 0;
+  width: 2px; height: 0%;
   animation: drawRight 1s forwards ease-out;
-  animation-delay: 1s;        /* wait until top border finishes */
+  animation-delay: 1s;
 }
+@keyframes drawRight { 0% { height: 0% } 100% { height: 100% } }
 
-@keyframes drawRight {
-  0%   { height: 0%; }
-  100% { height: 100%; }
-}
-
-/* 5) Bottom border: also from zero to full width */
+/* Bottom border (optional; only if you add it in HTML) */
 .border-bottom {
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 2px;
+  bottom: 0; left: 0;
+  width: 0%; height: 2px;
   animation: drawBottom 1s forwards ease-out;
-  animation-delay: 2s;        /* waits for right border to finish */
+  animation-delay: 2s;
 }
+@keyframes drawBottom { 0% { width: 0% } 100% { width: 100% } }
 
-@keyframes drawBottom {
-  0%   { width: 0%; }
-  100% { width: 100%; }
-}
-
-/* 6) Left border: final side, also animates downward */
+/* Left border */
 .border-left {
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 0%;
+  top: 0; left: 0;
+  width: 2px; height: 0%;
   animation: drawLeft 1s forwards ease-out;
-  animation-delay: 3s;        /* starts after bottom border is done */
+  animation-delay: 3s;
+}
+@keyframes drawLeft { 0% { height: 0% } 100% { height: 100% } }
+
+/* ===============================
+   Scrollbar theming (WebKit/Blink)
+   =============================== */
+/* Horizontal pager scrollbar */
+.pages-scroll::-webkit-scrollbar {
+  height: 10px;
+}
+.pages-scroll::-webkit-scrollbar-track {
+  background: #0b0b0b;
+  border-radius: 8px;
+}
+.pages-scroll::-webkit-scrollbar-thumb {
+  background: #343434;
+  border-radius: 8px;
+}
+.pages-scroll::-webkit-scrollbar-thumb:hover {
+  background: #4a4a4a;
 }
 
-@keyframes drawLeft {
-  0%   { height: 0%; }
-  100% { height: 100%; }
+/* Page vertical scrollbar to match */
+html::-webkit-scrollbar {
+  width: 10px;
 }
+html::-webkit-scrollbar-track {
+  background: #0b0b0b;
+}
+html::-webkit-scrollbar-thumb {
+  background: #343434;
+  border-radius: 8px;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: #4a4a4a;
+}
+
+/* Firefox vertical scrollbar on page */
+html {
+  scrollbar-color: #343434 #0b0b0b;
+  scrollbar-width: thin;
+}
+
+/* Keep promo (hidden unless you need it) */
+.promo { display: none; }

@@ -1,219 +1,161 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="Cache-Control" content="no-cache">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="Cache-Control" content="no-cache">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="mobile-web-app-capable" content="yes">
 
-    <link rel="apple-touch-icon" href="logo.png">
-    <link rel="icon" href="logo.png">
+      <link rel="apple-touch-icon" href="logo.png">
+      <link rel="icon" href="logo.png">
 
-    <title>Quinn Aho</title>
-    <meta name="description" content="A WebGL fluid simulation that works in mobile browsers.">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Webgl Fluid Simulation">
-    <meta property="og:description" content="A WebGL fluid simulation that works in mobile browsers.">
-    <meta property="og:url" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/">
-    <meta property="og:image" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/logo.png">
+      <title>Quinn Aho</title>
+      <meta name="description" content="Quinn's website portfolio using Web-GL fluid sim.">
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="Webgl Fluid Simulation">
+      <meta property="og:description" content="A WebGL fluid simulation that works in mobile browsers.">
+      <meta property="og:url" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/">
+      <meta property="og:image" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/logo.png">
 
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&family=DM+Serif+Display&family=JetBrains+Mono:wght@500&family=IBM+Plex+Sans:wght@500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="styles.css">
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&family=DM+Serif+Display&family=JetBrains+Mono:wght@500&family=IBM+Plex+Sans:wght@500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap" rel="stylesheet">
 
-    <script type="text/javascript" src="dat.gui.min.js"></script>
+      <script>
+          window.ga = window.ga || function(){ (ga.q = ga.q || []).push(arguments) }; 
+          ga.l = +new Date;
+          ga('create', 'UA-105392568-1', 'auto');
+          ga('send', 'pageview');  
+      </script>
+      <script async src="https://www.google-analytics.com/analytics.js"></script>
+  </head>
+  <body>
+    <header class="main-header">
+      <nav class="left-nav">
+        <ul class="nav-links">
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+        </ul>
+      </nav>
 
-    <script>
-        window.ga = window.ga || function(){ (ga.q = ga.q || []).push(arguments) }; 
-        ga.l = +new Date;
-        ga('create', 'UA-105392568-1', 'auto');
-        ga('send', 'pageview');  
-    </script>
-    <script async src="https://www.google-analytics.com/analytics.js"></script>
-</head>
-<body>
-  <header class="main-header">
-    <!-- Left-side navigation -->
-    <nav class="left-nav">
-      <ul class="nav-links">
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#skills">Skills</a></li>
-      </ul>
-    </nav>
-  
-     <!-- Centered guide container -->
-  <div class="header-guide" id="header-guide"></div>
-  
-    <!-- Optional right side -->
-    <div class="right-nav"></div>
-  </header>
+      <div class="header-guide" id="header-guide"></div>
+      <div class="right-nav"></div>
+    </header>
 
     <section class="hero">
-        <canvas></canvas>
-        <div class="scroll-arrow">
-          <a href="#intro" id="scroll-arrow">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 17.414l-6.707-6.707 1.414-1.414L12 14.586l5.293-5.293 1.414 1.414z"/>
-            </svg>
-          </a>
-        </div>
-      </section>
+      <canvas></canvas>
+      <div class="scroll-arrow">
+        <a href="#intro" id="scroll-arrow">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 17.414l-6.707-6.707 1.414-1.414L12 14.586l5.293-5.293 1.414 1.414z"/>
+          </svg>
+        </a>
+      </div>
+    </section>
 
-<!-- START: Border wrapper -->
-<div class="border-wrapper">
-  <!-- These four divs are the animated border lines -->
-  <div class="border-top"></div>
-  <div class="border-right"></div>
-  <!--<div class="border-bottom"></div> -->
-  <div class="border-left"></div>
+    <!-- Border wrapper with full-page section under hero -->
+    <div class="border-wrapper">
+      <div class="border-top"></div>
+      <div class="border-right"></div>
+      <!-- <div class="border-bottom"></div> -->
+      <div class="border-left"></div>
 
       <section class="intro-combined" id="intro">
-        <div class="intro-inner">
-          <div class="intro-left">
-            <p class="intro-label">
-              <span class="intro-hi">HI</span> <span class="intro-hi">I'M</span>
-            </p>
-            <h1 class="intro-name">
-              <span class="intro-name-word">QUINN</span> <span class="intro-name-word">AHO</span>
-            </h1>
-        
-            <div class="intro-tagline">
-              <span class="word tag-graphics">GRAPHICS</span> |
-              <span class="word tag-xr">EXTENDED REALITY</span> |
-              <span class="word tag-engine">GAME ENGINE</span> |
-              <span class="word tag-techart">TECHNICAL ART</span>
-              <span class="word"><em>Enthusiast</em></span>
-            </div>
-          </div>
+  <div class="intro-split">
+    <!-- Top half: CUBE -->
+    <div class="intro-top">
+      <div class="intro-top-inner">
+        <div class="cube-wrap">
+          <canvas id="intro-cube"></canvas>
         </div>
-        
-        <!-- Learn More Button -->
-        <div class="learn-more-container">
-          <div class="button-column">
-            <a id="download-resume-btn" href="QuinnAhoResume.pdf" download="QuinnAhoResume.pdf">Download Resume</a>
-            <button id="learn-more-btn">Learn More</button>
-          </div>
-        </div>
-        </div>
-    
-        <!-- Three Column Layout -->
-        <div class="three-column-layout">
-          <!-- Column 1 -->
-          <div class="column manual-animate">
-            <h1 class="section-header">EXPERIENCE</h1>
-            <div class="section-content">
-              <p class="section-line">
-                <span class="word">Immersive</span>
-                <span class="word">/</span>
-                <span class="word">Software</span>
-                <span class="word">Dev.</span>
-              </p>
-            </div>
-          </div>
-        
-          <!-- Column 2 -->
-          <div class="column manual-animate">
-            <h1 class="section-header">PROJECTS</h1>
-            <div class="section-content">
-              <p class="section-line">
-                <span class="word">The</span>
-                <span class="word">Golem’s</span>
-                <span class="word">Curse</span>
-              </p>
-            </div>
-          </div>
-        
-          <!-- Column 3 -->
-          <div class="column manual-animate">
-            <h1 class="section-header">EDUCATION</h1>
-            <div class="section-content">
-              <p class="section-line">
-                <span class="word">Bachelor’s</span>
-                <span class="word">in</span>
-                <span class="word">CS</span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    <div class="promo">
-        <div class="promo-middle">
-            <div class="promo-content">
-                <div class="promo-header">
-                    <span class="promo-close">&times;</span>
-                </div>
-                <div class="promo-body">
-                    <div class="links-container">
-                        <a class="link" id="apple_link" target="_blank">
-                        </a>
-                        <a class="link" id="google_link" target="_blank">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <script src="./script.js"></script>
+    <!-- Bottom half: HORIZONTAL PAGES -->
+    <div class="intro-bottom">
+      <div class="pages-scroll" id="intro-pages">
+        <!-- Page 0: Home (title + resume) -->
+        <section class="page page-home">
+          <div class="page-inner">
+            <h1 class="intro-title">QUINN AHO</h1>
+            <a id="download-resume-btn" href="media/QuinnAhoResume.pdf" download="QuinnAhoResume.pdf">
+              Download Resume
+            </a>
+          </div>
+        </section>
 
-    <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        const intro = document.getElementById('intro');
-        const animatedSet = new Set();
-      
-        // Helper to animate words with staggered delays
-        const animateWords = (container, selector, baseDelay = 0, step = 0.2) => {
-          const words = container.querySelectorAll(selector);
-          words.forEach((el, i) => {
-            el.style.animationDelay = `${baseDelay + i * step}s`;
-          });
-          return baseDelay + words.length * step;
-        };
-      
-        // Animate a section and return a promise that resolves when complete
-        const animateSection = (section) => {
-          return new Promise((resolve) => {
-            if (animatedSet.has(section)) return resolve();
-            animatedSet.add(section);
-      
-            // For non-intro sections, add the animate-section class so that header animations fire.
-            if (section.id !== 'intro') {
-              section.classList.add('animate-section');
-            }
-            section.classList.add('animate');
-      
-            let delay = 0;
-            if (section.id === 'intro') {
-              delay = animateWords(section, '.intro-hi', 0.2, 0.2);
-              delay = animateWords(section, '.intro-name-word', delay + 0.3, 0.2);
-              delay = animateWords(section, '.intro-tagline .word', delay + 0.4, 0.35);
-            } else {
-              delay = animateWords(section, '.word', 0, 0.35);
-            }
-            // Wait for the animation to finish before resolving (with a 0.5s buffer)
-            const totalDuration = (delay + 0.5) * 1000;
-            setTimeout(resolve, totalDuration);
-          });
-        };
-      
-        // Trigger column animations only when the Learn More button is pressed.
-        document.getElementById('learn-more-btn').addEventListener('click', () => {
-          const columns = Array.from(document.querySelectorAll('.manual-animate'));
-          let sequence = Promise.resolve();
-          columns.forEach(column => {
-            sequence = sequence.then(() => animateSection(column));
-          });
-          // Optionally, disable the button to prevent repeated clicks (without hiding it):
-          document.getElementById('learn-more-btn').disabled = true;
-        });
-      });
-      </script>
- <script src="./dynamicguide.js" defer></script>
-</body>
+        <!-- Page 1: Education -->
+        <section class="page page-education">
+          <div class="page-inner">
+            <h2>Education</h2>
+            <!-- your content -->
+          </div>
+        </section>
+
+        <!-- Page 2: Skills -->
+        <section class="page page-skills">
+          <div class="page-inner">
+            <h2>Skills</h2>
+            <!-- your content -->
+          </div>
+        </section>
+
+        <!-- Page 3: Projects -->
+        <section class="page page-projects">
+          <div class="page-inner">
+            <h2>Projects</h2>
+            <!-- your content -->
+          </div>
+        </section>
+
+        <!-- Page 4: Experience -->
+        <section class="page page-experience">
+          <div class="page-inner">
+            <h2>Experience</h2>
+            <!-- your content -->
+          </div>
+        </section>
+
+        <!-- Page 5: Contact -->
+        <section class="page page-contact">
+          <div class="page-inner">
+            <h2>Contact</h2>
+            <!-- your content -->
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- fluid sim doesnt work without the promo block-->
+    <div class="promo">
+      <div class="promo-middle">
+        <div class="promo-content">
+          <div class="promo-header">
+            <span class="promo-close">&times;</span>
+          </div>
+          <div class="promo-body">
+            <div class="links-container">
+              <a class="link" id="apple_link" target="_blank"></a>
+              <a class="link" id="google_link" target="_blank"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- scripts -->
+    <script src="scripts/fluid-sim.js"></script>
+    <script src="scripts/dynamic-guide.js" defer></script>
+    <script src="https://unpkg.com/three@0.158.0/build/three.min.js" defer></script>
+    <script src="scripts/intro-cube.js" defer></script>
+    <script src="scripts/intro-pages.js" defer></script>
+  </body>
 </html>

@@ -1,7 +1,5 @@
 # Quinn Aho Portfolio Website
 
-[Play here](https://paveldogreat.github.io/WebGL-Fluid-Simulation/)
-
 <img src="/screenshot.jpg?raw=true" width="880">
 
 ## References

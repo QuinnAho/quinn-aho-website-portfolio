@@ -199,24 +199,86 @@
       <button class="sheet-close" aria-label="Close">&#x2193;</button>
       <div class="sheet-content">
         <h3>Education</h3>
-        <p>B.S. in Computer Science, University XYZ</p>
-        <ul>
-          <li>Focus: Graphics, XR, Game Engines</li>
-          <li>Capstone: Real-time fluid simulation in WebGL</li>
-        </ul>
+        <div class="edu-grid">
+          <div class="edu-card card">
+            <h4>Wayne State University</h4>
+            <div class="school">B.S. in Computer Science Engineering</div>
+            <div class="row">
+              <span>Aug 2022 - Jan 2025</span>
+              <span>Major GPA: 3.86</span>
+              <span>Overall GPA: 3.12</span>
+            </div>
+            <ul>
+              <li>Relevant coursework: Computer Graphics I, DSA, Game Programming, CS I&II, Java, C++ for Gaming.</li>
+              <li>Awards: Congressional App Challenge (Winner), Dean's List (3 years), Edward &amp; Bernard Gaffney Scholarships.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Skills Sheet -->
-    <div class="detail-sheet" id="skills-details">
+    <div class="detail-sheet" id="skills-details" aria-hidden="true">
       <button class="sheet-close" aria-label="Close">&#x2193;</button>
       <div class="sheet-content">
         <h3>Skills</h3>
-        <ul>
-          <li>Unreal (C++/Blueprints), Unity (C#)</li>
-          <li>WebGL/Three.js, Shaders (GLSL/HLSL)</li>
-          <li>Tools: Blender, Houdini, Substance</li>
-        </ul>
+
+        <div class="skills-grid">
+          <section>
+            <h4>Engines &amp; XR</h4>
+            <ul>
+              <li>Unreal Engine 4/5 (C++ / Blueprints)</li>
+              <li>Unity (C#)</li>
+              <li>XR Dev (HTC &amp; Oculus SDK)</li>
+              <li>MetaHuman, Niagara, Sequencer</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Graphics &amp; Shaders</h4>
+            <ul>
+              <li>OpenGL, GLSL/HLSL</li>
+              <li>Real-time rendering &amp; post</li>
+              <li>Procedural FX / VFX</li>
+              <li>Optimization &amp; profiling</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Languages</h4>
+            <ul>
+              <li>C++, C#, Java, Python</li>
+              <li>JavaScript / TypeScript (web/Three.js)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Tools &amp; DCC</h4>
+            <ul>
+              <li>Blender, Houdini, Substance</li>
+              <li>NX, SolidWorks, 3ds Max</li>
+              <li>Ableton (sound design), DaVinci Resolve</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>DevOps &amp; Process</h4>
+            <ul>
+              <li>Git, Perforce (GitLab/Bitbucket)</li>
+              <li>Jira, Confluence, Agile/Scrum</li>
+              <li>CI/CD, PowerShell, Virtualization</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Backend &amp; Web</h4>
+            <ul>
+              <li>Node.js, MongoDB</li>
+              <li>HTML/CSS/JS, Three.js</li>
+              <li>Hugging Face, GPT API</li>
+            </ul>
+          </section>
+        </div>
       </div>
     </div>
 
@@ -226,45 +288,65 @@
       <div class="sheet-content">
         <h3>Projects</h3>
         <ul class="project-list">
-          <li>
-            <strong>KPI Recorder:</strong> Unreal plugin that extracts simulation data to compute KPIs for vehicle analysis.
+          <li class="card">
+            <strong>KPI Recorder</strong>
+            Unreal plugin to extract simulation data and compute KPIs for vehicle analysis.
           </li>
-          <li>
-            <strong>VR Educational Sim:</strong> Real-time educational simulator built for divers and gymnasts using hand tracking.
+          <li class="card">
+            <strong>VR Educational Sim</strong>
+            Air-awareness trainer with real-time comeout control and hand tracking.
           </li>
-          <li>
-            <strong>Raytheon Cinematic:</strong> Created a promo cinematic with UE4 sequencer, custom FX, and CAD asset translation.
+          <li class="card">
+            <strong>Raytheon Cinematic</strong>
+            UE sequencer promo with custom FX and CAD translation.
           </li>
-          <li>
-            <strong>ATD Positioning Tool:</strong> VR tool to intuitively pose Hybrid III ATD using IK and joint limits.
+          <li class="card">
+            <strong>ATD Positioning Tool</strong>
+            VR IK tool to intuitively pose Hybrid III ATD with joint limits.
           </li>
-          <li>
-            <strong>UE5 Weather Viz:</strong> Built a weather visualization system for architectural use in UE5 with C++/Blueprint.
+          <li class="card">
+            <strong>UE5 Weather Viz</strong>
+            Weather visualization system for architectural workflows (C++/Blueprint).
           </li>
-          <li>
-            <strong>Vision VR Enhancements:</strong> Added VR UX features and debug tools for Corvid's in-house sim software.
+          <li class="card">
+            <strong>Vision VR Enhancements</strong>
+            UX features and debug tools for Corvid’s in-house sim software.
           </li>
-          <li>
-            <strong>Military Ground Vehicle Sim:</strong> Developed interactive military simulations and optimized VR environments.
+          <li class="card">
+            <strong>Military Ground Vehicle Sim</strong>
+            Interactive military simulations and optimized VR environments.
           </li>
-          <li>
-            <strong>Golem's Curse:</strong> Full-length UE5 cinematic with original sound and post-processing.
-            <br><a href="https://www.youtube.com/watch?v=d8QPDpQtJI4" target="_blank">Watch Video</a>
+          <li class="card">
+            <strong>Golem’s Curse</strong>
+            Full-length UE5 cinematic with original sound/post. 
+            <div class="project-actions">
+              <a href="https://www.youtube.com/watch?v=d8QPDpQtJI4" target="_blank" rel="noopener noreferrer">Watch</a>
+            </div>
           </li>
-          <li>
-            <strong>RealityRift:</strong> Hackathon VR project using AI + Metahumans to explore historical events interactively.
-            <br><a href="https://devpost.com/software/realityrift" target="_blank">View Devpost</a>
+          <li class="card">
+            <strong>RealityRift</strong>
+            Hackathon VR with AI + MetaHumans for interactive history.
+            <div class="project-actions">
+              <a href="https://devpost.com/software/realityrift" target="_blank" rel="noopener noreferrer">Devpost</a>
+            </div>
           </li>
-          <li>
-            <strong>OBJ Viewer + Raytracer:</strong> Built in C++/OpenGL with real-time OBJ viewing and basic CPU raytracing.
-            <br><a href="https://github.com/QuinnAho/OpenGLOBJViewer" target="_blank">View on GitHub</a>
+          <li class="card">
+            <strong>OBJ Viewer + Raytracer</strong>
+            C++/OpenGL viewer + CPU raytracer with basic lighting.
+            <div class="project-actions">
+              <a href="https://github.com/QuinnAho/OpenGLOBJViewer" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
           </li>
-          <li>
-            <strong>AI Avatar Animation System:</strong> Developed real-time animation blending system using Audio2Face + ElevenLabs.
+          <li class="card">
+            <strong>AI Avatar Animation System</strong>
+            Real-time animation blending with Audio2Face + ElevenLabs.
           </li>
-          <li>
-            <strong>Metahuman Punch Animation:</strong> Quick test using motion capture + keyframed animation.
-            <br><a href="https://www.youtube.com/watch?v=_YsaMV5zTgg" target="_blank">Watch Video</a>
+          <li class="card">
+            <strong>Metahuman Punch Animation</strong>
+            Quick mocap + keyframed test.
+            <div class="project-actions">
+              <a href="https://www.youtube.com/watch?v=_YsaMV5zTgg" target="_blank" rel="noopener noreferrer">Watch</a>
+            </div>
           </li>
         </ul>
       </div>
@@ -275,7 +357,67 @@
       <button class="sheet-close" aria-label="Close">&#x2193;</button>
       <div class="sheet-content">
         <h3>Experience</h3>
-        <p>Immersive/Software Dev — built interactive experiences with UE/Unity.</p>
+
+        <div class="xp-list">
+          <article class="xp-item card">
+            <h4><strong>Johns Hopkins Applied Physics Lab (APL)</strong> — <em>Immersive / Software Development Intern</em></h4>
+            <p><small>May 2024 - Present · Laurel, MD</small></p>
+            <ul>
+              <li>Contributed to vehicle training simulation software for Navy soldiers using Unity (C#).</li>
+              <li>Built an internal CAD viewer in Unreal Engine for maintainers to inspect vehicle subsystems.</li>
+              <li>Developed shaders and environment effects to improve simulation realism.</li>
+              <li>Supported DevOps tasks: PowerShell scripting, virtualization, and CI/CD setup.</li>
+            </ul>
+          </article>
+
+          <article class="xp-item card">
+            <h4><strong>GS Engineering</strong> — <em>Simulation Engineering Intern</em></h4>
+            <p><small>Nov 2023 - May 2024 · Houghton, MI</small></p>
+            <ul>
+              <li>Led development of a KPI plugin in Unreal Engine to extract/analyze vehicle simulation data.</li>
+              <li>Created/rigged vehicle mockups in Blender; tuned collision and suspension in UE.</li>
+              <li>Participated in Agile scrums and cross-team planning.</li>
+            </ul>
+          </article>
+
+          <article class="xp-item card">
+            <h4><strong>GS Engineering</strong> — <em>Technology Growth Intern (High School)</em></h4>
+            <p><small>May 2021 - Aug 2022 · Houghton, MI</small></p>
+            <ul>
+              <li>Researched and developed VR simulation environments for military applications in UE.</li>
+              <li>Helped establish CAD-to-game-engine workflows for engineering visualization.</li>
+            </ul>
+          </article>
+
+          <article class="xp-item card">
+            <h4><strong>Corvid Technologies</strong> — <em>VR Visualization Intern</em></h4>
+            <p><small>May 2023 - Aug 2023 · Mooresville, NC</small></p>
+            <ul>
+              <li>Developed UE4/UE5 Blueprint &amp; C++ VR tools; delivered a Raytheon promo cinematic.</li>
+              <li>Built a VR IK ATD positioning tool with per-DoF joint limits and IK posing.</li>
+              <li>Improved <em>VISION</em>: label mapping, menu reset, material error checks, etc.</li>
+            </ul>
+          </article>
+
+          <article class="xp-item card">
+            <h4><strong>NextGenCoding</strong> — <em>Junior Unreal Developer (Contract)</em></h4>
+            <p><small>Sept 2024 - Nov 2024</small></p>
+            <ul>
+              <li>Integrated APIs and designed animation systems for realistic AI MetaHuman interactions.</li>
+              <li>Worked with ElevenLabs and NVIDIA Audio2Face for real-time voice-to-facial sync.</li>
+            </ul>
+          </article>
+
+          <article class="xp-item card">
+            <h4><strong>ImmersaLab</strong> — <em>Founder</em></h4>
+            <p><small>2023 - Present · <a href="https://immersalab.dev/" target="_blank" rel="noopener noreferrer">immersalab.dev</a></small></p>
+            <ul>
+              <li>Built AI-driven Niagara FX and real-time VFX/procedural tools for UE.</li>
+              <li>Delivered cinematics and XR experiences using MetaHumans, mocap, and AI avatars.</li>
+              <li>Focused on real-time rendering, VFX, and procedural environment generation.</li>
+            </ul>
+          </article>
+        </div>
       </div>
     </div>
 
@@ -312,31 +454,11 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://unpkg.com/three@0.158.0/build/three.min.js" defer></script>
     <script src="scripts/fluid-sim.js"></script>
     <script src="scripts/dynamic-guide.js" defer></script>
-    <script src="https://unpkg.com/three@0.158.0/build/three.min.js" defer></script>
     <script src="scripts/intro-cube.js" defer></script>
     <script src="scripts/intro-pages.js" defer></script>
-
-    <!-- Detail-sheet open/close glue -->
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // Open the matching detail sheet
-        document.querySelectorAll('.page-up-arrow').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const id = btn.dataset.target;
-            const sheet = document.getElementById(id);
-            if (sheet) sheet.classList.add('open');
-          });
-        });
-
-        // Close the sheet
-        document.querySelectorAll('.sheet-close').forEach(btn => {
-          btn.addEventListener('click', () => {
-            btn.parentElement.classList.remove('open');
-          });
-        });
-      });
-    </script>
+    <script src="scripts/sheets.js" defer></script>
   </body>
 </html>

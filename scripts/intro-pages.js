@@ -1,16 +1,33 @@
-// scripts/intro-pages.js
 (() => {
   const scroller = document.getElementById('intro-pages');
   const introBottom = document.querySelector('.intro-bottom');
   if (!scroller || !introBottom) return;
 
-  const PAGE_COUNT = scroller.children.length; // pages in markup
-  let syncing = false;     // prevents feedback loops between cube <-> pages
-  let paging = false;      // debounce per page step
+  // PAGE order in DOM:
+  // 0: Home (ignored for cube)
+  // 1: Education, 2: Skills, 3: Projects, 4: Experience, 5: Contact
+
+  // Map pages -> cube faces (adjust if your cube uses a different face order)
+  const pageToFace = {
+    1: 0, // Education  -> front
+    2: 1, // Skills     -> right
+    3: 2, // Projects   -> back
+    4: 3, // Experience -> left
+    5: 4  // Contact    -> top (or choose bottom=5 if you want)
+  };
+
+  // Inverse map (cube -> pages)
+  const faceToPage = Object.fromEntries(
+    Object.entries(pageToFace).map(([p, f]) => [f, Number(p)])
+  );
+
+  const PAGE_COUNT = [...scroller.children].filter(el => el.classList.contains('page')).length;
+  let syncing = false;
+  let paging = false;
   const PAGE_STEP_MS = 600;
 
-  function pageWidth() { return scroller.clientWidth; }
-  function currentIndex() { return Math.round(scroller.scrollLeft / pageWidth()); }
+  const pageWidth = () => scroller.clientWidth;
+  const currentIndex = () => Math.round(scroller.scrollLeft / pageWidth());
 
   function goToPage(index) {
     const clamped = Math.max(0, Math.min(PAGE_COUNT - 1, index));
@@ -20,58 +37,57 @@
     setTimeout(() => (syncing = false), PAGE_STEP_MS + 100);
   }
 
-  // Cube -> Pages
+  // Cube -> Pages (cube calls this after snap)
   window.onIntroCubeSnap = function(faceIndex) {
-    // If you only want the 4 side faces to map, remap here.
-    goToPage(faceIndex);
+    const pageIndex = faceToPage[faceIndex];
+    if (typeof pageIndex === 'number') {
+      goToPage(pageIndex); // never goes to Home since Home isn't in faceToPage
+    }
   };
 
-  // Pages -> Cube (on scroll)
-  let rafId = null;
+  // Pages -> Cube (after horizontal scroll settles)
+  let scrollTO = null;
+  function onScrollSettled() {
+    const idx = currentIndex();
+    if (idx === 0) return; // Home does not affect cube
+    const face = pageToFace[idx];
+    if (typeof face === 'number' && typeof window.setIntroCubeFace === 'function') {
+      window.setIntroCubeFace(face);
+    }
+  }
   scroller.addEventListener('scroll', () => {
     if (syncing) return;
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(() => {
-      const idx = currentIndex();
-      if (typeof window.setIntroCubeFace === 'function') {
-        window.setIntroCubeFace(idx);
-      }
-    });
+    clearTimeout(scrollTO);
+    scrollTO = setTimeout(onScrollSettled, 120);
   });
 
-  // Page snapping on resize
+  // Maintain snapping on resize
   window.addEventListener('resize', () => {
     const idx = currentIndex();
     scroller.scrollLeft = idx * pageWidth();
   }, { passive: true });
 
-  // ---- Wheel bridging: vertical wheel -> horizontal paging ----
-  // We only intercept wheel when the pointer is over the bottom half (introBottom).
+  // Vertical wheel → horizontal paging (only over the bottom region)
   introBottom.addEventListener('wheel', (e) => {
-    // Only hijack when fully within the intro bottom region
-    // If you want even stricter control, check bounding rect and pointer coords.
     const delta = e.deltaY;
     const idx = currentIndex();
 
-    // If we're mid paging, ignore extra wheel deltas
     if (paging) { e.preventDefault(); return; }
 
     if (delta > 0) {
-      // scrolling down -> go right if not at last page, else let it bubble (default)
       if (idx < PAGE_COUNT - 1) {
         e.preventDefault();
         paging = true;
         goToPage(idx + 1);
         setTimeout(() => (paging = false), PAGE_STEP_MS);
-      } // else: at last page: allow default to continue page scroll downward
+      }
     } else if (delta < 0) {
-      // scrolling up -> go left if not at first page, else let it bubble (default)
       if (idx > 0) {
         e.preventDefault();
         paging = true;
         goToPage(idx - 1);
         setTimeout(() => (paging = false), PAGE_STEP_MS);
-      } // else: at first page: allow default to scroll up to hero
+      }
     }
-  }, { passive: false }); // passive: false is required to call preventDefault()
+  }, { passive: false });
 })();

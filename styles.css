@@ -3,7 +3,7 @@
    =============================== */
 @font-face {
   font-family: 'iconfont';
-  src: url('iconfont.ttf') format('truetype');
+  src: url('media/iconfont.ttf') format('truetype');
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -401,6 +401,19 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
   color: #fff;
   cursor: pointer;
 }
+.detail-sheet .sheet-close {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 1000;
+}
+
 
 /* when sheet is active */
 .detail-sheet.open{ transform: translateY(0); }
@@ -422,4 +435,175 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
 .detail-sheet .sheet-content p,
 .detail-sheet .sheet-content li {
   color: #d6d6d6;
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem 1.25rem;
+}
+.skills-grid h4 { margin: 0 0 .35rem 0; font-weight: 700; }
+.skills-grid ul { margin: 0; padding-left: 1.1rem; line-height: 1.5; }
+
+/* --- Shared sheet helpers --- */
+.sheet-content a {
+  color: #cdd7ff;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(205,215,255,0.45);
+}
+.sheet-content a:hover { border-bottom-style: solid; }
+
+.sheet-content .eyebrow {
+  display: inline-block;
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #a7a7a7;
+  margin-bottom: .35rem;
+}
+
+.sheet-content .muted { color: #a8a8a8; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem .5rem;
+  margin-top: .5rem;
+}
+.tag {
+  font-size: .72rem;
+  line-height: 1;
+  padding: .35rem .6rem;
+  border-radius: 999px;
+  background: #171717;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #bdbdbd;
+}
+
+/* subtle cards */
+.card {
+  background: #0d0d0d;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.28);
+}
+
+.xp-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.xp-item {
+  padding: 1rem 1.25rem;
+}
+.xp-item h4 {
+  font-size: 1.05rem;
+  line-height: 1.25;
+  margin: 0 0 .35rem 0;
+}
+.xp-item h4 em {
+  font-style: normal;
+  color: #cfcfcf;
+  font-weight: 600;
+}
+.xp-item small {
+  color: #a2a2a2;
+}
+.xp-item ul {
+  margin: .6rem 0 0 0;
+  padding-left: 1.15rem;
+}
+.xp-item li {
+  color: #d6d6d6;
+  margin: .25rem 0;
+}
+
+/* Optional compact meta row inside header */
+.xp-meta {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  font-size: .85rem;
+  color: #9c9c9c;
+}
+
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.edu-card {
+  padding: 1rem 1.25rem;
+}
+.edu-card h4 {
+  margin: 0 0 .25rem 0;
+  font-size: 1.05rem;
+}
+.edu-card .school {
+  color: #cfcfcf;
+  margin-bottom: .35rem;
+}
+.edu-card .row {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  font-size: .9rem;
+  color: #a9a9a9;
+}
+.edu-card ul {
+  margin: .6rem 0 0 0;
+  padding-left: 1.15rem;
+}
+.edu-card li { color: #d6d6d6; }
+
+.project-list {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.project-list li {
+  padding: 1rem 1.25rem;
+}
+.project-list strong {
+  display: block;
+  margin-bottom: .25rem;
+  color: #fff;
+}
+.project-list p,
+.project-list li { color: #d6d6d6; }
+.project-list a {
+  display: inline-block;
+  margin-top: .35rem;
+}
+
+/* Optional compact “pill” link style for project actions */
+.project-actions {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-top: .5rem;
+}
+.project-actions a {
+  border: 1px solid rgba(205,215,255,0.35);
+  border-radius: 999px;
+  padding: .35rem .7rem;
+  line-height: 1;
+  font-size: .85rem;
+  color: #cdd7ff;
+  border-bottom: none; /* remove dashed underline from shared link style */
+}
+.project-actions a:hover {
+  background: rgba(205,215,255,0.08);
+}
+
+
+@media (max-width: 640px) {
+  .detail-sheet .sheet-content {
+    padding: 1.25rem 1rem;
+  }
+  .xp-item, .edu-card, .project-list li { padding: .9rem 1rem; }
 }

@@ -176,7 +176,7 @@ body {
 /* Cube sizing + flat framed container */
 .cube-wrap {
   /* Size: smaller than before */
-  width: clamp(160px, 28vmin, 320px);  /* was max(min(60vw, 420px)) */
+  width: clamp(140px, 24vmin, 280px);
   height: auto;                        /* let aspect-ratio set height */
   aspect-ratio: 1 / 1;
 
@@ -198,6 +198,14 @@ body {
   background: transparent;
   position: relative;
   z-index: 1;
+}
+
+/* Nudge the cube (and its frame) down slightly */
+.intro-top {
+  padding-top: 2.25rem; /* was ~1rem */
+}
+.cube-wrap {
+  margin-top: 0.5rem; /* tiny extra drop */
 }
 
 /* Bottom: 2/3 height, full-width horizontal pager */
@@ -244,6 +252,18 @@ body {
   gap: 1.25rem;
   align-items: center;
   width: min(100%, 1100px);
+}
+
+.page-education .page-inner h2,
+.page-skills .page-inner h2,
+.page-projects .page-inner h2,
+.page-experience .page-inner h2,
+.page-contact .page-inner h2 {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+  line-height: 1.05;
 }
 
 /* Title + Resume button */

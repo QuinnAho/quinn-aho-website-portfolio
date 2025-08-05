@@ -19,7 +19,7 @@
       <meta property="og:url" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/">
       <meta property="og:image" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/logo.png">
 
-      <!-- Your styles -->
+      <!-- Styles -->
       <link rel="stylesheet" href="/styles.css">
 
       <!-- Fonts -->
@@ -222,7 +222,6 @@
       <button class="sheet-close" aria-label="Close">&#x2193;</button>
       <div class="sheet-content">
         <h3>Skills</h3>
-
         <div class="skills-grid">
           <section>
             <h4>Engines &amp; XR</h4>
@@ -454,8 +453,10 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://unpkg.com/three@0.158.0/build/three.min.js" defer></script>
-    <script src="scripts/fluid-sim.js"></script>
+    <script type="module">
+      import * as THREE from 'https://unpkg.com/three@0.158.0/build/three.module.js';
+      window.THREE = THREE; // expose for your non-module scripts
+    </script>    <script src="scripts/fluid-sim.js"></script>
     <script src="scripts/dynamic-guide.js" defer></script>
     <script src="scripts/intro-cube.js" defer></script>
     <script src="scripts/intro-pages.js" defer></script>

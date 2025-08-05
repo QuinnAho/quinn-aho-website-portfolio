@@ -16,16 +16,26 @@
     camera.position.set(0, 0, 4);
     scene.add(camera);
 
+    // Lighting
     scene.add(new THREE.AmbientLight(0xffffff, 0.9));
     const key = new THREE.DirectionalLight(0xffffff, 0.7);
     key.position.set(2, 3, 4);
     scene.add(key);
 
+    // White cube
     const cube = new THREE.Mesh(
       new THREE.BoxGeometry(1.8, 1.8, 1.8),
       new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.4, metalness: 0.0 })
     );
     scene.add(cube);
+
+    // --- Overall size + hover grow ---
+    const BASE_SCALE = 0.85;            // smaller overall (tweak 0.8–0.9 if you want)
+    let targetScale = BASE_SCALE;
+    let currentScale = BASE_SCALE;
+
+    canvas.addEventListener('pointerenter', () => { targetScale = BASE_SCALE * 1.07; });
+    canvas.addEventListener('pointerleave', () => { targetScale = BASE_SCALE; });
 
     function resize() {
       const w = container.clientWidth;
@@ -37,7 +47,7 @@
     window.addEventListener('resize', resize, { passive: true });
     resize();
 
-    // Pointer events
+    // Pointer drag rotate
     let dragging = false;
     let lastX = 0, lastY = 0;
     let snapping = false;
@@ -61,31 +71,30 @@
       if (!dragging) return;
       dragging = false;
       try { canvas.releasePointerCapture(e.pointerId); } catch {}
-      snapToGrid();   // snap on release
+      snapToGrid();
     }
     canvas.addEventListener('pointerup', endPointer);
     canvas.addEventListener('pointercancel', endPointer);
     canvas.addEventListener('lostpointercapture', () => { dragging = false; });
 
-    // ---- Snap helpers (Euler grid) ----
-    const faceCount = 6; // [front,right,back,left,top,bottom] => pages 0..5
+    // Snap helpers
+    const faceCount = 6; // [front,right,back,left,top,bottom]
     function faceIndexToAngles(i) {
-      // Yaw multiples of 90° for the 4 side faces; Top/Bottom via pitch ±90°
       switch (i % faceCount) {
-        case 0: return { x: 0, y:   0             }; // front
-        case 1: return { x: 0, y:  Math.PI / 2    }; // right
-        case 2: return { x: 0, y:  Math.PI        }; // back
-        case 3: return { x: 0, y: -Math.PI / 2    }; // left
-        case 4: return { x: -Math.PI / 2, y: 0    }; // top
-        case 5: return { x:  Math.PI / 2,  y: 0   }; // bottom
+        case 0: return { x: 0, y: 0 };
+        case 1: return { x: 0, y: Math.PI / 2 };
+        case 2: return { x: 0, y: Math.PI };
+        case 3: return { x: 0, y: -Math.PI / 2 };
+        case 4: return { x: -Math.PI / 2, y: 0 };
+        case 5: return { x: Math.PI / 2,  y: 0 };
       }
     }
     function faceIndexFromAngles(x, y) {
-      const px = Math.round(wrapPi(x) / (Math.PI / 2));  // -1, 0, +1
-      const py = Math.round(wrapPi(y) / (Math.PI / 2));  // ..., -2,-1,0,1,2...
-      if (px === -1) return 4; // top
-      if (px === 1)  return 5; // bottom
-      const m = ((py % 4) + 4) % 4; // 0..3 => front,right,back,left
+      const px = Math.round(wrapPi(x) / (Math.PI / 2));
+      const py = Math.round(wrapPi(y) / (Math.PI / 2));
+      if (px === -1) return 4;
+      if (px === 1)  return 5;
+      const m = ((py % 4) + 4) % 4;
       return [0,1,2,3][m];
     }
 
@@ -116,12 +125,12 @@
         cube.rotation.x = x0 + shortAngleDelta(x0, x1) * t;
         cube.rotation.y = y0 + shortAngleDelta(y0, y1) * t;
         if (raw < 1) requestAnimationFrame(step);
-        else { snapping = false; if (onDone) onDone(); }
+        else { snapping = false; onDone && onDone(); }
       }
       requestAnimationFrame(step);
     }
 
-    // Public API: rotate to face index [0..5]
+    // Public API
     window.setIntroCubeFace = function(index) {
       const curX = wrapPi(cube.rotation.x);
       const curY = wrapPi(cube.rotation.y);
@@ -152,6 +161,10 @@
 
     // Render loop
     (function tick() {
+      // ease the scale toward target
+      currentScale += (targetScale - currentScale) * 0.12;
+      cube.scale.setScalar(currentScale);
+
       renderer.render(scene, camera);
       requestAnimationFrame(tick);
     })();

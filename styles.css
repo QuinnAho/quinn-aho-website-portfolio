@@ -392,8 +392,29 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
   color: #fff;
   cursor: pointer;
   transition: transform 0.25s;
+  animation: upArrowIdle 1.8s ease-in-out infinite;
+  transform: translateY(0);            /* baseline so the keyframes are consistent */
+  will-change: transform;
 }
-.page-up-arrow:hover{ transform: translateY(-4px) scale(1.15); }
+/* Pause the bob and give a tiny lift on hover/focus */
+.page-up-arrow:hover,
+.page-up-arrow:focus-visible {
+  animation-play-state: paused;
+  transform: translateY(-10px) scale(1.08);
+  outline: none;
+}
+
+/* Reduce/disable for users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  .page-up-arrow { animation: none; }
+}
+
+/* Keyframes for the subtle up/down motion */
+@keyframes upArrowIdle {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
 
 /* --- Sliding detail sheet --- */
 .detail-sheet{

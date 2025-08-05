@@ -648,3 +648,97 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
   }
   .xp-item, .edu-card, .project-list li { padding: .9rem 1rem; }
 }
+/* Animated underline for page titles (not Home) */
+.page:not(.page-home) h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: .25rem;
+}
+
+.page:not(.page-home) h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 2px;
+  width: 0;
+  background: #fff;
+  opacity: 0;
+  transition: width 420ms ease, opacity 520ms ease;
+}
+/* Vertical snap between Hero and the Intro section */
+html, body{
+  height:100%;
+  scroll-snap-type: y proximity;  /* less aggressive than 'mandatory' */
+  scroll-behavior: smooth;         /* base smoothness */
+}
+
+/* Snap points */
+.hero,
+.border-wrapper{
+  scroll-snap-align: start;
+}
+
+/* Optional: account for fixed header if needed */
+/* :root{ --header-h: 70px; }
+html { scroll-padding-top: var(--header-h); } */
+
+
+/* Make each major section a snap point */
+.hero,
+.border-wrapper {
+  scroll-snap-align: start;
+}
+
+/* Active page shows the line */
+.page.active:not(.page-home) h2::after{
+  transform:scaleX(1);
+  opacity:1;
+}
+
+/* Directional underline for section titles */
+.page:not(.page-home) h2{
+  position: relative;
+  display: inline-block;
+  padding-bottom: .25rem;
+}
+
+.page:not(.page-home) h2::after{
+  content:"";
+  position:absolute;
+  left:0; bottom:-6px;
+  height:2px;
+  width:100%;
+  background:#fff;
+
+  /* start hidden */
+  transform:scaleX(0);
+  opacity:0;
+
+  /* smooth fade + wipe */
+  transform-origin:left;
+  transition:
+    transform 420ms ease,
+    opacity 520ms ease;
+  will-change: transform, opacity;
+}
+
+/* Force a known starting state just before we activate (JS adds this briefly) */
+.page.pre-activate:not(.page-home) h2::after{
+  transform: scaleX(0);
+  opacity: 0;
+}
+
+/* Active page shows the line (this is the fade IN) */
+.page.active:not(.page-home) h2::after{
+  transform:scaleX(1);
+  opacity:1;
+}
+
+/* Set wipe direction based on scroll direction */
+.pages-scroll.dir-right .page:not(.page-home) h2::after{ transform-origin:left;  }
+.pages-scroll.dir-left  .page:not(.page-home) h2::after{ transform-origin:right; }
+
+/* Fade OUT direction matches scroll direction */
+.page.leaving-right h2::after { transform-origin: right; }
+.page.leaving-left  h2::after { transform-origin: left;  }

@@ -1,93 +1,133 @@
 (() => {
-  const scroller = document.getElementById('intro-pages');
-  const introBottom = document.querySelector('.intro-bottom');
+  const scroller     = document.getElementById('intro-pages');
+  const introBottom  = document.querySelector('.intro-bottom');
   if (!scroller || !introBottom) return;
 
-  // PAGE order in DOM:
-  // 0: Home (ignored for cube)
-  // 1: Education, 2: Skills, 3: Projects, 4: Experience, 5: Contact
-
-  // Map pages -> cube faces (adjust if your cube uses a different face order)
-  const pageToFace = {
-    1: 0, // Education  -> front
-    2: 1, // Skills     -> right
-    3: 2, // Projects   -> back
-    4: 3, // Experience -> left
-    5: 4  // Contact    -> top (or choose bottom=5 if you want)
-  };
-
-  // Inverse map (cube -> pages)
-  const faceToPage = Object.fromEntries(
-    Object.entries(pageToFace).map(([p, f]) => [f, Number(p)])
-  );
-
-  const PAGE_COUNT = [...scroller.children].filter(el => el.classList.contains('page')).length;
-  let syncing = false;
-  let paging = false;
+  // --- Pages & helpers ---
+  const pages = Array.from(scroller.querySelectorAll('.page'));
+  const PAGE_COUNT   = pages.length;
   const PAGE_STEP_MS = 600;
+  const UNDERLINE_MS = 520; // keep in sync with CSS transition
 
-  const pageWidth = () => scroller.clientWidth;
-  const currentIndex = () => Math.round(scroller.scrollLeft / pageWidth());
+  function pageWidth()   { return scroller.clientWidth; }
+  function currentIndex(){ return Math.round(scroller.scrollLeft / pageWidth()); }
 
-  function goToPage(index) {
+  // --- Cube face mapping ---
+  // DOM order: 0: Home, 1: Education, 2: Skills, 3: Projects, 4: Experience, 5: Contact
+  const pageToFace = { 1:0, 2:1, 3:2, 4:3, 5:4 };
+  const faceToPage = Object.fromEntries(Object.entries(pageToFace).map(([p,f]) => [f, Number(p)]));
+
+  let syncing     = false; // programmatic scroll guard
+  let paging      = false; // wheel debounce
+  let lastActive  = 0;     // current active page index
+  let lastScrollX = 0;     // for dir-left/dir-right
+
+  function toggleDirClasses(dirRight){
+    scroller.classList.toggle('dir-right', dirRight);
+    scroller.classList.toggle('dir-left',  !dirRight);
+  }
+
+  function setActive(nextIdx, dirRight){
+    if (nextIdx === lastActive) return;
+
+    // LEAVING page: remove active, then add directional leaving class for fade-out
+    const leaving = pages[lastActive];
+    if (leaving) {
+      leaving.classList.remove('active', 'pre-activate', 'leaving-left', 'leaving-right');
+      leaving.classList.add(dirRight ? 'leaving-right' : 'leaving-left');
+      // cleanup after animation finishes
+      setTimeout(() => {
+        leaving.classList.remove('leaving-left', 'leaving-right');
+      }, UNDERLINE_MS + 60);
+    }
+
+    // ENTERING page: set direction, ensure it's in starting state, then activate next frame
+    toggleDirClasses(dirRight);
+    const entering = pages[nextIdx];
+    if (entering) {
+      entering.classList.remove('active', 'leaving-left', 'leaving-right');
+      entering.classList.add('pre-activate');   // make sure it starts hidden
+      // force a reflow so the browser registers pre-activate state
+      void entering.offsetWidth;
+      // next frame: flip to active -> triggers fade IN
+      requestAnimationFrame(() => {
+        entering.classList.remove('pre-activate');
+        entering.classList.add('active');
+      });
+    }
+
+    // Update cube (Home index 0 does not affect cube)
+    if (nextIdx !== 0 && typeof window.setIntroCubeFace === 'function') {
+      const face = pageToFace[nextIdx];
+      if (typeof face === 'number') window.setIntroCubeFace(face);
+    }
+
+    lastActive = nextIdx;
+  }
+
+  function goToPage(index){
     const clamped = Math.max(0, Math.min(PAGE_COUNT - 1, index));
+    const dirRight = clamped > lastActive;
     const x = clamped * pageWidth();
+
     syncing = true;
     scroller.scrollTo({ left: x, behavior: 'smooth' });
-    setTimeout(() => (syncing = false), PAGE_STEP_MS + 100);
+    setActive(clamped, dirRight);
+    setTimeout(() => (syncing = false), PAGE_STEP_MS + 120);
   }
 
-  // Cube -> Pages (cube calls this after snap)
-  window.onIntroCubeSnap = function(faceIndex) {
+  // --- Cube -> Pages (external hook from cube) ---
+  window.onIntroCubeSnap = function(faceIndex){
     const pageIndex = faceToPage[faceIndex];
-    if (typeof pageIndex === 'number') {
-      goToPage(pageIndex); // never goes to Home since Home isn't in faceToPage
-    }
+    if (typeof pageIndex === 'number') goToPage(pageIndex);
   };
 
-  // Pages -> Cube (after horizontal scroll settles)
-  let scrollTO = null;
-  function onScrollSettled() {
-    const idx = currentIndex();
-    if (idx === 0) return; // Home does not affect cube
-    const face = pageToFace[idx];
-    if (typeof face === 'number' && typeof window.setIntroCubeFace === 'function') {
-      window.setIntroCubeFace(face);
-    }
-  }
+  // --- Pages -> Cube & underline direction tracking ---
+  let rafId = null;
   scroller.addEventListener('scroll', () => {
+    const dirRight = scroller.scrollLeft > lastScrollX;
+    toggleDirClasses(dirRight);
+    lastScrollX = scroller.scrollLeft;
+
     if (syncing) return;
-    clearTimeout(scrollTO);
-    scrollTO = setTimeout(onScrollSettled, 120);
+
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => {
+      const idx = currentIndex();
+      if (idx !== lastActive) {
+        setActive(idx, dirRight);
+      }
+      // Optional: keep cube aligned while dragging (except for Home)
+      if (idx !== 0 && typeof window.setIntroCubeFace === 'function') {
+        const face = pageToFace[idx];
+        if (typeof face === 'number') window.setIntroCubeFace(face);
+      }
+    });
   });
 
-  // Maintain snapping on resize
+  // --- Vertical wheel -> horizontal paging (bottom area only) ---
+  introBottom.addEventListener('wheel', (e) => {
+    const delta = e.deltaY;
+    const idx   = currentIndex();
+
+    if (paging) { e.preventDefault(); return; }
+
+    if (delta > 0 && idx < PAGE_COUNT - 1) {
+      e.preventDefault(); paging = true; goToPage(idx + 1);
+      setTimeout(() => (paging = false), PAGE_STEP_MS);
+    } else if (delta < 0 && idx > 0) {
+      e.preventDefault(); paging = true; goToPage(idx - 1);
+      setTimeout(() => (paging = false), PAGE_STEP_MS);
+    }
+  }, { passive: false });
+
+  // Keep alignment on resize
   window.addEventListener('resize', () => {
     const idx = currentIndex();
     scroller.scrollLeft = idx * pageWidth();
   }, { passive: true });
 
-  // Vertical wheel → horizontal paging (only over the bottom region)
-  introBottom.addEventListener('wheel', (e) => {
-    const delta = e.deltaY;
-    const idx = currentIndex();
-
-    if (paging) { e.preventDefault(); return; }
-
-    if (delta > 0) {
-      if (idx < PAGE_COUNT - 1) {
-        e.preventDefault();
-        paging = true;
-        goToPage(idx + 1);
-        setTimeout(() => (paging = false), PAGE_STEP_MS);
-      }
-    } else if (delta < 0) {
-      if (idx > 0) {
-        e.preventDefault();
-        paging = true;
-        goToPage(idx - 1);
-        setTimeout(() => (paging = false), PAGE_STEP_MS);
-      }
-    }
-  }, { passive: false });
+  // Init: mark page 0 active so its underline animates on first scroll
+  pages.forEach((p,i)=>p.classList.toggle('active', i===0));
+  scroller.classList.add('dir-right'); // default wipe direction
 })();

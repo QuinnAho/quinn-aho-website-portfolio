@@ -204,9 +204,9 @@
             <h4>Wayne State University</h4>
             <div class="school">B.S. in Computer Science Engineering</div>
             <div class="row">
-              <span>Aug 2022 - Jan 2025</span>
+              <span>Aug 2022 - May 2026</span>
               <span>Major GPA: 3.86</span>
-              <span>Overall GPA: 3.12</span>
+              <span>Overall GPA: 3.2</span>
             </div>
             <ul>
               <li>Relevant coursework: Computer Graphics I, DSA, Game Programming, CS I&II, Java, C++ for Gaming.</li>
@@ -456,7 +456,51 @@
     <script type="module">
       import * as THREE from 'https://unpkg.com/three@0.158.0/build/three.module.js';
       window.THREE = THREE; // expose for your non-module scripts
-    </script>    <script src="scripts/fluid-sim.js"></script>
+    </script>
+    <script>
+    (() => {
+      const SECTIONS = [
+        document.querySelector('.hero'),
+        document.querySelector('.border-wrapper')
+      ].filter(Boolean);
+
+      if (SECTIONS.length < 2) return;
+
+      const SNAP_DELAY = 160;   // wait after wheel/scroll ends
+      const SNAP_MS    = 900;   // slower glide
+      let tId = null;
+
+      function ease(t){ return t<.5 ? 2*t*t : 1 - Math.pow(-2*t+2,2)/2; }
+
+      function animateScroll(from, to, dur){
+        const start = performance.now();
+        function step(now){
+          const p = Math.min(1, (now - start) / dur);
+          const e = ease(p);
+          window.scrollTo(0, from + (to - from) * e);
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      function snap(){
+        const y = window.scrollY;
+        let best = 0, bestDist = Infinity;
+        for (let i=0;i<SECTIONS.length;i++){
+          const top = SECTIONS[i].offsetTop;
+          const d = Math.abs(top - y);
+          if (d < bestDist){ bestDist = d; best = i; }
+        }
+        animateScroll(window.scrollY, SECTIONS[best].offsetTop, SNAP_MS);
+      }
+
+      window.addEventListener('scroll', () => {
+        clearTimeout(tId);
+        tId = setTimeout(snap, SNAP_DELAY);
+      }, { passive:true });
+    })();
+    </script>
+    <script src="scripts/fluid-sim.js"></script>
     <script src="scripts/dynamic-guide.js" defer></script>
     <script src="scripts/intro-cube.js" defer></script>
     <script src="scripts/intro-pages.js" defer></script>

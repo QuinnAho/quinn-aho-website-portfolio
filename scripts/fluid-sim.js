@@ -1770,9 +1770,14 @@ function hashCode (s) {
     return hash;
 };
 
-document.querySelector('.scroll-arrow').addEventListener('click', () => {
-    document.querySelector('.content').scrollIntoView({ 
-        behavior: 'smooth'
+const scrollArrow = document.querySelector('.scroll-arrow');
+const introSection = document.getElementById('intro');
+if (scrollArrow && introSection) {
+    scrollArrow.addEventListener('click', (e) => {
+        e.preventDefault();
+        introSection.scrollIntoView({
+            behavior: 'smooth'
+        });
     });
-});
+}
 

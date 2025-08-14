@@ -76,6 +76,8 @@
     setTimeout(() => (syncing = false), PAGE_STEP_MS + 120);
   }
 
+  window.goToIntroPage = goToPage;
+
   // --- Cube -> Pages (external hook from cube) ---
   window.onIntroCubeSnap = function(faceIndex){
     const pageIndex = faceToPage[faceIndex];

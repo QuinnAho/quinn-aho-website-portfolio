@@ -14,7 +14,7 @@
 
   // --- Cube face mapping ---
   // DOM order: 0: Home, 1: Education, 2: Skills, 3: Projects, 4: Experience, 5: Contact
-  const pageToFace = { 1:0, 2:1, 3:2, 4:3, 5:4 };
+  const pageToFace = { 0:5, 1:0, 2:1, 3:2, 4:3, 5:4 };
   const faceToPage = Object.fromEntries(Object.entries(pageToFace).map(([p,f]) => [f, Number(p)]));
 
   let syncing     = false; // programmatic scroll guard
@@ -56,8 +56,8 @@
       });
     }
 
-    // Update cube (Home index 0 does not affect cube)
-    if (nextIdx !== 0 && typeof window.setIntroCubeFace === 'function') {
+    // Update cube orientation to match active page
+    if (typeof window.setIntroCubeFace === 'function') {
       const face = pageToFace[nextIdx];
       if (typeof face === 'number') window.setIntroCubeFace(face);
     }
@@ -99,8 +99,8 @@
       if (idx !== lastActive) {
         setActive(idx, dirRight);
       }
-      // Optional: keep cube aligned while dragging (except for Home)
-      if (idx !== 0 && typeof window.setIntroCubeFace === 'function') {
+      // Keep cube aligned while dragging
+      if (typeof window.setIntroCubeFace === 'function') {
         const face = pageToFace[idx];
         if (typeof face === 'number') window.setIntroCubeFace(face);
       }

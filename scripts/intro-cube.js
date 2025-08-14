@@ -22,10 +22,18 @@
     key.position.set(2, 3, 4);
     scene.add(key);
 
-    // White cube
+    // Color-coded cube faces (education, skills, projects, experience, contact, home)
+    const FACE_COLORS = [
+      0x2e026d, // front  - Education (purple)
+      0x0a838f, // right  - Skills (teal)
+      0x1a690e, // back   - Projects (green)
+      0x693f0a, // left   - Experience (orange)
+      0x6d0038, // top    - Contact (magenta)
+      0x0a2e6d  // bottom - Home (blue)
+    ];
     const cube = new THREE.Mesh(
       new THREE.BoxGeometry(1.8, 1.8, 1.8),
-      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.4, metalness: 0.0 })
+      FACE_COLORS.map(c => new THREE.MeshStandardMaterial({ color: c, roughness: 0.4, metalness: 0.0 }))
     );
     scene.add(cube);
 

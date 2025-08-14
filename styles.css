@@ -245,6 +245,14 @@ body {
   padding: 1rem 1.5rem 1.5rem;
 }
 
+/* Page background colors synced with cube faces */
+.page-home       { background-color: #0a2e6d; }
+.page-education  { background-color: #2e026d; }
+.page-skills     { background-color: #0a838f; }
+.page-projects   { background-color: #1a690e; }
+.page-experience { background-color: #693f0a; }
+.page-contact    { background-color: #6d0038; }
+
 .page-inner {
   text-align: center;
   display: flex;

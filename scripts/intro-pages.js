@@ -16,7 +16,7 @@
   // --- Cube face mapping ---
   // DOM order: 0: Home, 1: Education, 2: Skills, 3: Projects, 4: Experience, 5: Contact
   // Home (index 0) leaves the cube orientation unchanged
-  const pageToFace = { 1:1, 2:2, 3:3, 4:4, 5:5 };
+  const pageToFace = { 1:3, 2:2, 3:1, 4:4, 5:5 };
   const faceToPage = Object.fromEntries(
     Object.entries(pageToFace).map(([p, f]) => [f, Number(p)])
   );

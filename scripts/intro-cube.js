@@ -42,7 +42,10 @@
     }
 
     // Icons for each face of the cube (BoxGeometry order: right, left, top, bottom, front, back)
-    const faceIcons = ['🎓', '📁', '💼', '✉️', '🏠', '🛠️'];
+    // BoxGeometry material order: right, left, top, bottom, front, back
+    // Pages map to cube faces via intro-pages.js (face indices 1–5)
+    // Education 🎓, Projects 💼, Experience 📁, Contact ✉️, Skills 🛠️, Home 🏠
+    const faceIcons = ['🎓', '💼', '📁', '✉️', '🏠', '🛠️'];
     const materials = faceIcons.map(icon => new THREE.MeshStandardMaterial({
       color: 0x000000,
       roughness: 0.4,

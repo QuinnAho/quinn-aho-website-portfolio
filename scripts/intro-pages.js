@@ -1,6 +1,7 @@
 (() => {
   const scroller     = document.getElementById('intro-pages');
   const introBottom  = document.querySelector('.intro-bottom');
+  const cubeCanvas   = document.getElementById('intro-cube');
   if (!scroller || !introBottom) return;
 
   // --- Pages & helpers ---
@@ -14,7 +15,8 @@
 
   // --- Cube face mapping ---
   // DOM order: 0: Home, 1: Education, 2: Skills, 3: Projects, 4: Experience, 5: Contact
-  const pageToFace = { 0:0, 1:1, 2:2, 3:3, 4:4, 5:5 };
+  // Home (index 0) leaves the cube orientation unchanged
+  const pageToFace = { 1:1, 2:2, 3:3, 4:4, 5:5 };
   const faceToPage = Object.fromEntries(
     Object.entries(pageToFace).map(([p, f]) => [f, Number(p)])
   );
@@ -62,6 +64,10 @@
     const face = pageToFace[nextIdx];
     if (typeof face === 'number' && typeof window.setIntroCubeFace === 'function') {
       window.setIntroCubeFace(face);
+    }
+
+    if (cubeCanvas) {
+      cubeCanvas.style.pointerEvents = nextIdx === 0 ? 'none' : '';
     }
 
     lastActive = nextIdx;
@@ -133,5 +139,6 @@
 
   // Init: mark page 0 active so its underline animates on first scroll
   pages.forEach((p,i)=>p.classList.toggle('active', i===0));
+  if (cubeCanvas) cubeCanvas.style.pointerEvents = 'none';
   scroller.classList.add('dir-right'); // default wipe direction
 })();

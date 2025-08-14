@@ -22,7 +22,7 @@
     key.position.set(2, 3, 4);
     scene.add(key);
 
-    // Helper: draw an emoji onto a canvas and use as texture
+    // Helper: draw an emoji silhouette in white for use as an emissive map
     function makeEmojiTexture(emoji) {
       const size = 256;
       const cvs = document.createElement('canvas');
@@ -31,18 +31,23 @@
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.font = size * 0.7 + 'px serif';
+      // Draw emoji normally
       ctx.fillText(emoji, size / 2, size / 2);
+      // Recolor to white while keeping transparency
+      ctx.globalCompositeOperation = 'source-in';
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, size, size);
       return new THREE.CanvasTexture(cvs);
     }
 
     // Icons for each face of the cube (BoxGeometry order: right, left, top, bottom, front, back)
     const faceIcons = ['🎓', '📁', '💼', '✉️', '🏠', '🛠️'];
     const materials = faceIcons.map(icon => new THREE.MeshStandardMaterial({
-      color: 0xffffff,
+      color: 0x000000,
       roughness: 0.4,
       metalness: 0.0,
-      transparent: true,
-      map: makeEmojiTexture(icon)
+      emissive: 0xffffff,
+      emissiveMap: makeEmojiTexture(icon)
     }));
 
     const cube = new THREE.Mesh(new THREE.BoxGeometry(1.8, 1.8, 1.8), materials);

@@ -526,6 +526,12 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 12px;
   box-shadow: 0 8px 18px rgba(0,0,0,0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.35);
 }
 
 .xp-list {
@@ -597,6 +603,11 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
   padding-left: 1.15rem;
 }
 .edu-card li { color: #d6d6d6; }
+
+.skill-card,
+.contact-card {
+  padding: 1rem 1.25rem;
+}
 
 .project-list {
   list-style: none;

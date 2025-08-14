@@ -202,10 +202,10 @@ body {
 
 /* Nudge the cube (and its frame) down slightly */
 .intro-top {
-  padding-top: 2.25rem; /* was ~1rem */
+  padding-top: 4rem; /* give more breathing room */
 }
 .cube-wrap {
-  margin-top: 0.5rem; /* tiny extra drop */
+  margin-top: 1rem; /* move cube and border down together */
 }
 
 /* Bottom: 2/3 height, full-width horizontal pager */

@@ -202,10 +202,10 @@ body {
 
 /* Nudge the cube (and its frame) down slightly */
 .intro-top {
-  padding-top: 2.25rem; /* was ~1rem */
+  padding-top: 4rem; /* give more breathing room */
 }
 .cube-wrap {
-  margin-top: 0.5rem; /* tiny extra drop */
+  margin-top: 1rem; /* move cube and border down together */
 }
 
 /* Bottom: 2/3 height, full-width horizontal pager */
@@ -239,8 +239,8 @@ body {
   scroll-snap-align: start;
   display: flex;
 
-  align-items: flex-start;  /* top */
-  justify-content: center;  /* centered horizontally */
+  align-items: center;       /* vertically center section content */
+  justify-content: center;   /* centered horizontally */
 
   padding: 1rem 1.5rem 1.5rem;
 }
@@ -400,7 +400,7 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
 .page-up-arrow:hover,
 .page-up-arrow:focus-visible {
   animation-play-state: paused;
-  transform: translateY(-10px) scale(1.08);
+  transform: translateY(-10px) scale(1.15); /* subtle grow on hover */
   outline: none;
 }
 

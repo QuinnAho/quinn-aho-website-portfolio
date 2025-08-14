@@ -1,6 +1,7 @@
 (() => {
   const scroller     = document.getElementById('intro-pages');
   const introBottom  = document.querySelector('.intro-bottom');
+  const cubeCanvas   = document.getElementById('intro-cube');
   if (!scroller || !introBottom) return;
 
   // --- Pages & helpers ---
@@ -14,8 +15,11 @@
 
   // --- Cube face mapping ---
   // DOM order: 0: Home, 1: Education, 2: Skills, 3: Projects, 4: Experience, 5: Contact
-  const pageToFace = { 1:0, 2:1, 3:2, 4:3, 5:4 };
-  const faceToPage = Object.fromEntries(Object.entries(pageToFace).map(([p,f]) => [f, Number(p)]));
+  // Home (index 0) leaves the cube orientation unchanged
+  const pageToFace = { 1:3, 2:2, 3:1, 4:4, 5:5 };
+  const faceToPage = Object.fromEntries(
+    Object.entries(pageToFace).map(([p, f]) => [f, Number(p)])
+  );
 
   let syncing     = false; // programmatic scroll guard
   let paging      = false; // wheel debounce
@@ -56,10 +60,14 @@
       });
     }
 
-    // Update cube (Home index 0 does not affect cube)
-    if (nextIdx !== 0 && typeof window.setIntroCubeFace === 'function') {
-      const face = pageToFace[nextIdx];
-      if (typeof face === 'number') window.setIntroCubeFace(face);
+    // Update cube to reflect active page
+    const face = pageToFace[nextIdx];
+    if (typeof face === 'number' && typeof window.setIntroCubeFace === 'function') {
+      window.setIntroCubeFace(face);
+    }
+
+    if (cubeCanvas) {
+      cubeCanvas.style.pointerEvents = nextIdx === 0 ? 'none' : '';
     }
 
     lastActive = nextIdx;
@@ -99,10 +107,10 @@
       if (idx !== lastActive) {
         setActive(idx, dirRight);
       }
-      // Optional: keep cube aligned while dragging (except for Home)
-      if (idx !== 0 && typeof window.setIntroCubeFace === 'function') {
-        const face = pageToFace[idx];
-        if (typeof face === 'number') window.setIntroCubeFace(face);
+      // Keep cube aligned while dragging
+      const face = pageToFace[idx];
+      if (typeof face === 'number' && typeof window.setIntroCubeFace === 'function') {
+        window.setIntroCubeFace(face);
       }
     });
   });
@@ -131,5 +139,6 @@
 
   // Init: mark page 0 active so its underline animates on first scroll
   pages.forEach((p,i)=>p.classList.toggle('active', i===0));
+  if (cubeCanvas) cubeCanvas.style.pointerEvents = 'none';
   scroller.classList.add('dir-right'); // default wipe direction
 })();

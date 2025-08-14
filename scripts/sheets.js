@@ -16,6 +16,8 @@
     }
   }
 
+  window.openDetailSheet = openSheetById;
+
   // Delegate clicks: open with up arrow, close with down arrow or backdrop click
   document.addEventListener('click', (e) => {
     const openBtn = e.target.closest('.page-up-arrow');

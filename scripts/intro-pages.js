@@ -14,8 +14,10 @@
 
   // --- Cube face mapping ---
   // DOM order: 0: Home, 1: Education, 2: Skills, 3: Projects, 4: Experience, 5: Contact
-  const pageToFace = { 1:0, 2:1, 3:2, 4:3, 5:4 };
-  const faceToPage = Object.fromEntries(Object.entries(pageToFace).map(([p,f]) => [f, Number(p)]));
+  const pageToFace = { 0:0, 1:1, 2:2, 3:3, 4:4, 5:5 };
+  const faceToPage = Object.fromEntries(
+    Object.entries(pageToFace).map(([p, f]) => [f, Number(p)])
+  );
 
   let syncing     = false; // programmatic scroll guard
   let paging      = false; // wheel debounce
@@ -56,10 +58,10 @@
       });
     }
 
-    // Update cube (Home index 0 does not affect cube)
-    if (nextIdx !== 0 && typeof window.setIntroCubeFace === 'function') {
-      const face = pageToFace[nextIdx];
-      if (typeof face === 'number') window.setIntroCubeFace(face);
+    // Update cube to reflect active page
+    const face = pageToFace[nextIdx];
+    if (typeof face === 'number' && typeof window.setIntroCubeFace === 'function') {
+      window.setIntroCubeFace(face);
     }
 
     lastActive = nextIdx;
@@ -99,10 +101,10 @@
       if (idx !== lastActive) {
         setActive(idx, dirRight);
       }
-      // Optional: keep cube aligned while dragging (except for Home)
-      if (idx !== 0 && typeof window.setIntroCubeFace === 'function') {
-        const face = pageToFace[idx];
-        if (typeof face === 'number') window.setIntroCubeFace(face);
+      // Keep cube aligned while dragging
+      const face = pageToFace[idx];
+      if (typeof face === 'number' && typeof window.setIntroCubeFace === 'function') {
+        window.setIntroCubeFace(face);
       }
     });
   });

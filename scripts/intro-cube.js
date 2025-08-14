@@ -22,11 +22,30 @@
     key.position.set(2, 3, 4);
     scene.add(key);
 
-    // White cube
-    const cube = new THREE.Mesh(
-      new THREE.BoxGeometry(1.8, 1.8, 1.8),
-      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.4, metalness: 0.0 })
-    );
+    // Helper: draw an emoji onto a canvas and use as texture
+    function makeEmojiTexture(emoji) {
+      const size = 256;
+      const cvs = document.createElement('canvas');
+      cvs.width = cvs.height = size;
+      const ctx = cvs.getContext('2d');
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = size * 0.7 + 'px serif';
+      ctx.fillText(emoji, size / 2, size / 2);
+      return new THREE.CanvasTexture(cvs);
+    }
+
+    // Icons for each face of the cube (BoxGeometry order: right, left, top, bottom, front, back)
+    const faceIcons = ['🎓', '📁', '💼', '✉️', '🏠', '🛠️'];
+    const materials = faceIcons.map(icon => new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      roughness: 0.4,
+      metalness: 0.0,
+      transparent: true,
+      map: makeEmojiTexture(icon)
+    }));
+
+    const cube = new THREE.Mesh(new THREE.BoxGeometry(1.8, 1.8, 1.8), materials);
     scene.add(cube);
 
     // --- Overall size + hover grow ---

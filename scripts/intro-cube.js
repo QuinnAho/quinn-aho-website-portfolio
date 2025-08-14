@@ -24,13 +24,14 @@
 
     // Helper: draw an emoji silhouette in white for use as an emissive map
     function makeEmojiTexture(emoji) {
-      const size = 256;
+      // use a larger canvas and draw the emoji smaller so the result looks sharper
+      const size = 512;
       const cvs = document.createElement('canvas');
       cvs.width = cvs.height = size;
       const ctx = cvs.getContext('2d');
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.font = size * 0.7 + 'px serif';
+      ctx.font = size * 0.4 + 'px serif';
       // Draw emoji normally
       ctx.fillText(emoji, size / 2, size / 2);
       // Recolor to white while keeping transparency

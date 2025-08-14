@@ -138,8 +138,8 @@ body {
    Full-page section under hero
    =============================== */
 .intro-combined {
+  min-height: calc(100vh - var(--header-h));
   width: 100%;
-  min-height: 100vh;
   background: #000;
   display: flex;
   align-items: stretch;
@@ -149,14 +149,15 @@ body {
 
 /* Full width so pages span the entire viewport */
 .intro-split {
-  width: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
 
+
 /* Top: 1/3 height (cube) */
 .intro-top {
-  height: 33vh;
+  flex: 0 0 38%; /* percentage of the intro height */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -175,18 +176,16 @@ body {
 
 /* Cube sizing + flat framed container */
 .cube-wrap {
-  /* Size: smaller than before */
-  width: clamp(140px, 24vmin, 280px);
-  height: auto;                        /* let aspect-ratio set height */
+  width: clamp(180px, 28vmin, 340px); /* was 140/24vmin/280 */
+  height: auto;
   aspect-ratio: 1 / 1;
-
-  /* Frame: thinner + softer */
-  border: 1px solid var(--frame-border);  /* was 2px */
-  border-radius: 10px;                    /* was 14px */
+  border: 1px solid var(--frame-border);
+  border-radius: 10px;
   box-shadow:
-    0 8px 16px var(--frame-drop-a),       /* was 0 12px 24px */
-    0 2px 6px var(--frame-drop-b),        /* was 0 4px 10px */
-    inset 0 0 6px var(--frame-inset);     /* was inset 0 0 10px */
+    0 8px 16px var(--frame-drop-a),
+    0 2px 6px var(--frame-drop-b),
+    inset 0 0 6px var(--frame-inset);
+  margin-top: 0.5rem;
 }
 
 #intro-cube {
@@ -210,8 +209,9 @@ body {
 
 /* Bottom: 2/3 height, full-width horizontal pager */
 .intro-bottom {
-  height: 67vh;                  /* no divider subtraction */
-  /* no border line = no divider bar */
+  flex: 1 1 auto;
+  height: auto;
+  padding-top: 0.5rem; /* reduced gap between cube and section titles */
   background: #000;
   overscroll-behavior: contain;
 }
@@ -225,8 +225,6 @@ body {
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-
-  /* Dark scrollbar (Firefox) */
   scrollbar-color: #343434 #0b0b0b;
   scrollbar-width: thin;
 }
@@ -238,18 +236,15 @@ body {
   width: 100%;
   scroll-snap-align: start;
   display: flex;
-
-  align-items: center;       /* vertically center section content */
-  justify-content: center;   /* centered horizontally */
-
+  align-items: center;
+  justify-content: center;
   padding: 1rem 1.5rem 1.5rem;
 }
-
 .page-inner {
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.75rem; /* reduced from 1.25rem */
   align-items: center;
   width: min(100%, 1100px);
 }
@@ -376,16 +371,17 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
 .promo { display: none; }
 
 /* --- Example blurb under heading --- */
-.page-blurb{
+.page-blurb {
   font-size: 0.95rem;
   line-height: 1.5;
   max-width: 28ch;
   color: #bdbdbd;
+  margin-top: 0.25rem; /* tightened */
 }
 
 /* --- Up arrow button --- */
 .page-up-arrow{
-  margin-top: auto;                 /* push to bottom of .page-inner */
+  margin-top: 0.5rem;                 /* push to bottom of .page-inner */
   font-size: 2.2rem;
   background: none;
   border: none;
@@ -684,21 +680,16 @@ html, body{
   scroll-behavior: smooth;         /* base smoothness */
 }
 
-/* Snap points */
-.hero,
-.border-wrapper{
-  scroll-snap-align: start;
+:root { --header-h: 70px; } /* adjust if your header is taller/shorter */
+
+html { 
+  scroll-padding-top: var(--header-h); /* anchors/snap land below header */
 }
-
-/* Optional: account for fixed header if needed */
-/* :root{ --header-h: 70px; }
-html { scroll-padding-top: var(--header-h); } */
-
 
 /* Make each major section a snap point */
 .hero,
 .border-wrapper {
-  scroll-snap-align: start;
+  padding-top: var(--header-h);
 }
 
 /* Active page shows the line */

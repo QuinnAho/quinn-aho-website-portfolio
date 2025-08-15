@@ -17,7 +17,7 @@ html, body {
 body {
   font-family: 'Inter', sans-serif;
   color: #fff;
-  margin-left: var(--side-nav-w);
+  margin-left: 0;
 }
 
 /* Visual constants */
@@ -31,6 +31,9 @@ body {
 
   /* Flat interior */
   --surface-gray: #e6e6e6;
+
+  /* Width of left nav when shown */
+  --nav-peek: 12px;
 }
 
 /* ===============================
@@ -39,8 +42,8 @@ body {
 .main-header {
   position: fixed;
   top: 0;
-  left: var(--side-nav-w);
-  width: calc(100% - var(--side-nav-w));
+  left: 0;
+  width: 100%;
   height: var(--header-h);
   display: flex;
   align-items: center;
@@ -57,8 +60,8 @@ body {
   content: '';
   position: absolute;
   top: 0;
-  left: calc(-1 * var(--side-nav-w));
-  width: calc(100% + var(--side-nav-w));
+  left: 0;
+  width: 100%;
   height: 100%;
   border-bottom: 1px solid rgba(255,255,255,0.05);
   pointer-events: none;
@@ -74,6 +77,28 @@ body {
   display: flex;
   justify-content: center;
   z-index: 999;
+  transform: translateX(calc(-100% + var(--nav-peek)));
+  transition: transform 0.3s ease;
+}
+
+.side-nav:hover,
+body.side-nav-open .side-nav {
+  transform: translateX(0);
+}
+
+.side-nav-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+body.side-nav-open .side-nav-toggle {
+  transform: rotate(180deg);
 }
 
 .side-nav .nav-links {
@@ -130,12 +155,14 @@ body {
     width: 100%;
     height: auto;
     padding: 0.8rem 1rem;
+    transform: none;
   }
   .side-nav .nav-links {
     flex-direction: row;
     gap: 1rem;
     justify-content: center;
   }
+  .side-nav-toggle { display: none; }
   .nav-links a {
     font-size: 0.75rem;
   }

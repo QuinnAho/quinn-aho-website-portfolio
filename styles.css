@@ -74,8 +74,11 @@ body {
   width: var(--side-nav-w);
   height: 100vh;
   padding-top: var(--header-h);
+  padding-bottom: var(--header-h);
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   z-index: 999;
   transform: translateX(calc(-100% + var(--nav-peek)));
   transition: transform 0.3s ease;

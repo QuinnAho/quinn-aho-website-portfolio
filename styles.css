@@ -17,6 +17,7 @@ html, body {
 body {
   font-family: 'Inter', sans-serif;
   color: #fff;
+  margin-left: 0;
 }
 
 /* Visual constants */
@@ -30,6 +31,9 @@ body {
 
   /* Flat interior */
   --surface-gray: #e6e6e6;
+
+  /* Width of left nav when shown */
+  --nav-peek: 12px;
 }
 
 /* ===============================
@@ -37,25 +41,75 @@ body {
    =============================== */
 .main-header {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-h);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.2rem 2rem;
+  justify-content: center;
+  padding: 0 2rem;
   background-color: rgba(0,0,0,0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
-  top: 0; left: 0; width: 100%;
+  border-bottom: none;
+}
+
+.main-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   border-bottom: 1px solid rgba(255,255,255,0.05);
+  pointer-events: none;
 }
 
-.main-header .nav-links {
+.side-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--side-nav-w);
+  height: 100vh;
+  padding-top: var(--header-h);
   display: flex;
-  list-style: none;
-  gap: 3rem;
+  justify-content: center;
+  z-index: 999;
+  transform: translateX(calc(-100% + var(--nav-peek)));
+  transition: transform 0.3s ease;
 }
 
-.main-header nav a {
+.side-nav:hover,
+body.side-nav-open .side-nav,
+body.side-nav-hover .side-nav {
+  transform: translateX(0);
+}
+
+.side-nav-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+body.side-nav-open .side-nav-toggle {
+  transform: rotate(180deg);
+}
+
+.side-nav .nav-links {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
   color: rgba(255,255,255,0.9);
   text-decoration: none;
   font-size: 0.85rem;
@@ -67,9 +121,9 @@ body {
   transition: all 0.3s ease;
 }
 
-.main-header nav a:hover { color: #fff; }
+.nav-links a:hover { color: #fff; }
 
-.main-header nav a::after {
+.nav-links a::after {
   content: '';
   position: absolute;
   bottom: 0; left: 0;
@@ -78,7 +132,43 @@ body {
   transition: width 0.3s ease;
 }
 
-.main-header nav a:hover::after { width: 100%; }
+.nav-links a:hover::after { width: 100%; }
+
+/* Bouncing arrow hint for side navigation */
+.side-nav-arrow {
+  position: fixed;
+  top: 50%;
+  left: calc(var(--nav-peek) + 10px);
+  animation: bounce-x 2s infinite;
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(5px);
+  padding: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 998;
+  transition: opacity 0.3s ease;
+}
+
+.side-nav-arrow .arrow-icon { transform: rotate(-90deg); }
+
+.side-nav-arrow svg {
+  width: 30px;
+  height: 30px;
+  fill: rgba(255,255,255,0.8);
+}
+
+@keyframes bounce-x {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(-50%) translateX(0); }
+  40% { transform: translateY(-50%) translateX(10px); }
+  60% { transform: translateY(-50%) translateX(5px); }
+}
+
+body.side-nav-hover .side-nav-arrow,
+body.side-nav-open .side-nav-arrow {
+  display: none;
+}
 
 /* Dynamic guide centered in header */
 .header-guide {
@@ -91,16 +181,29 @@ body {
 
 /* Responsive tweaks for small screens */
 @media (max-width: 600px) {
+  :root { --side-nav-w: 0; }
   .main-header {
+    left: 0;
+    width: 100%;
     padding: 0.8rem 1rem;
   }
-  .main-header .nav-links {
-    gap: 1rem;
-    overflow-x: auto;
+  .side-nav {
+    top: var(--header-h);
+    width: 100%;
+    height: auto;
+    padding: 0.8rem 1rem;
+    transform: none;
   }
-  .main-header nav a {
+  .side-nav .nav-links {
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .side-nav-toggle { display: none; }
+  .nav-links a {
     font-size: 0.75rem;
   }
+  .side-nav-arrow { display: none; }
 }
 
 .animated-message { opacity: 0; transition: opacity 0.5s ease; }
@@ -695,7 +798,7 @@ html, body{
   scroll-behavior: smooth;         /* base smoothness */
 }
 
-:root { --header-h: 70px; } /* adjust if your header is taller/shorter */
+:root { --header-h: 70px; --side-nav-w: 180px; } /* adjust if your header is taller/shorter */
 
 html { 
   scroll-padding-top: var(--header-h); /* anchors/snap land below header */

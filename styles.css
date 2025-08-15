@@ -50,7 +50,18 @@ body {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
+  border-bottom: none;
+}
+
+.main-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: calc(-1 * var(--side-nav-w));
+  width: calc(100% + var(--side-nav-w));
+  height: 100%;
   border-bottom: 1px solid rgba(255,255,255,0.05);
+  pointer-events: none;
 }
 
 .side-nav {
@@ -60,9 +71,6 @@ body {
   width: var(--side-nav-w);
   height: 100vh;
   padding-top: var(--header-h);
-  background-color: rgba(0,0,0,0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   z-index: 999;

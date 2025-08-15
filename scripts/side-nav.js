@@ -11,7 +11,8 @@
       pinned = !pinned;
       body.classList.toggle('side-nav-open', pinned);
       toggle.setAttribute('aria-expanded', pinned);
-      toggle.innerHTML = pinned ? '\u25C0' : '\u25B6';
+      toggle.innerHTML = pinned ? '\u2715' : '\u2630';
+      toggle.setAttribute('aria-label', pinned ? 'Close navigation' : 'Open navigation');
       if (!pinned) body.classList.remove('side-nav-hover');
     });
   }
@@ -35,4 +36,3 @@
     });
   }
 })();
-

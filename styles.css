@@ -89,6 +89,20 @@ body {
   padding: 0.5rem;
 }
 
+/* Responsive tweaks for small screens */
+@media (max-width: 600px) {
+  .main-header {
+    padding: 0.8rem 1rem;
+  }
+  .main-header .nav-links {
+    gap: 1rem;
+    overflow-x: auto;
+  }
+  .main-header nav a {
+    font-size: 0.75rem;
+  }
+}
+
 .animated-message { opacity: 0; transition: opacity 0.5s ease; }
 .animated-message.show { opacity: 1; }
 .animated-message.fade-out-all { opacity: 0; }
@@ -235,6 +249,7 @@ body {
   height: 100%;
   width: 100%;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -676,7 +691,7 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
 /* Vertical snap between Hero and the Intro section */
 html, body{
   height:100%;
-  scroll-snap-type: y proximity;  /* less aggressive than 'mandatory' */
+  scroll-snap-type: y mandatory;  /* ensure sections always snap */
   scroll-behavior: smooth;         /* base smoothness */
 }
 
@@ -690,6 +705,8 @@ html {
 .hero,
 .border-wrapper {
   padding-top: var(--header-h);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 /* Active page shows the line */

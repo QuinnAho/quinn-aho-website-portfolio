@@ -1,13 +1,26 @@
 (() => {
   const body = document.body;
   const toggle = document.querySelector('.side-nav-toggle');
-  if (!toggle) return;
+  let pinned = false;
 
-  toggle.addEventListener('click', e => {
-    e.stopPropagation();
-    const open = body.classList.toggle('side-nav-open');
-    toggle.setAttribute('aria-expanded', open);
-    toggle.innerHTML = open ? '\u25C0' : '\u25B6';
+  if (toggle) {
+    toggle.addEventListener('click', e => {
+      e.stopPropagation();
+      pinned = !pinned;
+      body.classList.toggle('side-nav-open', pinned);
+      toggle.setAttribute('aria-expanded', pinned);
+      toggle.innerHTML = pinned ? '\u25C0' : '\u25B6';
+      if (!pinned) body.classList.remove('side-nav-hover');
+    });
+  }
+
+  document.addEventListener('mousemove', e => {
+    if (pinned) return;
+    if (e.clientX < window.innerWidth / 4) {
+      body.classList.add('side-nav-hover');
+    } else {
+      body.classList.remove('side-nav-hover');
+    }
   });
 })();
 

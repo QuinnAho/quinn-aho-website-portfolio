@@ -82,7 +82,8 @@ body {
 }
 
 .side-nav:hover,
-body.side-nav-open .side-nav {
+body.side-nav-open .side-nav,
+body.side-nav-hover .side-nav {
   transform: translateX(0);
 }
 
@@ -133,6 +134,42 @@ body.side-nav-open .side-nav-toggle {
 
 .nav-links a:hover::after { width: 100%; }
 
+/* Bouncing arrow hint for side navigation */
+.side-nav-arrow {
+  position: fixed;
+  top: 50%;
+  left: calc(var(--nav-peek) + 10px);
+  animation: bounce-x 2s infinite;
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(5px);
+  padding: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 998;
+  transition: opacity 0.3s ease;
+}
+
+.side-nav-arrow .arrow-icon { transform: rotate(-90deg); }
+
+.side-nav-arrow svg {
+  width: 30px;
+  height: 30px;
+  fill: rgba(255,255,255,0.8);
+}
+
+@keyframes bounce-x {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(-50%) translateX(0); }
+  40% { transform: translateY(-50%) translateX(10px); }
+  60% { transform: translateY(-50%) translateX(5px); }
+}
+
+body.side-nav-hover .side-nav-arrow,
+body.side-nav-open .side-nav-arrow {
+  display: none;
+}
+
 /* Dynamic guide centered in header */
 .header-guide {
   position: absolute;
@@ -166,6 +203,7 @@ body.side-nav-open .side-nav-toggle {
   .nav-links a {
     font-size: 0.75rem;
   }
+  .side-nav-arrow { display: none; }
 }
 
 .animated-message { opacity: 0; transition: opacity 0.5s ease; }

@@ -2,7 +2,7 @@
 
 <img src="/screenshot.jpg?raw=true" width="880">
 
-## 📂 General Structure
+## General Structure
 
 ### Root Assets
 - **`index.html`** – Single-page portfolio site; defines main sections (`hero`, `intro`, `projects`, `experience`, `contact`) and wires up scripts/styles.
@@ -18,7 +18,7 @@
 
 ---
 
-## 🔑 Important Concepts
+## Important Concepts
 
 ### WebGL Fluid Simulation (`fluid-sim.js`)
 - Uses **fragment/vertex shaders** with GPU framebuffer techniques.
@@ -42,7 +42,7 @@
 
 ---
 
-## 🚀 Suggested Next Steps / Learning
+## Suggested Next Steps / Learning
 - **WebGL & GPU Shaders** – Explore fragment/vertex shader programming to modify fluid visuals.
 - **Three.js & 3D Interaction** – Learn materials, lighting, and advanced controls for expanding cube functionality.
 - **Modern Front-End APIs** – Review `IntersectionObserver`, scroll snapping, and smooth scrolling for responsive UI behaviors.
@@ -50,12 +50,12 @@
 
 ---
 
-## 📚 References
+## References
 - [NVIDIA GPU Gems – Fast Fluid Dynamics Simulation on the GPU](https://developer.nvidia.com/gpugems/gpugems/part-vi-beyond-triangles/chapter-38-fast-fluid-dynamics-simulation-gpu)  
 - [mharrys/fluids-2d](https://github.com/mharrys/fluids-2d)  
 - [haxiomic/GPU-Fluid-Experiments](https://github.com/haxiomic/GPU-Fluid-Experiments)  
 
 ---
 
-## 📜 License
+## License
 The code is available under the [MIT license](LICENSE).

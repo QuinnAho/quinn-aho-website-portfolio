@@ -45,8 +45,6 @@
 ## Suggested Next Steps / Learning
 - **WebGL & GPU Shaders** – Explore fragment/vertex shader programming to modify fluid visuals.
 - **Three.js & 3D Interaction** – Learn materials, lighting, and advanced controls for expanding cube functionality.
-- **Modern Front-End APIs** – Review `IntersectionObserver`, scroll snapping, and smooth scrolling for responsive UI behaviors.
-- **CSS Animations & Layout** – Understand custom variables, grid/flexbox layouts, and transitions used heavily in the design.
 
 ---
 

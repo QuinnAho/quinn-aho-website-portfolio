@@ -7,7 +7,7 @@
   const canvas = document.getElementById('intro-cube');
   if (!container || !canvas) return;
 
-  function start() {
+  async function start() {
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
@@ -22,36 +22,45 @@
     key.position.set(2, 3, 4);
     scene.add(key);
 
-    // Helper: draw an emoji silhouette in white for use as an emissive map
-    function makeEmojiTexture(emoji) {
-      // use a larger canvas and draw the emoji smaller so the result looks sharper
-      const size = 512;
-      const cvs = document.createElement('canvas');
-      cvs.width = cvs.height = size;
-      const ctx = cvs.getContext('2d');
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.font = size * 0.4 + 'px serif';
-      // Draw emoji normally
-      ctx.fillText(emoji, size / 2, size / 2);
-      // Recolor to white while keeping transparency
-      ctx.globalCompositeOperation = 'source-in';
-      ctx.fillStyle = '#fff';
-      ctx.fillRect(0, 0, size, size);
-      return new THREE.CanvasTexture(cvs);
+    // Helper: load an SVG/PNG icon and return a white canvas texture
+    function loadIconTexture(url) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+          const size = 512;
+          const cvs = document.createElement('canvas');
+          cvs.width = cvs.height = size;
+          const ctx = cvs.getContext('2d');
+          const scale = 0.6 * size / Math.max(img.width, img.height);
+          const w = img.width * scale;
+          const h = img.height * scale;
+          ctx.drawImage(img, (size - w) / 2, (size - h) / 2, w, h);
+          resolve(new THREE.CanvasTexture(cvs));
+        };
+        img.onerror = reject;
+        img.src = url;
+      });
     }
 
     // Icons for each face of the cube (BoxGeometry order: right, left, top, bottom, front, back)
-    // BoxGeometry material order: right, left, top, bottom, front, back
     // Pages map to cube faces via intro-pages.js (face indices 1–5)
-    // Education 🎓, Projects 💼, Experience 📁, Contact ✉️, Skills 🛠️, Home 🏠
-    const faceIcons = ['🎓', '💼', '📁', '✉️', '🏠', '🛠️'];
-    const materials = faceIcons.map(icon => new THREE.MeshStandardMaterial({
+    const iconPaths = [
+      'media/icons/education.svg',
+      'media/icons/projects.svg',
+      'media/icons/experience.svg',
+      'media/icons/contact.svg',
+      'media/icons/home.svg',
+      'media/icons/skills.svg'
+    ];
+
+    const textures = await Promise.all(iconPaths.map(loadIconTexture));
+    const materials = textures.map(tex => new THREE.MeshStandardMaterial({
       color: 0x000000,
       roughness: 0.4,
       metalness: 0.0,
       emissive: 0xffffff,
-      emissiveMap: makeEmojiTexture(icon)
+      emissiveMap: tex,
+      transparent: true
     }));
 
     const cube = new THREE.Mesh(new THREE.BoxGeometry(1.8, 1.8, 1.8), materials);

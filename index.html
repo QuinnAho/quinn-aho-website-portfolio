@@ -524,6 +524,14 @@
         clearTimeout(tId);
         tId = setTimeout(snap, SNAP_DELAY);
       }, { passive:true });
+
+      const arrow = document.getElementById('scroll-arrow');
+      if (arrow && SECTIONS[1]) {
+        arrow.addEventListener('click', e => {
+          e.preventDefault();
+          animateScroll(window.scrollY, SECTIONS[1].offsetTop, SNAP_MS);
+        });
+      }
     })();
     </script>
     <script src="scripts/fluid-sim.js"></script>

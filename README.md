@@ -4,6 +4,10 @@
 
 <img width="1897" height="870" alt="image" src="https://github.com/user-attachments/assets/4f6651b0-1192-4bd0-ada4-f5c0684ae282" />
 
+A sleek, interactive portfolio showcasing my (Quinn Aho’s) projects and experience.  
+Built with **HTML, CSS, and JavaScript**, it features a **WebGL fluid simulation**,  
+an **interactive Three.js cube**, and dynamic UI elements to create an engaging,  
+modern presentation of work and skills.
 
 ## General Structure
 

@@ -2,6 +2,9 @@
 
 <img width="1903" height="981" alt="image" src="https://github.com/user-attachments/assets/c6f0379a-49bd-4708-b803-1c26b855dc78" />
 
+<img width="1897" height="870" alt="image" src="https://github.com/user-attachments/assets/4f6651b0-1192-4bd0-ada4-f5c0684ae282" />
+
+
 ## General Structure
 
 ### Root Assets

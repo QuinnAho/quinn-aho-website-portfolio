@@ -1,6 +1,6 @@
 # Quinn Aho Portfolio Website
 
-<img src="/screenshot.jpg?raw=true" width="880">
+<img width="1903" height="981" alt="image" src="https://github.com/user-attachments/assets/c6f0379a-49bd-4708-b803-1c26b855dc78" />
 
 ## General Structure
 

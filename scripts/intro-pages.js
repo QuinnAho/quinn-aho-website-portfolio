@@ -141,4 +141,23 @@
   pages.forEach((p,i)=>p.classList.toggle('active', i===0));
   if (cubeCanvas) cubeCanvas.style.pointerEvents = 'none';
   scroller.classList.add('dir-right'); // default wipe direction
+
+  // --- Keyboard navigation: left/right arrows for horizontal paging ---
+  document.addEventListener('keydown', (e) => {
+    // Only handle arrow keys when on the intro section (not on hero or in a sheet)
+    const onIntroSection = window.scrollY >= window.innerHeight * 0.5; // roughly on second page
+    const sheetOpen = document.querySelector('.detail-sheet.open');
+
+    if (!onIntroSection || sheetOpen) return;
+
+    const idx = currentIndex();
+
+    if (e.key === 'ArrowRight' && idx < PAGE_COUNT - 1) {
+      e.preventDefault();
+      goToPage(idx + 1);
+    } else if (e.key === 'ArrowLeft' && idx > 0) {
+      e.preventDefault();
+      goToPage(idx - 1);
+    }
+  });
 })();

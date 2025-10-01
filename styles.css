@@ -20,6 +20,20 @@ body {
   margin-left: 0;
 }
 
+/* Focus styles for keyboard navigation */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Remove default outline for mouse users */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
 /* Visual constants */
 :root{
   /* Cube frame */
@@ -102,6 +116,22 @@ body.side-nav-hover .side-nav {
   font-size: 1.5rem;
   z-index: 1001;
   display: none;
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.side-nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.1);
+}
+.side-nav-toggle:active {
+  transform: translateY(-50%) scale(0.95);
 }
 
 
@@ -413,6 +443,7 @@ body.side-nav-open .side-nav-arrow {
   border-radius: 999px;
   position: relative;
   outline: none;
+  transition: all 0.3s ease;
 }
 #download-resume-btn::before {
   content: '';
@@ -421,8 +452,20 @@ body.side-nav-open .side-nav-arrow {
   border: 2px solid #fff;
   border-radius: 999px;
   pointer-events: none;
+  transition: all 0.3s ease;
 }
-#download-resume-btn:active { transform: translateY(1px); }
+#download-resume-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+#download-resume-btn:hover::before {
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+#download-resume-btn:active {
+  transform: translateY(0px);
+  background: rgba(255, 255, 255, 0.05);
+}
 
 /* ===============================
    Border wrapper + animated lines
@@ -565,6 +608,21 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
   border: none;
   color: #fff;
   cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sheet-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+.sheet-close:active {
+  transform: scale(0.95);
 }
 .detail-sheet .sheet-close {
   position: absolute;
@@ -577,8 +635,22 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
   color: white;
   cursor: pointer;
   z-index: 1000;
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
+.detail-sheet .sheet-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-50%) scale(1.1);
+}
+.detail-sheet .sheet-close:active {
+  transform: translateX(-50%) scale(0.95);
+}
 
 /* when sheet is active */
 .detail-sheet.open{ transform: translateY(0); }
@@ -658,12 +730,51 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
   box-shadow: 0 12px 24px rgba(0,0,0,0.35);
 }
 
-.xp-list {
-  display: grid;
-  gap: 1rem;
+.xp-timeline {
+  position: relative;
   margin-top: 1rem;
+  padding-left: 2rem;
 }
+
 .xp-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding: 0;
+}
+
+.xp-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-point {
+  position: absolute;
+  left: -1.25rem;
+  top: 1rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #000;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+/* Line segment after each point (except the last) */
+.xp-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 0.75rem;
+  top: calc(1rem + 14px + 4px);
+  width: 2px;
+  bottom: -1rem;
+  background: rgba(255, 255, 255, 0.4);
+  z-index: 1;
+}
+
+.timeline-content {
+  flex: 1;
   padding: 1rem 1.25rem;
 }
 .xp-item h4 {
@@ -771,9 +882,16 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
   font-size: .85rem;
   color: #cdd7ff;
   border-bottom: none; /* remove dashed underline from shared link style */
+  transition: all 0.3s ease;
 }
 .project-actions a:hover {
-  background: rgba(205,215,255,0.08);
+  background: rgba(205,215,255,0.15);
+  border-color: rgba(205,215,255,0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(205,215,255,0.1);
+}
+.project-actions a:active {
+  transform: translateY(0px);
 }
 
 

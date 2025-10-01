@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
       <meta charset="utf-8">
       <meta http-equiv="Cache-Control" content="no-cache">
@@ -12,21 +12,28 @@
       <link rel="icon" href="logo.png">
 
       <title>Quinn Aho</title>
-      <meta name="description" content="Quinn's website portfolio using Web-GL fluid sim.">
+      <meta name="description" content="Interactive portfolio of Quinn Aho, graphics and XR engineer. Features real-time 3D visuals, WebGL effects, and immersive project showcases.">
+      <meta name="keywords" content="Quinn Aho, graphics engineer, XR engineer, portfolio, web design, Unreal Engine, Three.js, WebGL">
       <meta property="og:type" content="website">
-      <meta property="og:title" content="Webgl Fluid Simulation">
-      <meta property="og:description" content="A WebGL fluid simulation that works in mobile browsers.">
-      <meta property="og:url" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/">
-      <meta property="og:image" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/logo.png">
+      <meta property="og:title" content="Quinn Aho - Graphics/XR Engineer Portfolio">
+      <meta property="og:description" content="Interactive portfolio showcasing real-time graphics, XR development, and immersive web experiences by Quinn Aho.">
+      <meta property="og:url" content="https://quinnaho.dev/">
+      <meta property="og:image" content="https://quinnaho.dev/logo.png">
+
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content="Quinn Aho - Graphics/XR Engineer Portfolio">
+      <meta name="twitter:description" content="Interactive portfolio showcasing real-time graphics, XR development, and immersive web experiences.">
+      <meta name="twitter:image" content="https://quinnaho.dev/logo.png">
+
+      <link rel="canonical" href="https://quinnaho.dev/">
 
       <!-- Styles -->
       <link rel="stylesheet" href="/styles.css">
 
       <!-- Fonts -->
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&family=DM+Serif+Display&family=JetBrains+Mono:wght@500&family=IBM+Plex+Sans:wght@500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=DM+Serif+Display&family=IBM+Plex+Sans:wght@500&family=Inter:wght@400;600&family=JetBrains+Mono:wght@500&family=Playfair+Display:ital,wght@0,500;1,500&family=Space+Grotesk:wght@500&family=Tangerine:wght@700&display=swap" rel="stylesheet">
 
       <!-- Analytics (unchanged) -->
       <script>
@@ -64,7 +71,7 @@
 
     <!-- Hero -->
     <section class="hero">
-      <canvas></canvas>
+      <canvas aria-label="Interactive fluid simulation background" role="img"></canvas>
       <div class="scroll-arrow">
         <a href="#intro" id="scroll-arrow">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -388,64 +395,82 @@
       <div class="sheet-content">
         <h3>Experience</h3>
 
-        <div class="xp-list">
+        <div class="xp-timeline">
           <article class="xp-item card">
-            <h4><strong>Johns Hopkins Applied Physics Lab (APL)</strong> — <em>Immersive / Software Development Intern</em></h4>
-            <p><small>May 2024 - Present · Laurel, MD</small></p>
-            <ul>
-              <li>Contributed to vehicle training simulation software for Navy soldiers using Unity (C#).</li>
-              <li>Built an internal CAD viewer in Unreal Engine for maintainers to inspect vehicle subsystems.</li>
-              <li>Developed shaders and environment effects to improve simulation realism.</li>
-              <li>Supported DevOps tasks: PowerShell scripting, virtualization, and CI/CD setup.</li>
-            </ul>
+            <div class="timeline-point"></div>
+            <div class="timeline-content">
+              <h4><strong>Johns Hopkins Applied Physics Lab (APL)</strong> — <em>Immersive / Software Development Intern</em></h4>
+              <p><small>May 2024 - Present · Laurel, MD</small></p>
+              <ul>
+                <li>Contributed to vehicle training simulation software for Navy soldiers using Unity (C#).</li>
+                <li>Built an internal CAD viewer in Unreal Engine for maintainers to inspect vehicle subsystems.</li>
+                <li>Developed shaders and environment effects to improve simulation realism.</li>
+                <li>Supported DevOps tasks: PowerShell scripting, virtualization, and CI/CD setup.</li>
+              </ul>
+            </div>
           </article>
 
           <article class="xp-item card">
-            <h4><strong>GS Engineering</strong> — <em>Simulation Engineering Intern</em></h4>
-            <p><small>Nov 2023 - May 2024 · Houghton, MI</small></p>
-            <ul>
-              <li>Led development of a KPI plugin in Unreal Engine to extract/analyze vehicle simulation data.</li>
-              <li>Created/rigged vehicle mockups in Blender; tuned collision and suspension in UE.</li>
-              <li>Participated in Agile scrums and cross-team planning.</li>
-            </ul>
+            <div class="timeline-point"></div>
+            <div class="timeline-content">
+              <h4><strong>GS Engineering</strong> — <em>Simulation Engineering Intern</em></h4>
+              <p><small>Nov 2023 - May 2024 · Houghton, MI</small></p>
+              <ul>
+                <li>Led development of a KPI plugin in Unreal Engine to extract/analyze vehicle simulation data.</li>
+                <li>Created/rigged vehicle mockups in Blender; tuned collision and suspension in UE.</li>
+                <li>Participated in Agile scrums and cross-team planning.</li>
+              </ul>
+            </div>
           </article>
 
           <article class="xp-item card">
-            <h4><strong>GS Engineering</strong> — <em>Technology Growth Intern (High School)</em></h4>
-            <p><small>May 2021 - Aug 2022 · Houghton, MI</small></p>
-            <ul>
-              <li>Researched and developed VR simulation environments for military applications in UE.</li>
-              <li>Helped establish CAD-to-game-engine workflows for engineering visualization.</li>
-            </ul>
+            <div class="timeline-point"></div>
+            <div class="timeline-content">
+              <h4><strong>GS Engineering</strong> — <em>Technology Growth Intern (High School)</em></h4>
+              <p><small>May 2021 - Aug 2022 · Houghton, MI</small></p>
+              <ul>
+                <li>Researched and developed VR simulation environments for military applications in UE.</li>
+                <li>Helped establish CAD-to-game-engine workflows for engineering visualization.</li>
+              </ul>
+            </div>
           </article>
 
           <article class="xp-item card">
-            <h4><strong>Corvid Technologies</strong> — <em>VR Visualization Intern</em></h4>
-            <p><small>May 2023 - Aug 2023 · Mooresville, NC</small></p>
-            <ul>
-              <li>Developed UE4/UE5 Blueprint &amp; C++ VR tools; delivered a Raytheon promo cinematic.</li>
-              <li>Built a VR IK ATD positioning tool with per-DoF joint limits and IK posing.</li>
-              <li>Improved <em>VISION</em>: label mapping, menu reset, material error checks, etc.</li>
-            </ul>
+            <div class="timeline-point"></div>
+            <div class="timeline-content">
+              <h4><strong>Corvid Technologies</strong> — <em>VR Visualization Intern</em></h4>
+              <p><small>May 2023 - Aug 2023 · Mooresville, NC</small></p>
+              <ul>
+                <li>Developed UE4/UE5 Blueprint &amp; C++ VR tools; delivered a Raytheon promo cinematic.</li>
+                <li>Built a VR IK ATD positioning tool with per-DoF joint limits and IK posing.</li>
+                <li>Improved <em>VISION</em>: label mapping, menu reset, material error checks, etc.</li>
+              </ul>
+            </div>
           </article>
 
           <article class="xp-item card">
-            <h4><strong>NextGenCoding</strong> — <em>Junior Unreal Developer (Contract)</em></h4>
-            <p><small>Sept 2024 - Nov 2024</small></p>
-            <ul>
-              <li>Integrated APIs and designed animation systems for realistic AI MetaHuman interactions.</li>
-              <li>Worked with ElevenLabs and NVIDIA Audio2Face for real-time voice-to-facial sync.</li>
-            </ul>
+            <div class="timeline-point"></div>
+            <div class="timeline-content">
+              <h4><strong>NextGenCoding</strong> — <em>Junior Unreal Developer (Contract)</em></h4>
+              <p><small>Sept 2024 - Nov 2024</small></p>
+              <ul>
+                <li>Integrated APIs and designed animation systems for realistic AI MetaHuman interactions.</li>
+                <li>Worked with ElevenLabs and NVIDIA Audio2Face for real-time voice-to-facial sync.</li>
+              </ul>
+            </div>
           </article>
 
           <article class="xp-item card">
-            <h4><strong>ImmersaLab</strong> — <em>Founder</em></h4>
-            <p><small>2023 - Present · <a href="https://immersalab.dev/" target="_blank" rel="noopener noreferrer">immersalab.dev</a></small></p>
-            <ul>
-              <li>Built AI-driven Niagara FX and real-time VFX/procedural tools for UE.</li>
-              <li>Delivered cinematics and XR experiences using MetaHumans, mocap, and AI avatars.</li>
-              <li>Focused on real-time rendering, VFX, and procedural environment generation.</li>
-            </ul>
+            <div class="timeline-point"></div>
+            <div class="timeline-content">
+              <h4><strong>ImmersaLab</strong> — <em>Founder</em></h4>
+              <p><small>2023 - Present · <a href="https://immersalab.dev/" target="_blank" rel="noopener noreferrer">immersalab.dev</a></small></p>
+              <ul>
+                <li>Built AI-driven Niagara FX and real-time VFX/procedural tools for UE.</li>
+                <li>Delivered cinematics and XR experiences using MetaHumans, mocap, and AI avatars.</li>
+                <li>Focused on real-time rendering, VFX, and procedural environment generation.</li>
+              </ul>
+            </div>
           </article>
         </div>
       </div>
@@ -467,6 +492,11 @@
         </div>
       </div>
 
+    <!-- Footer Attribution -->
+    <footer class="site-footer" style="text-align: center; padding: 2rem 1rem; background: rgba(0,0,0,0.8); color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1);">
+      <p>&copy; 2025 Quinn Aho. All rights reserved.</p>
+      <p style="margin-top: 0.5rem;">Fluid simulation based on <a href="https://github.com/PavelDoGreat/WebGL-Fluid-Simulation" target="_blank" rel="noopener noreferrer" style="color: rgba(255,255,255,0.8);">Pavel Dobryakov's WebGL Fluid Simulation</a> (MIT License). Built with <a href="https://threejs.org/" target="_blank" rel="noopener noreferrer" style="color: rgba(255,255,255,0.8);">Three.js</a> (MIT License).</p>
+    </footer>
 
     <!-- fluid sim doesnt work without the promo block-->
     <div class="promo">

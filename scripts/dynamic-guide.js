@@ -93,7 +93,7 @@
 
             // Show contextual messages based on interaction count
             if (interactionCount === 3 && this.isOnHero && !this.shownMessages.has('fluid-fun')) {
-              this.messageQueue.push('nice the fluid sim is pretty mesmerizing');
+              this.messageQueue.push('nice, the fluid sim is pretty mesmerizing');
               this.shownMessages.add('fluid-fun');
             } else if (interactionCount === 10 && this.isOnHero && !this.shownMessages.has('fluid-master')) {
               this.messageQueue.push("you're getting the hang of it");

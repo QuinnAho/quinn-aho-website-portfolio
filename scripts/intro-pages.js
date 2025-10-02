@@ -1,151 +1,135 @@
 (() => {
-  const scroller     = document.getElementById('intro-pages');
-  const introBottom  = document.querySelector('.intro-bottom');
-  const cubeCanvas   = document.getElementById('intro-cube');
+  const scroller = document.getElementById('intro-pages');
+  const introBottom = document.querySelector('.intro-bottom');
   if (!scroller || !introBottom) return;
 
-  // --- Pages & helpers ---
   const pages = Array.from(scroller.querySelectorAll('.page'));
-  const PAGE_COUNT   = pages.length;
+  const PAGE_COUNT = pages.length;
   const PAGE_STEP_MS = 600;
-  const UNDERLINE_MS = 520; // keep in sync with CSS transition
+  const UNDERLINE_MS = 520;
 
-  function pageWidth()   { return scroller.clientWidth; }
-  function currentIndex(){ return Math.round(scroller.scrollLeft / pageWidth()); }
+  // Page-to-cube-face mapping
+  // Pages: 0=Home, 1=Education, 2=Skills, 3=Projects, 4=Experience, 5=Contact
+  const PAGE_TO_FACE = [3, 4, 5, 1, 2, 0];
+  const FACE_TO_PAGE = PAGE_TO_FACE.reduce((acc, face, page) => {
+    acc[face] = page;
+    return acc;
+  }, {});
 
-  // --- Cube face mapping ---
-  // DOM order: 0: Home, 1: Education, 2: Skills, 3: Projects, 4: Experience, 5: Contact
-  // Home (index 0) leaves the cube orientation unchanged
-  const pageToFace = { 1:3, 2:2, 3:1, 4:4, 5:5 };
-  const faceToPage = Object.fromEntries(
-    Object.entries(pageToFace).map(([p, f]) => [f, Number(p)])
-  );
+  let syncing = false;
+  let paging = false;
+  let lastActive = 0;
+  let lastScrollX = 0;
 
-  let syncing     = false; // programmatic scroll guard
-  let paging      = false; // wheel debounce
-  let lastActive  = 0;     // current active page index
-  let lastScrollX = 0;     // for dir-left/dir-right
+  const pageWidth = () => scroller.clientWidth;
+  const currentIndex = () => Math.round(scroller.scrollLeft / pageWidth());
 
-  function toggleDirClasses(dirRight){
-    scroller.classList.toggle('dir-right', dirRight);
-    scroller.classList.toggle('dir-left',  !dirRight);
+  function setScrollDirection(isRight) {
+    scroller.classList.toggle('dir-right', isRight);
+    scroller.classList.toggle('dir-left', !isRight);
   }
 
-  function setActive(nextIdx, dirRight){
+  function updateCubeFace(pageIndex) {
+    const face = PAGE_TO_FACE[pageIndex];
+    if (face !== undefined && window.setIntroCubeFace) {
+      window.setIntroCubeFace(face);
+    }
+  }
+
+  function setActivePage(nextIdx, isMovingRight) {
     if (nextIdx === lastActive) return;
 
-    // LEAVING page: remove active, then add directional leaving class for fade-out
     const leaving = pages[lastActive];
     if (leaving) {
       leaving.classList.remove('active', 'pre-activate', 'leaving-left', 'leaving-right');
-      leaving.classList.add(dirRight ? 'leaving-right' : 'leaving-left');
-      // cleanup after animation finishes
-      setTimeout(() => {
-        leaving.classList.remove('leaving-left', 'leaving-right');
-      }, UNDERLINE_MS + 60);
+      leaving.classList.add(isMovingRight ? 'leaving-right' : 'leaving-left');
+      setTimeout(() => leaving.classList.remove('leaving-left', 'leaving-right'), UNDERLINE_MS + 60);
     }
 
-    // ENTERING page: set direction, ensure it's in starting state, then activate next frame
-    toggleDirClasses(dirRight);
+    setScrollDirection(isMovingRight);
+
     const entering = pages[nextIdx];
     if (entering) {
       entering.classList.remove('active', 'leaving-left', 'leaving-right');
-      entering.classList.add('pre-activate');   // make sure it starts hidden
-      // force a reflow so the browser registers pre-activate state
-      void entering.offsetWidth;
-      // next frame: flip to active -> triggers fade IN
+      entering.classList.add('pre-activate');
+      void entering.offsetWidth; // Force reflow
       requestAnimationFrame(() => {
         entering.classList.remove('pre-activate');
         entering.classList.add('active');
       });
     }
 
-    // Update cube to reflect active page
-    const face = pageToFace[nextIdx];
-    if (typeof face === 'number' && typeof window.setIntroCubeFace === 'function') {
-      window.setIntroCubeFace(face);
-    }
-
-    if (cubeCanvas) {
-      cubeCanvas.style.pointerEvents = nextIdx === 0 ? 'none' : '';
-    }
-
+    updateCubeFace(nextIdx);
     lastActive = nextIdx;
   }
 
-  function goToPage(index){
+  function goToPage(index) {
     const clamped = Math.max(0, Math.min(PAGE_COUNT - 1, index));
-    const dirRight = clamped > lastActive;
-    const x = clamped * pageWidth();
+    const isMovingRight = clamped > lastActive;
 
     syncing = true;
-    scroller.scrollTo({ left: x, behavior: 'smooth' });
-    setActive(clamped, dirRight);
+    scroller.scrollTo({ left: clamped * pageWidth(), behavior: 'smooth' });
+    setActivePage(clamped, isMovingRight);
     setTimeout(() => (syncing = false), PAGE_STEP_MS + 120);
   }
 
   window.goToIntroPage = goToPage;
 
-  // --- Cube -> Pages (external hook from cube) ---
-  window.onIntroCubeSnap = function(faceIndex){
-    const pageIndex = faceToPage[faceIndex];
-    if (typeof pageIndex === 'number') goToPage(pageIndex);
+  // Cube snap callback
+  window.onIntroCubeSnap = (faceIndex) => {
+    const pageIndex = FACE_TO_PAGE[faceIndex];
+    if (pageIndex !== undefined) goToPage(pageIndex);
   };
 
-  // --- Pages -> Cube & underline direction tracking ---
-  let rafId = null;
+  // Scroll tracking
+  let scrollRaf = null;
   scroller.addEventListener('scroll', () => {
-    const dirRight = scroller.scrollLeft > lastScrollX;
-    toggleDirClasses(dirRight);
+    const isMovingRight = scroller.scrollLeft > lastScrollX;
+    setScrollDirection(isMovingRight);
     lastScrollX = scroller.scrollLeft;
 
     if (syncing) return;
 
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(() => {
+    if (scrollRaf) cancelAnimationFrame(scrollRaf);
+    scrollRaf = requestAnimationFrame(() => {
       const idx = currentIndex();
       if (idx !== lastActive) {
-        setActive(idx, dirRight);
-      }
-      // Keep cube aligned while dragging
-      const face = pageToFace[idx];
-      if (typeof face === 'number' && typeof window.setIntroCubeFace === 'function') {
-        window.setIntroCubeFace(face);
+        setActivePage(idx, isMovingRight);
       }
     });
   });
 
-  // --- Vertical wheel -> horizontal paging (bottom area only) ---
+  // Wheel navigation
   introBottom.addEventListener('wheel', (e) => {
-    const delta = e.deltaY;
-    const idx   = currentIndex();
+    if (paging) {
+      e.preventDefault();
+      return;
+    }
 
-    if (paging) { e.preventDefault(); return; }
+    const idx = currentIndex();
+    const delta = e.deltaY;
 
     if (delta > 0 && idx < PAGE_COUNT - 1) {
-      e.preventDefault(); paging = true; goToPage(idx + 1);
+      e.preventDefault();
+      paging = true;
+      goToPage(idx + 1);
       setTimeout(() => (paging = false), PAGE_STEP_MS);
     } else if (delta < 0 && idx > 0) {
-      e.preventDefault(); paging = true; goToPage(idx - 1);
+      e.preventDefault();
+      paging = true;
+      goToPage(idx - 1);
       setTimeout(() => (paging = false), PAGE_STEP_MS);
     }
   }, { passive: false });
 
-  // Keep alignment on resize
+  // Resize alignment
   window.addEventListener('resize', () => {
-    const idx = currentIndex();
-    scroller.scrollLeft = idx * pageWidth();
+    scroller.scrollLeft = currentIndex() * pageWidth();
   }, { passive: true });
 
-  // Init: mark page 0 active so its underline animates on first scroll
-  pages.forEach((p,i)=>p.classList.toggle('active', i===0));
-  if (cubeCanvas) cubeCanvas.style.pointerEvents = 'none';
-  scroller.classList.add('dir-right'); // default wipe direction
-
-  // --- Keyboard navigation: left/right arrows for horizontal paging ---
+  // Keyboard navigation
   document.addEventListener('keydown', (e) => {
-    // Only handle arrow keys when on the intro section (not on hero or in a sheet)
-    const onIntroSection = window.scrollY >= window.innerHeight * 0.5; // roughly on second page
+    const onIntroSection = window.scrollY >= window.innerHeight * 0.5;
     const sheetOpen = document.querySelector('.detail-sheet.open');
 
     if (!onIntroSection || sheetOpen) return;
@@ -160,4 +144,9 @@
       goToPage(idx - 1);
     }
   });
+
+  // Initialize
+  pages.forEach((p, i) => p.classList.toggle('active', i === 0));
+  updateCubeFace(0);
+  scroller.classList.add('dir-right');
 })();

@@ -817,46 +817,70 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
   gap: 1rem;
   margin-top: 1rem;
 }
-.project-list li {
+
+/* Project card setup */
+.project-card {
+  position: relative;
   padding: 1rem 1.25rem;
+  overflow: hidden;
+  cursor: pointer;
 }
-.project-list strong {
+
+.project-content {
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.project-content strong {
   display: block;
   margin-bottom: .25rem;
   color: #fff;
 }
+
 .project-list p,
 .project-list li { color: #d6d6d6; }
-.project-list a {
-  display: inline-block;
-  margin-top: .35rem;
+
+/* Hover overlay effect */
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(13, 13, 13, 0.95);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  text-decoration: none;
 }
 
-/* Optional compact “pill” link style for project actions */
-.project-actions {
-  display: flex;
-  gap: .5rem;
-  flex-wrap: wrap;
-  margin-top: .5rem;
-}
-.project-actions a {
-  border: 1px solid rgba(205,215,255,0.35);
-  border-radius: 999px;
-  padding: .35rem .7rem;
-  line-height: 1;
-  font-size: .85rem;
+.project-overlay .overlay-text {
+  font-size: 1.5rem;
+  font-weight: 600;
   color: #cdd7ff;
-  border-bottom: none; /* remove dashed underline from shared link style */
-  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
-.project-actions a:hover {
-  background: rgba(205,215,255,0.15);
-  border-color: rgba(205,215,255,0.5);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(205,215,255,0.1);
+
+/* Hover states */
+.project-card:hover .project-overlay {
+  opacity: 1;
 }
-.project-actions a:active {
-  transform: translateY(0px);
+
+.project-card:hover .project-content {
+  opacity: 0.1;
+}
+
+/* Disabled overlay (no link) */
+.project-overlay-disabled {
+  cursor: default;
+}
+
+.project-overlay-disabled .overlay-text {
+  color: #888;
+  font-size: 1.1rem;
 }
 
 

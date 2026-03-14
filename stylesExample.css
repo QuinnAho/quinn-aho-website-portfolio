@@ -1,0 +1,983 @@
+/* ===============================
+   Base / Reset
+   =============================== */
+@font-face {
+  font-family: 'iconfont';
+  src: url('media/iconfont.ttf') format('truetype');
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  overflow-x: hidden;
+  background-color: #000;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  margin-left: 0;
+}
+
+/* Focus styles for keyboard navigation */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Remove default outline for mouse users */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Visual constants */
+:root{
+  /* Cube frame */
+  --frame-radius: 14px;
+  --frame-border: rgba(255,255,255,0.18);
+  --frame-drop-a: rgba(0,0,0,0.22);
+  --frame-drop-b: rgba(0,0,0,0.12);
+  --frame-inset: rgba(0,0,0,0.30);
+
+  /* Flat interior */
+  --surface-gray: #e6e6e6;
+
+  /* Width of left nav when shown */
+  --nav-peek: 12px;
+}
+
+/* ===============================
+   Header
+   =============================== */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem;
+  background-color: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
+  border-bottom: none;
+}
+
+.main-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  pointer-events: none;
+}
+
+.side-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--side-nav-w);
+  height: 100vh;
+  padding-top: var(--header-h);
+  padding-bottom: var(--header-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  transform: translateX(calc(-100% + var(--nav-peek)));
+  transition: transform 0.3s ease;
+}
+
+.side-nav:hover,
+body.side-nav-open .side-nav,
+body.side-nav-hover .side-nav {
+  transform: translateX(0);
+}
+
+.side-nav-toggle {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  font-size: 1.25rem;
+  z-index: 1001;
+  display: none;
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.side-nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.1);
+}
+.side-nav-toggle:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+
+
+.side-nav .nav-links {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover { color: #fff; }
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background-color: #fff;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after { width: 100%; }
+
+/* Bouncing arrow hint for side navigation */
+.side-nav-arrow {
+  position: fixed;
+  top: 50%;
+  left: calc(var(--nav-peek) + 10px);
+  animation: bounce-x 2s infinite;
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(5px);
+  padding: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 998;
+  transition: opacity 0.3s ease;
+}
+
+.side-nav-arrow .arrow-icon { transform: rotate(-90deg); }
+
+.side-nav-arrow svg {
+  width: 30px;
+  height: 30px;
+  fill: rgba(255,255,255,0.8);
+}
+
+@keyframes bounce-x {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(-50%) translateX(0); }
+  40% { transform: translateY(-50%) translateX(10px); }
+  60% { transform: translateY(-50%) translateX(5px); }
+}
+
+body.side-nav-hover .side-nav-arrow,
+body.side-nav-open .side-nav-arrow {
+  display: none;
+}
+
+/* Dynamic guide centered in header */
+.header-guide {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 0.5rem;
+}
+
+/* Responsive tweaks for small screens */
+@media (max-width: 600px) {
+  :root { --side-nav-w: 100%; --nav-peek: 0; }
+  .main-header {
+    left: 0;
+    width: 100%;
+    padding: 0.8rem 1rem;
+  }
+  .side-nav {
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    padding: var(--header-h) 1rem 1rem;
+    transform: translateX(-100%);
+    background: rgba(0,0,0,0.95);
+  }
+  body.side-nav-open .side-nav {
+    transform: translateX(0);
+  }
+  .side-nav .nav-links {
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - var(--header-h));
+  }
+  .side-nav-toggle { display: block; }
+  .nav-links a {
+    font-size: 1.25rem;
+  }
+  .side-nav-arrow { display: none; }
+}
+
+.animated-message { opacity: 0; transition: opacity 0.5s ease; }
+.animated-message.show { opacity: 1; }
+.animated-message.fade-out-all { opacity: 0; }
+
+/* ===============================
+   Hero
+   =============================== */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero canvas {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+/* Scroll Arrow */
+.scroll-arrow {
+  position: absolute;
+  bottom: 40px; left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  animation: bounce 2s infinite;
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(5px);
+  padding: 15px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.3s ease;
+}
+.scroll-arrow:hover { background: rgba(0,0,0,0.4); }
+
+.scroll-arrow svg {
+  width: 30px; height: 30px;
+  fill: rgba(255,255,255,0.8);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+  40% { transform: translate(-50%, -10px); }
+  60% { transform: translate(-50%, -5px); }
+}
+
+/* ===============================
+   Full-page section under hero
+   =============================== */
+.intro-combined {
+  min-height: calc(100vh - var(--header-h));
+  width: 100%;
+  background: #000;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Full width so pages span the entire viewport */
+.intro-split {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Top: 1/3 height (cube) */
+.intro-top {
+  flex: 0 0 38%; /* percentage of the intro height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1rem 0.5rem;
+}
+
+/* Optional inner wrapper to keep cube from growing too wide */
+.intro-top-inner {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* Cube sizing + flat framed container */
+.cube-wrap {
+  width: clamp(180px, 28vmin, 340px); /* was 140/24vmin/280 */
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--frame-border);
+  border-radius: 10px;
+  box-shadow:
+    0 8px 16px var(--frame-drop-a),
+    0 2px 6px var(--frame-drop-b),
+    inset 0 0 6px var(--frame-inset);
+  margin-top: 0.5rem;
+}
+
+#intro-cube {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  user-select: none;
+  background: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+/* Nudge the cube (and its frame) down slightly */
+.intro-top {
+  padding-top: 4rem; /* give more breathing room */
+}
+.cube-wrap {
+  margin-top: 1rem; /* move cube and border down together */
+}
+
+/* Bottom: 2/3 height, full-width horizontal pager */
+.intro-bottom {
+  flex: 1 1 auto;
+  height: auto;
+  padding-top: 0.5rem; /* reduced gap between cube and section titles */
+  background: #000;
+  overscroll-behavior: contain;
+}
+
+/* Horizontal scroller spans full viewport width */
+.pages-scroll {
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-color: #343434 #0b0b0b;
+  scrollbar-width: thin;
+}
+
+/* Each page fills the viewport width and is top-centered */
+.page {
+  flex: 0 0 100vw;
+  height: 100%;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.5rem 1.5rem;
+}
+.page-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* reduced from 1.25rem */
+  align-items: center;
+  width: min(100%, 1100px);
+}
+
+.page-education .page-inner h2,
+.page-skills .page-inner h2,
+.page-projects .page-inner h2,
+.page-experience .page-inner h2,
+.page-contact .page-inner h2 {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+  line-height: 1.05;
+}
+
+/* Title + Resume button */
+.intro-title {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+  line-height: 1.05;
+  color: #fff;
+  margin: 0.5rem 0 0 0;
+}
+
+#download-resume-btn {
+  display: inline-block;
+  background: transparent;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  position: relative;
+  outline: none;
+  transition: all 0.3s ease;
+}
+#download-resume-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+#download-resume-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+#download-resume-btn:hover::before {
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+#download-resume-btn:active {
+  transform: translateY(0px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ===============================
+   Border wrapper + animated lines
+   =============================== */
+.border-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.border-top,
+.border-right,
+.border-bottom,
+.border-left {
+  position: absolute;
+  background-color: #fff;
+  z-index: 9999;
+}
+
+/* Top border */
+.border-top {
+  top: 0; left: 0;
+  width: 0%; height: 2px;
+  animation: drawTop 1s forwards ease-out;
+}
+@keyframes drawTop { 0% { width: 0% } 100% { width: 100% } }
+
+/* Right border */
+.border-right {
+  top: 0; right: 0;
+  width: 2px; height: 0%;
+  animation: drawRight 1s forwards ease-out;
+  animation-delay: 1s;
+}
+@keyframes drawRight { 0% { height: 0% } 100% { height: 100% } }
+
+/* Bottom border (optional; only if you add it in HTML) */
+.border-bottom {
+  bottom: 0; left: 0;
+  width: 0%; height: 2px;
+  animation: drawBottom 1s forwards ease-out;
+  animation-delay: 2s;
+}
+@keyframes drawBottom { 0% { width: 0% } 100% { width: 100% } }
+
+/* Left border */
+.border-left {
+  top: 0; left: 0;
+  width: 2px; height: 0%;
+  animation: drawLeft 1s forwards ease-out;
+  animation-delay: 3s;
+}
+@keyframes drawLeft { 0% { height: 0% } 100% { height: 100% } }
+
+/* ===============================
+   Scrollbar theming (WebKit/Blink)
+   =============================== */
+.pages-scroll::-webkit-scrollbar { height: 10px; }
+.pages-scroll::-webkit-scrollbar-track { background: #0b0b0b; border-radius: 8px; }
+.pages-scroll::-webkit-scrollbar-thumb { background: #343434; border-radius: 8px; }
+.pages-scroll::-webkit-scrollbar-thumb:hover { background: #4a4a4a; }
+
+/* Page vertical scrollbar to match */
+html::-webkit-scrollbar { width: 10px; }
+html::-webkit-scrollbar-track { background: #0b0b0b; }
+html::-webkit-scrollbar-thumb { background: #343434; border-radius: 8px; }
+html::-webkit-scrollbar-thumb:hover { background: #4a4a4a; }
+
+/* Firefox vertical scrollbar on page */
+html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
+
+/* Keep promo (hidden unless you need it) */
+.promo { display: none; }
+
+/* --- Example blurb under heading --- */
+.page-blurb {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 28ch;
+  color: #bdbdbd;
+  margin-top: 0.25rem; /* tightened */
+}
+
+/* --- Up arrow button --- */
+.page-up-arrow{
+  margin-top: 0.5rem;                 /* push to bottom of .page-inner */
+  font-size: 2.2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.25s;
+  animation: upArrowIdle 1.8s ease-in-out infinite;
+  transform: translateY(0);            /* baseline so the keyframes are consistent */
+  will-change: transform;
+}
+/* Pause the bob and give a tiny lift on hover/focus */
+.page-up-arrow:hover,
+.page-up-arrow:focus-visible {
+  animation-play-state: paused;
+  transform: translateY(-10px) scale(1.15); /* subtle grow on hover */
+  outline: none;
+}
+
+/* Reduce/disable for users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  .page-up-arrow { animation: none; }
+}
+
+/* Keyframes for the subtle up/down motion */
+@keyframes upArrowIdle {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+
+/* --- Sliding detail sheet --- */
+.detail-sheet{
+  position: fixed;
+  inset: 0;
+  background: #111;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  transform: translateY(100vh);
+  transition: transform 0.5s ease;
+  z-index: 1200;
+}
+
+/* close button inside sheet */
+.sheet-close{
+  position: absolute;
+  top: 12px; right: 12px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sheet-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+.sheet-close:active {
+  transform: scale(0.95);
+}
+.detail-sheet .sheet-close {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.detail-sheet .sheet-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-50%) scale(1.1);
+}
+.detail-sheet .sheet-close:active {
+  transform: translateX(-50%) scale(0.95);
+}
+
+/* when sheet is active */
+.detail-sheet.open{ transform: translateY(0); }
+
+.detail-sheet {
+  overflow: hidden;         /* keep the sheet itself fixed */
+}
+.detail-sheet .sheet-content {
+  max-width: 900px;
+  width: min(90vw, 900px);
+  max-height: calc(100vh - 80px);
+  overflow: auto;           /* content scrolls inside */
+  padding: 2rem 1.25rem;
+  line-height: 1.6;
+}
+.detail-sheet .sheet-content h3 {
+  margin: 0 0 1rem;
+}
+.detail-sheet .sheet-content p,
+.detail-sheet .sheet-content li {
+  color: #d6d6d6;
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem 1.25rem;
+}
+.skills-grid h4 { margin: 0 0 .35rem 0; font-weight: 700; }
+.skills-grid ul { margin: 0; padding-left: 1.1rem; line-height: 1.5; }
+
+/* --- Shared sheet helpers --- */
+.sheet-content a {
+  color: #cdd7ff;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(205,215,255,0.45);
+}
+.sheet-content a:hover { border-bottom-style: solid; }
+
+.sheet-content .eyebrow {
+  display: inline-block;
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #a7a7a7;
+  margin-bottom: .35rem;
+}
+
+.sheet-content .muted { color: #a8a8a8; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem .5rem;
+  margin-top: .5rem;
+}
+.tag {
+  font-size: .72rem;
+  line-height: 1;
+  padding: .35rem .6rem;
+  border-radius: 999px;
+  background: #171717;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #bdbdbd;
+}
+
+/* subtle cards */
+.card {
+  background: #0d0d0d;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.35);
+}
+
+.xp-timeline {
+  margin-top: 1rem;
+}
+
+.xp-item {
+  margin-bottom: 2rem;
+}
+
+.xp-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-content {
+  padding: 1rem 1.25rem;
+}
+.xp-item h4 {
+  font-size: 1.05rem;
+  line-height: 1.25;
+  margin: 0 0 .35rem 0;
+}
+.xp-item h4 em {
+  font-style: normal;
+  color: #cfcfcf;
+  font-weight: 600;
+}
+.xp-item small {
+  color: #a2a2a2;
+}
+.xp-item p {
+  color: #d6d6d6;
+  margin: .6rem 0 0 0;
+  line-height: 1.6;
+}
+
+/* Optional compact meta row inside header */
+.xp-meta {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  font-size: .85rem;
+  color: #9c9c9c;
+}
+
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.edu-card {
+  padding: 1rem 1.25rem;
+}
+.edu-card h4 {
+  margin: 0 0 .25rem 0;
+  font-size: 1.05rem;
+}
+.edu-card .school {
+  color: #cfcfcf;
+  margin-bottom: .35rem;
+}
+.edu-card .row {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  font-size: .9rem;
+  color: #a9a9a9;
+}
+.edu-card ul {
+  margin: .6rem 0 0 0;
+  padding-left: 1.15rem;
+}
+.edu-card li { color: #d6d6d6; }
+
+.skill-card,
+.contact-card {
+  padding: 1rem 1.25rem;
+}
+
+.project-list {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Project card setup */
+.project-card {
+  position: relative;
+  padding: 1rem 1.25rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.project-content {
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.project-content strong {
+  display: block;
+  margin-bottom: .25rem;
+  color: #fff;
+}
+
+.project-list p,
+.project-list li { color: #d6d6d6; }
+
+/* Hover overlay effect */
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(13, 13, 13, 0.95);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  text-decoration: none;
+}
+
+.project-overlay .overlay-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #cdd7ff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Hover states */
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-card:hover .project-content {
+  opacity: 0.1;
+}
+
+/* Disabled overlay (no link) */
+.project-overlay-disabled {
+  cursor: default;
+}
+
+.project-overlay-disabled .overlay-text {
+  color: #888;
+  font-size: 1.1rem;
+}
+
+
+@media (max-width: 640px) {
+  .detail-sheet .sheet-content {
+    padding: 1.25rem 1rem;
+  }
+  .xp-item, .edu-card, .project-list li { padding: .9rem 1rem; }
+}
+/* Animated underline for page titles (not Home) */
+.page:not(.page-home) h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: .25rem;
+}
+
+.page:not(.page-home) h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 2px;
+  width: 0;
+  background: #fff;
+  opacity: 0;
+  transition: width 420ms ease, opacity 520ms ease;
+}
+/* Vertical snap between Hero and the Intro section */
+html, body{
+  height:100%;
+  scroll-snap-type: y mandatory;  /* ensure sections always snap */
+  scroll-behavior: smooth;         /* base smoothness */
+}
+
+:root { --header-h: 70px; --side-nav-w: 180px; } /* adjust if your header is taller/shorter */
+
+html { 
+  scroll-padding-top: var(--header-h); /* anchors/snap land below header */
+}
+
+/* Make each major section a snap point */
+.hero,
+.border-wrapper {
+  padding-top: var(--header-h);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Active page shows the line */
+.page.active:not(.page-home) h2::after{
+  transform:scaleX(1);
+  opacity:1;
+}
+
+/* Directional underline for section titles */
+.page:not(.page-home) h2{
+  position: relative;
+  display: inline-block;
+  padding-bottom: .25rem;
+}
+
+.page:not(.page-home) h2::after{
+  content:"";
+  position:absolute;
+  left:0; bottom:-6px;
+  height:2px;
+  width:100%;
+  background:#fff;
+
+  /* start hidden */
+  transform:scaleX(0);
+  opacity:0;
+
+  /* smooth fade + wipe */
+  transform-origin:left;
+  transition:
+    transform 420ms ease,
+    opacity 520ms ease;
+  will-change: transform, opacity;
+}
+
+/* Force a known starting state just before we activate (JS adds this briefly) */
+.page.pre-activate:not(.page-home) h2::after{
+  transform: scaleX(0);
+  opacity: 0;
+}
+
+/* Active page shows the line (this is the fade IN) */
+.page.active:not(.page-home) h2::after{
+  transform:scaleX(1);
+  opacity:1;
+}
+
+/* Set wipe direction based on scroll direction */
+.pages-scroll.dir-right .page:not(.page-home) h2::after{ transform-origin:left;  }
+.pages-scroll.dir-left  .page:not(.page-home) h2::after{ transform-origin:right; }
+
+/* Fade OUT direction matches scroll direction */
+.page.leaving-right h2::after { transform-origin: right; }
+.page.leaving-left  h2::after { transform-origin: left;  }

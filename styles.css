@@ -826,6 +826,10 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
   cursor: pointer;
 }
 
+.project-card-actions {
+  cursor: default;
+}
+
 .project-content {
   position: relative;
   z-index: 1;
@@ -856,6 +860,41 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
   text-decoration: none;
 }
 
+.project-overlay-actions {
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-content: center;
+  padding: 1rem;
+  pointer-events: none;
+}
+
+.project-action {
+  min-width: 9.5rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(205, 215, 255, 0.4);
+  border-radius: 999px;
+  background: rgba(28, 34, 52, 0.92);
+  color: #eef2ff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.project-action:hover,
+.project-action:focus-visible {
+  transform: translateY(-1px);
+  background: rgba(48, 61, 92, 0.98);
+  border-color: rgba(205, 215, 255, 0.7);
+}
+
+.project-action-secondary {
+  background: transparent;
+}
+
 .project-overlay .overlay-text {
   font-size: 1.5rem;
   font-weight: 600;
@@ -869,8 +908,21 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
   opacity: 1;
 }
 
+.project-card:focus-within .project-overlay {
+  opacity: 1;
+}
+
 .project-card:hover .project-content {
   opacity: 0.1;
+}
+
+.project-card:focus-within .project-content {
+  opacity: 0.1;
+}
+
+.project-card-actions:hover .project-overlay-actions,
+.project-card-actions:focus-within .project-overlay-actions {
+  pointer-events: auto;
 }
 
 /* Disabled overlay (no link) */
@@ -889,6 +941,27 @@ html { scrollbar-color: #343434 #0b0b0b; scrollbar-width: thin; }
     padding: 1.25rem 1rem;
   }
   .xp-item, .edu-card, .project-list li { padding: .9rem 1rem; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .project-card-actions .project-overlay-actions {
+    position: static;
+    inset: auto;
+    justify-content: flex-start;
+    background: transparent;
+    backdrop-filter: none;
+    opacity: 1;
+    padding: 0.9rem 0 0;
+    pointer-events: auto;
+  }
+
+  .project-card-actions .project-content {
+    opacity: 1 !important;
+  }
+
+  .project-card-actions .project-action {
+    min-width: 0;
+  }
 }
 /* Animated underline for page titles (not Home) */
 .page:not(.page-home) h2 {

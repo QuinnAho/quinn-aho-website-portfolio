@@ -1,74 +1,85 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-      <meta charset="utf-8">
-      <meta http-equiv="Cache-Control" content="no-cache">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-      <meta name="apple-mobile-web-app-capable" content="yes">
-      <meta name="mobile-web-app-capable" content="yes">
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
 
-      <link rel="apple-touch-icon" href="logo.png">
-      <link rel="icon" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" href="logo.png">
 
-      <title>Quinn Aho</title>
-      <meta name="description" content="Interactive portfolio of Quinn Aho, graphics and XR engineer. Features real-time 3D visuals, WebGL effects, and immersive project showcases.">
-      <meta name="keywords" content="Quinn Aho, graphics engineer, XR engineer, portfolio, web design, Unreal Engine, Three.js, WebGL">
-      <meta property="og:type" content="website">
-      <meta property="og:title" content="Quinn Aho - Graphics/XR Engineer Portfolio">
-      <meta property="og:description" content="Interactive portfolio showcasing real-time graphics, XR development, and immersive web experiences by Quinn Aho.">
-      <meta property="og:url" content="https://quinnaho.dev/">
-      <meta property="og:image" content="https://quinnaho.dev/logo.png">
+    <title>Quinn Aho — Graphics &amp; XR Engineer</title>
+    <meta name="description" content="I build tools that keep humans in control of complex systems as AI accelerates how we make them — code, 3D scenes, simulators. Currently at Johns Hopkins APL. Creator of ClaudeMap.">
+    <meta name="keywords" content="Quinn Aho, graphics engineer, XR engineer, applied AI, AI tooling, MCP, Claude Code, ClaudeMap, IntentGraph, Glint3D, Unreal Engine, Unity, digital twin, simulator, San Francisco">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Quinn Aho — Graphics &amp; XR Engineer">
+    <meta property="og:description" content="I build tools that keep humans in control of complex systems as AI accelerates how we make them — code, 3D scenes, simulators.">
+    <meta property="og:url" content="https://quinnaho.dev/">
+    <meta property="og:image" content="https://quinnaho.dev/media/img/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Quinn Aho — Graphics &amp; XR Engineer">
+    <meta name="twitter:description" content="I build tools that keep humans in control of complex systems as AI accelerates how we make them — code, 3D scenes, simulators.">
+    <meta name="twitter:image" content="https://quinnaho.dev/media/img/og-image.png">
 
-      <link rel="canonical" href="https://quinnaho.dev/">
+    <link rel="canonical" href="https://quinnaho.dev/">
 
-      <!-- Styles -->
-      <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles.css">
 
-      <!-- Fonts -->
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=DM+Serif+Display&family=IBM+Plex+Sans:wght@500&family=Inter:wght@400;600&family=JetBrains+Mono:wght@500&family=Playfair+Display:ital,wght@0,500;1,500&family=Space+Grotesk:wght@500&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-      <!-- Analytics (unchanged) -->
-      <script>
-        window.ga = window.ga || function(){ (ga.q = ga.q || []).push(arguments) };
-        ga.l = +new Date;
-        ga('create', 'UA-105392568-1', 'auto');
-        ga('send', 'pageview');
-      </script>
-      <script async src="https://www.google-analytics.com/analytics.js"></script>
+    <script>
+      window.ga = window.ga || function(){ (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-105392568-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
   </head>
   <body>
-    <!-- Header -->
-    <header class="main-header">
-      <button class="side-nav-toggle" aria-label="Toggle navigation">&#9776;</button>
-      <div class="header-guide" id="header-guide"></div>
+    <header class="site-header">
+      <a href="#hero" class="site-mark">Quinn Aho</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="media/QuinnAhoResume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </header>
 
-    <nav class="side-nav">
-      <ul class="nav-links">
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-
-    <div class="side-nav-arrow" aria-hidden="true">
-      <div class="arrow-icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 17.414l-6.707-6.707 1.414-1.414L12 14.586l5.293-5.293 1.414 1.414z"/>
-        </svg>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <canvas class="hero-fluid" aria-hidden="true"></canvas>
       </div>
-    </div>
 
-    <!-- Hero -->
-    <section class="hero">
-      <canvas aria-label="Interactive fluid simulation background" role="img"></canvas>
-      <div class="scroll-arrow">
-        <a href="#intro" id="scroll-arrow">
+      <div class="hero-inner">
+        <h1 class="hero-headline">
+          <span class="hero-name">Quinn Aho</span>
+          <span class="hero-thesis">
+            I build tools that keep humans in control of complex systems
+            as AI accelerates how we make them — code, 3D scenes, simulators.
+          </span>
+        </h1>
+
+        <p class="hero-subhead">
+          Graphics &amp; XR engineer at Johns Hopkins APL, building immersive trainers
+          for active defense programs. Creator of <a href="https://github.com/QuinnAho/claudemap" target="_blank" rel="noopener">ClaudeMap</a> (233★).
+          Graduating May 2026, looking for research engineer and early-stage roles in San Francisco.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#now">See what I'm building <span aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="media/QuinnAhoResume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+        </div>
+      </div>
+
+      <div class="hero-scroll" aria-hidden="true">
+        <a href="#now" aria-label="Scroll to current work">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 17.414l-6.707-6.707 1.414-1.414L12 14.586l5.293-5.293 1.414 1.414z"/>
           </svg>
@@ -76,435 +87,348 @@
       </div>
     </section>
 
-    <!-- Border wrapper with full-page section under hero -->
-    <div class="border-wrapper">
-      <div class="border-top"></div>
-      <div class="border-right"></div>
-      <!-- <div class="border-bottom"></div> -->
-      <div class="border-left"></div>
-
-      <section class="intro-combined" id="intro">
-        <div class="intro-split">
-          <!-- Top half: CUBE -->
-          <div class="intro-top">
-            <div class="intro-top-inner">
-              <div class="cube-wrap">
-                <canvas id="intro-cube"></canvas>
-              </div>
-            </div>
+    <!-- WHAT I'M BUILDING NOW -->
+    <section class="section section-now" id="now">
+      <div class="section-inner">
+        <div class="section-eyebrow">What I'm building now</div>
+        <div class="now-grid">
+          <div class="now-copy">
+            <h2 class="section-title"><span class="now-name">IntentGraph</span> <span class="now-tagline">— a spec-driven IDE plugin. You work in a living graph of intent, constraints, decisions, and rationale; AI keeps the implementation in sync, both directions.</span></h2>
+            <p>
+              Code becomes a verifiable projection of intent: when you edit the graph, AI proposes a patch in a worktree shadow;
+              when you edit code, the graph detects drift in under two seconds.
+            </p>
+            <p>
+              The bet is that AI-augmented codebases need persistent program theory the team can audit, not markdown docs that go stale.
+              The architecture enforces faithfulness as a structural property — every agent action records concrete artifacts
+              (tool calls, retrieved nodes, model version, verifier outcomes), and the monitor LLM is never trained against its own signal.
+            </p>
+            <p>
+              27 ADRs in. TypeScript-first, VS Code-first, with one MCP server consumed identically by Claude Code, Codex, and the extension itself.
+            </p>
+            <p class="now-links">
+              <a class="link-arrow" href="https://github.com/QuinnAho/intent-graph" target="_blank" rel="noopener">Spec &amp; ADRs on GitHub <span aria-hidden="true">→</span></a>
+            </p>
           </div>
-
-          <!-- Bottom half: HORIZONTAL PAGES -->
-          <div class="intro-bottom">
-            <div class="pages-scroll" id="intro-pages">
-              <!-- Page 0: Home (title + resume) -->
-              <section class="page page-home">
-                <div class="page-inner">
-                  <h1 class="intro-title">QUINN AHO</h1>
-                  <a id="download-resume-btn"
-                     href="media/QuinnAhoResume.pdf"
-                     download="QuinnAhoResume.pdf">Download Resume</a>
-
-                  <p class="page-blurb">
-                    Hi! I'm Quinn: Software engineer with a lot of intrests: AI, Grapihcs, Game Engine, Full Stack.
-                  </p>
-                </div>
-              </section>
-
-              <!-- Page 1: Education -->
-              <section class="page page-education">
-                <div class="page-inner">
-                  <h2>EDUCATION</h2>
-                  <p class="page-blurb">Quick snapshot of my academic background.</p>
-
-                  <button class="page-up-arrow" data-target="education-details" aria-label="Open education details">
-                    &#x2191;
-                  </button>
-                </div>
-              </section>
-
-              <!-- Page 2: Skills -->
-              <section class="page page-skills">
-                <div class="page-inner">
-                  <h2>SKILLS</h2>
-                  <p class="page-blurb">
-                    My favourite engines, tools and languages, at a glance.
-                  </p>
-                  <button class="page-up-arrow"
-                          data-target="skills-details"
-                          aria-label="Open skills details">
-                    &#x2191;
-                  </button>
-                </div>
-              </section>
-
-              <!-- Page 3: Projects -->
-              <section class="page page-projects">
-                <div class="page-inner">
-                  <h2>PROJECTS</h2>
-                  <p class="page-blurb">
-                    A tour of personal and team work, from prototypes to polished builds.
-                  </p>
-                  <button class="page-up-arrow"
-                          data-target="projects-details"
-                          aria-label="Open projects details">
-                    &#x2191;
-                  </button>
-                </div>
-              </section>
-
-              <!-- Page 4: Experience -->
-              <section class="page page-experience">
-                <div class="page-inner">
-                  <h2>EXPERIENCE</h2>
-                  <p class="page-blurb">
-                    Roles, responsibilities and measurable impact across teams.
-                  </p>
-                  <button class="page-up-arrow"
-                          data-target="experience-details"
-                          aria-label="Open experience details">
-                    &#x2191;
-                  </button>
-                </div>
-              </section>
-
-              <!-- Page 5: Contact -->
-              <section class="page page-contact">
-                <div class="page-inner">
-                  <h2>CONTACT</h2>
-                  <p class="page-blurb">
-                    Let's get in touch, open to collaborations and new opportunities.
-                  </p>
-                  <button class="page-up-arrow"
-                          data-target="contact-details"
-                          aria-label="Open contact details">
-                    &#x2191;
-                  </button>
-                </div>
-              </section>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- Detail sheets (ONE per ID) -->
-    <!-- Education Sheet -->
-    <div class="detail-sheet" id="education-details">
-      <button class="sheet-close" aria-label="Close">&#x2193;</button>
-      <div class="sheet-content">
-        <h3>Education</h3>
-        <div class="edu-grid">
-          <div class="edu-card card">
-            <h4>Wayne State University</h4>
-            <div class="school">B.S. in Computer Science Engineering</div>
-            <div class="row">
-              <span>Aug 2022 - May 2026</span>
-              <span>Major GPA: 3.86</span>
-              <span>Overall GPA: 3.2</span>
-            </div>
-            <ul>
-              <li>Relevant coursework: Computer Graphics I, DSA, Game Programming, CS I&II, Java, C++ for Gaming, Intro to LLMs, 3D Graphical and Geometric Modeling.</li>
-              <li>Awards: Congressional App Challenge (Winner), Dean's List (3 years), Edward &amp; Bernard Gaffney Scholarships.</li>
-            </ul>
-          </div>
+          <figure class="now-figure">
+            <img src="media/img/intentgraph-architecture.svg" alt="IntentGraph architecture: five pillars — plugin-first, relational graph store, spec-driven loop, agent orchestration, faithfulness by architecture.">
+            <figcaption>Five pillars · One MCP substrate · Three first-class clients</figcaption>
+          </figure>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Skills Sheet -->
-    <div class="detail-sheet" id="skills-details" aria-hidden="true">
-      <button class="sheet-close" aria-label="Close">&#x2193;</button>
-      <div class="sheet-content">
-        <h3>Skills</h3>
-        <div class="skills-grid">
-          <section class="skill-card card">
-            <h4>Engines &amp; XR</h4>
-            <ul>
-              <li>Unreal Engine 4/5 (C++ / Blueprints)</li>
-              <li>Unity (C#)</li>
-              <li>XR Dev (HTC &amp; Oculus SDK)</li>
-              <li>MetaHuman, Niagara, Sequencer</li>
-            </ul>
-          </section>
+    <!-- FEATURED WORK -->
+    <section class="section section-work" id="work">
+      <div class="section-inner">
+        <div class="section-eyebrow">Featured work</div>
+        <h2 class="section-title">Five projects that carry the thesis.</h2>
 
-          <section class="skill-card card">
-            <h4>Graphics &amp; Shaders</h4>
-            <ul>
-              <li>OpenGL, GLSL/HLSL</li>
-              <li>Real-time rendering &amp; post</li>
-              <li>Procedural FX / VFX</li>
-              <li>Optimization &amp; profiling</li>
-            </ul>
-          </section>
+        <ul class="featured-grid">
+          <!-- 1. ClaudeMap -->
+          <li class="featured-card">
+            <a class="featured-media" href="https://github.com/QuinnAho/claudemap" target="_blank" rel="noopener" aria-label="ClaudeMap on GitHub">
+              <img src="media/img/claudemap-hero.png" alt="ClaudeMap branding">
+            </a>
+            <div class="featured-body">
+              <h3>ClaudeMap <span class="featured-tag">Google Maps for AI-augmented codebases.</span></h3>
+              <p>
+                An open-source Claude Code plugin that builds a navigable concept-organized map of any repo.
+                Code clusters by what it actually does, with health overlays showing what's working and what's broken.
+                Slash commands drive the map: <code>/explain</code> walks Claude through any path,
+                <code>/show</code> jumps to whatever you ask for.
+              </p>
+              <p class="featured-stats">
+                233★ on GitHub · 541 npm downloads · 160 in a single day on the v0.2.0 release ·
+                Distributed as <code>@quinnaho/claudemap</code>.
+              </p>
+              <p class="featured-stack"><strong>Stack.</strong> JavaScript · MCP · Claude Code skills.</p>
+              <p class="featured-links">
+                <a href="https://github.com/QuinnAho/claudemap" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://www.npmjs.com/package/@quinnaho/claudemap" target="_blank" rel="noopener">npm</a>
+                <a href="https://www.loom.com/share/6a2ff0948ae64ae6994fb3817cb3607e" target="_blank" rel="noopener">Loom demo</a>
+                <a href="https://quinnaho.github.io/claudemap/" target="_blank" rel="noopener">Live preview</a>
+              </p>
+            </div>
+          </li>
 
-          <section class="skill-card card">
-            <h4>Languages</h4>
-            <ul>
-              <li>C++, C#, Java, Python</li>
-              <li>JavaScript / TypeScript (web/Three.js)</li>
-            </ul>
-          </section>
+          <!-- 2. Glint3D -->
+          <li class="featured-card">
+            <a class="featured-media" href="https://github.com/QuinnAho/Glint3D" target="_blank" rel="noopener" aria-label="Glint3D on GitHub">
+              <video class="featured-video" autoplay muted loop playsinline poster="media/img/qem-studio-split.png">
+                <source src="media/img/glint3d-qem.mp4" type="video/mp4">
+                <img src="media/img/glint3d-qem.gif" alt="Glint3D running a QEM mesh decimation pass — wireframe collapsing into simplified geometry.">
+              </video>
+            </a>
+            <div class="featured-body">
+              <h3>Glint3D <span class="featured-tag">A 3D engine designed for humans and machines.</span></h3>
+              <p>
+                Custom C++/OpenGL engine with two equal surfaces: an interactive UI for human scene editing,
+                and a JSON Ops pipeline + headless CLI for AI and automation workflows. PBR materials, glTF/FBX/OBJ/PLY import,
+                both rasterization and CPU ray-tracing paths. The dual-mode design isn't rhetoric — it's enforced by the data format
+                (JSON Ops with a versioned schema) so both audiences operate on the same primitives.
+              </p>
+              <p>
+                Includes an in-tree QEM mesh decimation algorithm, exposed standalone as
+                <a href="https://github.com/QuinnAho/qem-studio" target="_blank" rel="noopener">QEM Studio</a> with feature-aware
+                preservation of boundaries, sharp edges, and high-curvature regions. QEM Studio's performance writeup documents
+                a +91% slowdown from a "textbook" optimization, why it happened, and why it was reverted —
+                the kind of result most projects don't publish.
+              </p>
+              <p class="featured-stack"><strong>Stack.</strong> C++ · OpenGL · GLSL · CMake · Assimp · Eigen · Dear ImGui.</p>
+              <p class="featured-links">
+                <a href="https://github.com/QuinnAho/Glint3D" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/QuinnAho/qem-studio" target="_blank" rel="noopener">QEM Studio</a>
+              </p>
+            </div>
+          </li>
 
-          <section class="skill-card card">
-            <h4>Tools &amp; DCC</h4>
-            <ul>
-              <li>Blender, Houdini, Substance</li>
-              <li>NX, SolidWorks, 3ds Max</li>
-              <li>Ableton (sound design), DaVinci Resolve</li>
-            </ul>
-          </section>
+          <!-- 3. Blueprint Health Analyzer -->
+          <li class="featured-card">
+            <a class="featured-media" href="https://www.youtube.com/watch?v=c7IdFpv8CDs" target="_blank" rel="noopener" aria-label="Blueprint Health Analyzer demo on YouTube">
+              <img src="https://img.youtube.com/vi/c7IdFpv8CDs/maxresdefault.jpg" alt="Blueprint Health Analyzer YouTube demo thumbnail">
+            </a>
+            <div class="featured-body">
+              <h3>Blueprint Health Analyzer <span class="featured-tag">A static analyzer for Unreal Engine Blueprints.</span></h3>
+              <p>
+                An Unreal Editor plugin and commandlet that audits Blueprint and asset health across a project.
+                Three scan modes: full project, current selection, or any asset and everything that depends on it.
+                Produces deterministic reports with stable signature hashing, so the same plugin powers both the editor dashboard
+                and CI quality gates that fail builds on critical findings.
+              </p>
+              <p>
+                Built under the immersalab label. Targets UE 5.6 / 5.7. The first commercial product I've shipped on a real engine.
+              </p>
+              <p class="featured-stack"><strong>Stack.</strong> C++ · Unreal Engine 5.</p>
+              <p class="featured-links">
+                <a href="https://www.youtube.com/watch?v=c7IdFpv8CDs" target="_blank" rel="noopener">Demo video</a>
+                <a href="https://immersalab.dev/blueprint-health-analyzer/" target="_blank" rel="noopener">Docs site</a>
+                <a href="https://github.com/QuinnAho/BlueprintHealthAnalyzer" target="_blank" rel="noopener">GitHub</a>
+              </p>
+            </div>
+          </li>
 
-          <section class="skill-card card">
-            <h4>DevOps &amp; Process</h4>
-            <ul>
-              <li>Git, Perforce (GitLab/Bitbucket)</li>
-              <li>Jira, Confluence, Agile/Scrum</li>
-              <li>CI/CD, PowerShell, Virtualization</li>
-            </ul>
-          </section>
+          <!-- 4. PhasePal -->
+          <li class="featured-card">
+            <a class="featured-media" href="https://store.steampowered.com/app/3655450/Phase_Pal/" target="_blank" rel="noopener" aria-label="Phase Pal on Steam">
+              <!-- Steam capsule URL contains a rotating signed token; refresh if it 404s. -->
+              <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3655450/7969075597d03eb302fa7112d4330e745b86c02d/header.jpg?t=1771756083"
+                   alt="Phase Pal Steam header"
+                   onerror="this.onerror=null;this.src='media/img/phasepal-placeholder.png';">
+            </a>
+            <div class="featured-body">
+              <h3>PhasePal <span class="featured-tag">An AI desktop companion that lives on your screen.</span></h3>
+              <p>
+                Real-time LLM chat with animated 3D characters, voice synthesis, and local/cloud provider routing.
+                Founding Unity Engineer at Consistency AI (Oct 2025 – Jan 2026). I built the inference latency optimization across
+                multiple LLM backends, the safety guardrails for real-time AI conversations, and the Unity character systems —
+                cursor tracking, window perching, VRM model support, state machines.
+              </p>
+              <p>Shipped on Steam.</p>
+              <p class="featured-stack"><strong>Stack.</strong> Unity (C#) · VRM · multiple LLM backends · voice synthesis.</p>
+              <p class="featured-links">
+                <a href="https://store.steampowered.com/app/3655450/Phase_Pal/" target="_blank" rel="noopener">Steam page</a>
+              </p>
+            </div>
+          </li>
 
-          <section class="skill-card card">
-            <h4>Backend &amp; Web</h4>
-            <ul>
-              <li>Node.js, MongoDB</li>
-              <li>HTML/CSS/JS, Three.js</li>
-              <li>Hugging Face, GPT API</li>
-            </ul>
-          </section>
-        </div>
-      </div>
-    </div>
-
-    <!-- Projects Sheet -->
-    <div class="detail-sheet" id="projects-details">
-      <button class="sheet-close" aria-label="Close">&#x2193;</button>
-      <div class="sheet-content">
-        <h3>Projects</h3>
-        <ul class="project-list">
-          <li class="card project-card project-card-actions">
-            <div class="project-content">
-              <strong>Blueprint Health Analyzer</strong>
-              Unreal Editor plugin that catches Blueprint and asset issues with deterministic reports for faster fixes and CI enforcement.
-            </div>
-            <div class="project-overlay project-overlay-actions" aria-label="Blueprint Health Analyzer links">
-              <a href="https://www.youtube.com/watch?v=c7IdFpv8CDs&t=2s" class="project-action" target="_blank" rel="noopener noreferrer">
-                Watch Demo
-              </a>
-              <a href="https://immersalab.dev/blueprint-health-analyzer/" class="project-action project-action-secondary" target="_blank" rel="noopener noreferrer">
-                Website
-              </a>
-            </div>
-          </li>
-          <li class="card project-card">
-            <div class="project-content">
-              <strong>Glint3D</strong>
-              Fast, lightweight 3D viewer and renderer built for AI and automation. Focuses on deterministic JSON Ops and headless rendering for CI/CD.
-            </div>
-            <a href="https://github.com/QuinnAho/Glint3D" class="project-overlay" target="_blank" rel="noopener noreferrer">
-              <span class="overlay-text">GitHub</span>
+          <!-- 5. Milestone -->
+          <li class="featured-card">
+            <a class="featured-media" href="https://github.com/QuinnAho/Milestone" target="_blank" rel="noopener" aria-label="Milestone on GitHub">
+              <img src="media/img/milestone-dashboard.png" alt="Milestone dashboard MVP screenshot — task progress with structured AI logs.">
             </a>
-          </li>
-          <li class="card project-card">
-            <div class="project-content">
-              <strong>MILESTONE</strong>
-              AI-ready, machine-readable workflow that improves prompts, tracks AI actions, and keeps progress clear and controlled. Built with Electron and React.
+            <div class="featured-body">
+              <h3>Milestone <span class="featured-tag">Local AI task management with structural guardrails.</span></h3>
+              <p>
+                A local-first tool with an <code>ai/</code> folder full of contracts, schemas, and per-task progress logs that AI agents must follow.
+                Every agent reads its <code>AI_*_CONTRACT.md</code> and writes progress into structured NDJSON —
+                so a task literally can't be marked complete without the right log entries.
+                The guardrails (Machine Summary Blocks, schema-validated checklists, diff payloads) are the product.
+              </p>
+              <p>
+                The thesis: AI productivity collapses without legibility surfaces, and the surfaces have to be enforced, not requested.
+              </p>
+              <p class="featured-stack"><strong>Stack.</strong> TypeScript · React/Vite · Express · NDJSON.</p>
+              <p class="featured-links">
+                <a href="https://github.com/QuinnAho/Milestone" target="_blank" rel="noopener">GitHub</a>
+              </p>
             </div>
-            <a href="https://github.com/QuinnAho/Milestone" class="project-overlay" target="_blank" rel="noopener noreferrer">
-              <span class="overlay-text">GitHub</span>
-            </a>
-          </li>
-          <li class="card project-card">
-            <div class="project-content">
-              <strong>Golem's Curse</strong>
-              Full-length UE5 cinematic with original sound/post.
-            </div>
-            <a href="https://www.youtube.com/watch?v=d8QPDpQtJI4" class="project-overlay" target="_blank" rel="noopener noreferrer">
-              <span class="overlay-text">Watch</span>
-            </a>
-          </li>
-          <li class="card project-card">
-            <div class="project-content">
-              <strong>User Management Portal</strong>
-              Full-stack authentication with advanced search and filtering. Node.js, Express, MySQL, and vanilla JavaScript.
-            </div>
-            <a href="https://github.com/QuinnAho/DatabaseProject1" class="project-overlay" target="_blank" rel="noopener noreferrer">
-              <span class="overlay-text">GitHub</span>
-            </a>
-          </li>
-          <li class="card project-card">
-            <div class="project-content">
-              <strong>Vision VR Enhancements</strong>
-              UX features and debug tools for Corvid's in-house sim software.
-            </div>
-            <a href="https://youtu.be/MM4_4wsBuC8" class="project-overlay" target="_blank" rel="noopener noreferrer">
-              <span class="overlay-text">Watch</span>
-            </a>
-          </li>
-          <li class="card project-card">
-            <div class="project-content">
-              <strong>AI Avatar Animation System</strong>
-              Real-time animation blending with Audio2Face + ElevenLabs.
-            </div>
-            <a href="https://youtu.be/xbMaAssRC9g" class="project-overlay" target="_blank" rel="noopener noreferrer">
-              <span class="overlay-text">Watch</span>
-            </a>
-          </li>
-          <li class="card project-card">
-            <div class="project-content">
-              <strong>KPI Recorder</strong>
-              Unreal plugin to extract simulation data and compute KPIs for vehicle analysis.
-            </div>
-            <div class="project-overlay project-overlay-disabled">
-              <span class="overlay-text">No link available</span>
-            </div>
-          </li>
-          <li class="card project-card">
-            <div class="project-content">
-              <strong>VR Air Awareness Training Simulation</strong>
-              Air-awareness trainer with real-time comeout control and hand tracking.
-            </div>
-            <a href="https://devpost.com/software/vr-air-awareness-training-simulator" class="project-overlay" target="_blank" rel="noopener noreferrer">
-              <span class="overlay-text">Devpost</span>
-            </a>
-          </li>
-          <li class="card project-card">
-            <div class="project-content">
-              <strong>Raytheon Cinematic</strong>
-              UE sequencer promo with custom FX and CAD translation.
-            </div>
-            <div class="project-overlay project-overlay-disabled">
-              <span class="overlay-text">No link available</span>
-            </div>
-          </li>
-          <li class="card project-card">
-            <div class="project-content">
-              <strong>ATD Positioning Tool</strong>
-              VR IK tool to intuitively pose Hybrid III ATD with joint limits.
-            </div>
-            <a href="https://youtu.be/UsT4EdJYFr4" class="project-overlay" target="_blank" rel="noopener noreferrer">
-              <span class="overlay-text">Watch</span>
-            </a>
-          </li>
-          <li class="card project-card">
-            <div class="project-content">
-              <strong>Military Ground Vehicle Sim</strong>
-              Interactive military simulations and optimized VR environments.
-            </div>
-            <div class="project-overlay project-overlay-disabled">
-              <span class="overlay-text">No link available</span>
-            </div>
-          </li>
-          <li class="card project-card">
-            <div class="project-content">
-              <strong>RealityRift</strong>
-              Hackathon VR with AI + MetaHumans for interactive history.
-            </div>
-            <a href="https://devpost.com/software/realityrift" class="project-overlay" target="_blank" rel="noopener noreferrer">
-              <span class="overlay-text">Devpost</span>
-            </a>
-          </li>
-          <li class="card project-card">
-            <div class="project-content">
-              <strong>UE5 Weather Viz</strong>
-              Weather visualization system for architectural workflows (C++/Blueprint).
-            </div>
-            <a href="https://youtu.be/L1CMBg4MvKo" class="project-overlay" target="_blank" rel="noopener noreferrer">
-              <span class="overlay-text">Watch</span>
-            </a>
-          </li>
-          <li class="card project-card">
-            <div class="project-content">
-              <strong>Metahuman Punch Animation</strong>
-              Quick mocap + keyframed test.
-            </div>
-            <a href="https://www.youtube.com/watch?v=_YsaMV5zTgg" class="project-overlay" target="_blank" rel="noopener noreferrer">
-              <span class="overlay-text">Watch</span>
-            </a>
           </li>
         </ul>
       </div>
-    </div>
+    </section>
 
-    <!-- Experience Sheet -->
-    <div class="detail-sheet" id="experience-details">
-      <button class="sheet-close" aria-label="Close">&#x2193;</button>
-      <div class="sheet-content">
-        <h3>Experience</h3>
+    <!-- MORE WORK -->
+    <section class="section section-more" id="more">
+      <div class="section-inner">
+        <div class="section-eyebrow">More work</div>
+        <h2 class="section-title">Smaller projects, hackathon work, research.</h2>
 
-        <div class="xp-timeline">
-          <article class="xp-item card">
-            <div class="timeline-content">
-              <h4><strong>Johns Hopkins Applied Physics Lab (APL)</strong>, <em>Immersive / Software Development Intern</em></h4>
-              <p><small>May 2024 - Present · Laurel, MD</small></p>
-              <p>Contributed to vehicle training simulation software for Navy soldiers using Unity (C#). Built an internal CAD viewer in Unreal Engine for maintainers to inspect vehicle subsystems. Developed shaders and environment effects to improve simulation realism. Supported DevOps tasks: PowerShell scripting, virtualization, and CI/CD setup.</p>
-            </div>
-          </article>
+        <ul class="more-grid">
+          <li class="more-card">
+            <h4>A Day in an AI Agent</h4>
+            <p>A/B experiment showing that structured generate→playtest→log→iterate workflows produce better AI-generated games than baseline prompting. Two playable dungeons from the same prompt.</p>
+            <p class="more-links">
+              <a href="https://quinnaho.github.io/a-day-in-an-ai-agent/" target="_blank" rel="noopener">Live demo</a>
+              <a href="https://github.com/QuinnAho/a-day-in-an-ai-agent" target="_blank" rel="noopener">GitHub</a>
+            </p>
+          </li>
 
-          <article class="xp-item card">
-            <div class="timeline-content">
-              <h4><strong>GS Engineering</strong>, <em>Simulation Engineering Intern</em></h4>
-              <p><small>Nov 2023 - May 2024 · Houghton, MI</small></p>
-              <p>Led development of a KPI plugin in Unreal Engine to extract/analyze vehicle simulation data. Created/rigged vehicle mockups in Blender; tuned collision and suspension in UE. Participated in Agile scrums and cross-team planning.</p>
-            </div>
-          </article>
+          <li class="more-card">
+            <h4>Gemma-on-Quest</h4>
+            <p>On-device Gemma + STT pipeline running locally inside a Unity / Quest 3 simulation, with a generic C# layer for any sim to expose state and tools to the conversation loop.</p>
+            <p class="more-links">
+              <a href="https://github.com/QuinnAho/gemma-hackathon" target="_blank" rel="noopener">GitHub</a>
+            </p>
+          </li>
 
-          <article class="xp-item card">
-            <div class="timeline-content">
-              <h4><strong>GS Engineering</strong>, <em>Technology Growth Intern (High School)</em></h4>
-              <p><small>May 2021 - Aug 2022 · Houghton, MI</small></p>
-              <p>Researched and developed VR simulation environments for military applications in UE. Helped establish CAD-to-game-engine workflows for engineering visualization.</p>
-            </div>
-          </article>
+          <li class="more-card">
+            <h4>AI Avatar Animation System</h4>
+            <p>Built the real-time MetaHuman animation pipeline (NVIDIA Audio2Face + ElevenLabs voice-to-facial sync) for NextGenCoding's DJ Khaled interactive chatbot. The project launched supporting 150,000+ concurrent users at peak.</p>
+            <p class="more-links">
+              <a href="https://www.nextgencodingcompany.com/case-study/khaled-face/" target="_blank" rel="noopener">Case study</a>
+              <!-- TODO: video pending re-upload; replace #video-pending with the YouTube URL once recovered. -->
+              <a href="#video-pending" data-pending="true" aria-disabled="true">Demo (pending)</a>
+            </p>
+          </li>
 
-          <article class="xp-item card">
-            <div class="timeline-content">
-              <h4><strong>Corvid Technologies</strong>, <em>VR Visualization Intern</em></h4>
-              <p><small>May 2023 - Aug 2023 · Mooresville, NC</small></p>
-              <p>Developed UE4/UE5 Blueprint &amp; C++ VR tools; delivered a Raytheon promo cinematic. Built a VR IK ATD positioning tool with per-DoF joint limits and IK posing. Improved <em>VISION</em>: label mapping, menu reset, material error checks, etc.</p>
-            </div>
-          </article>
+          <li class="more-card">
+            <h4>Magic Window Viewer</h4>
+            <p>WebGL 3D viewer with webcam-driven head tracking — the viewport behaves like a window into the scene.</p>
+            <p class="more-links">
+              <a href="https://github.com/QuinnAho/magic-window-viewer" target="_blank" rel="noopener">GitHub</a>
+            </p>
+          </li>
 
-          <article class="xp-item card">
-            <div class="timeline-content">
-              <h4><strong>NextGenCoding</strong>, <em>Junior Unreal Developer (Contract)</em></h4>
-              <p><small>Sept 2024 - Nov 2024</small></p>
-              <p>Integrated APIs and designed animation systems for realistic AI MetaHuman interactions. Worked with ElevenLabs and NVIDIA Audio2Face for real-time voice-to-facial sync.</p>
-            </div>
-          </article>
-        </div>
+          <li class="more-card">
+            <h4>RealityRift</h4>
+            <p>Hackathon VR experience combining AI agents and MetaHumans for interactive history.</p>
+            <p class="more-links">
+              <a href="https://devpost.com/software/realityrift" target="_blank" rel="noopener">Devpost</a>
+            </p>
+          </li>
+
+          <li class="more-card">
+            <h4>VR Air Awareness Trainer</h4>
+            <p>Real-time comeout control and hand tracking for an air-awareness training scenario.</p>
+            <p class="more-links">
+              <a href="https://devpost.com/software/vr-air-awareness-training-simulator" target="_blank" rel="noopener">Devpost</a>
+            </p>
+          </li>
+
+          <li class="more-card">
+            <h4>Neural VFX Parameter Translator</h4>
+            <p>Seq2seq model (GRU encoder + Bahdanau attention + GRU decoder) translating natural-language VFX descriptions into canonical token sequences. Synthetic 6,144-example dataset.</p>
+            <p class="more-links">
+              <a href="https://github.com/QuinnAho/csc-5991-hw1" target="_blank" rel="noopener">GitHub</a>
+            </p>
+          </li>
+
+          <li class="more-card">
+            <h4>Golem's Curse</h4>
+            <p>Full-length UE5 cinematic with original sound and post.</p>
+            <p class="more-links">
+              <a href="https://www.youtube.com/watch?v=d8QPDpQtJI4" target="_blank" rel="noopener">Watch</a>
+            </p>
+          </li>
+        </ul>
       </div>
-    </div>
+    </section>
 
-    <!-- Contact Sheet -->
-      <div class="detail-sheet" id="contact-details">
-        <button class="sheet-close" aria-label="Close">&#x2193;</button>
-        <div class="sheet-content">
-          <h3>Contact</h3>
-          <div class="contact-card card">
-            <p>Email: quinnaho123@gmail.com</p>
-            <p>LinkedIn:
-              <a href="https://www.linkedin.com/in/quinn-aho-76b315223/" target="_blank" rel="noopener noreferrer">
-                linkedin.com/in/quinn-aho-76b315223
-              </a>
+    <!-- ABOUT -->
+    <section class="section section-about" id="about">
+      <div class="section-inner about-inner">
+        <div class="section-eyebrow">About</div>
+
+        <div class="about-prose">
+          <p>
+            I build tools for working with complex systems honestly. Sometimes the system is a codebase, sometimes a 3D scene,
+            sometimes a training simulator. The throughline is that AI is making these systems faster to produce than humans can
+            understand them, and I think the answer is better surfaces — graphs over file trees, intent over implementation,
+            structural verification over hopeful rationales.
+          </p>
+          <p>
+            I've spent the last four years on the graphics and XR side of that problem. At Johns Hopkins APL, I deploy military
+            training simulations in Unity for active defense programs and prototype next-generation immersive trainers in Unreal —
+            one of those prototypes earned internal honors and helped secure five years of continued funding for its program.
+            Before APL, I built VR visualization tools at Corvid Technologies, vehicle digital-twin tooling at GS Engineering,
+            and the real-time MetaHuman animation pipeline for NextGenCoding's DJ Khaled launch.
+          </p>
+          <p>
+            The last 18 months I've been building on the AI-tools side too. ClaudeMap is the public one — 233★ on GitHub,
+            real npm downloads, an open-source codebase visualization tool that started as a hackathon project.
+            Blueprint Health Analyzer is the commercial one. IntentGraph is what I'm building now, and it's the most ambitious of the three.
+          </p>
+          <p>
+            I'm graduating from Wayne State University in May 2026 with a B.S. in Computer Science Engineering
+            (3.86 in CS coursework, 3.2 cumulative). Looking for research engineer and early-stage builder roles in
+            San Francisco where graphics, AI tooling, and human-AI collaboration meet.
+          </p>
+        </div>
+
+        <div class="about-meta">
+          <div class="about-block">
+            <h3>Experience</h3>
+            <ul class="xp-list">
+              <li><strong>Johns Hopkins Applied Physics Laboratory</strong> — SWE Intern, Immersive Technologies <span class="xp-when">May 2024 – Present · Laurel, MD</span></li>
+              <li><strong>Consistency AI</strong> — Founding Unity Engineer, PhasePal <span class="xp-when">Oct 2025 – Jan 2026 · Remote</span></li>
+              <li><strong>NextGenCoding</strong> — Junior Unreal Developer, contract <span class="xp-when">Sept 2024 – Nov 2024</span></li>
+              <li><strong>GS Engineering</strong> — Simulation Engineering Intern <span class="xp-when">Nov 2023 – May 2024 · Houghton, MI</span></li>
+              <li><strong>Corvid Technologies</strong> — VR Visualization Intern <span class="xp-when">May 2023 – Aug 2023 · Mooresville, NC</span></li>
+            </ul>
+            <p class="about-restricted">
+              Defense-restricted projects from these roles — KPI Recorder, Vision VR Enhancements, ATD Positioning Tool,
+              Military Ground Vehicle Sim — sit on the resume rather than in the project grid because there's no public artifact to link.
+            </p>
+          </div>
+
+          <div class="about-block">
+            <h3>Education</h3>
+            <p>
+              <strong>Wayne State University</strong><br>
+              B.S. in Computer Science Engineering · Aug 2022 – May 2026<br>
+              3.86 GPA in CS coursework · 3.2 cumulative
+            </p>
+            <p>
+              <strong>Honors.</strong> Edward &amp; Bernard Gaffney Scholarships · Dean's List · Congressional App Challenge winner.
+            </p>
+            <p>
+              <strong>Relevant coursework.</strong> 3D Graphical and Geometric Modeling · Computer Graphics I · Intro to LLMs ·
+              Game Programming · Data Structures &amp; Algorithms · CS I &amp; II.
             </p>
           </div>
         </div>
       </div>
+    </section>
 
-    <!-- Footer Attribution -->
-    <footer class="site-footer" style="text-align: center; padding: 2rem 1rem; background: rgba(0,0,0,0.8); color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1);">
-      <p>&copy; 2025 Quinn Aho. All rights reserved.</p>
-      <p style="margin-top: 0.5rem;">Fluid simulation based on <a href="https://github.com/PavelDoGreat/WebGL-Fluid-Simulation" target="_blank" rel="noopener noreferrer" style="color: rgba(255,255,255,0.8);">Pavel Dobryakov's WebGL Fluid Simulation</a> (MIT License). Built with <a href="https://threejs.org/" target="_blank" rel="noopener noreferrer" style="color: rgba(255,255,255,0.8);">Three.js</a> (MIT License).</p>
+    <!-- CONTACT -->
+    <section class="section section-contact" id="contact">
+      <div class="section-inner contact-inner">
+        <div class="section-eyebrow">Contact</div>
+        <h2 class="section-title contact-title">Open to research engineer and early-stage roles. SF preferred.</h2>
+        <ul class="contact-list">
+          <li><a href="mailto:quinnaho123@gmail.com">quinnaho123@gmail.com</a></li>
+          <li><a href="https://www.linkedin.com/in/quinn-aho-76b315223/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/QuinnAho" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="media/QuinnAhoResume.pdf" target="_blank" rel="noopener">Resume (PDF)</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 Quinn Aho.</p>
+      <p class="footer-credit">
+        Hero fluid sim adapted from
+        <a href="https://github.com/PavelDoGreat/WebGL-Fluid-Simulation" target="_blank" rel="noopener">Pavel Dobryakov's WebGL Fluid Simulation</a>
+        (MIT). Built with vanilla HTML/CSS/JS.
+      </p>
     </footer>
 
-    <!-- fluid sim doesnt work without the promo block-->
-    <div class="promo">
+    <!-- The fluid-sim script reaches for promo elements; keep them present but hidden. -->
+    <div class="promo" hidden>
       <div class="promo-middle">
         <div class="promo-content">
-          <div class="promo-header">
-            <span class="promo-close">&times;</span>
-          </div>
+          <div class="promo-header"><span class="promo-close">&times;</span></div>
           <div class="promo-body">
             <div class="links-container">
               <a class="link" id="apple_link" target="_blank"></a>
@@ -516,93 +440,7 @@
     </div>
 
     <!-- Scripts -->
-    <script type="module">
-      import * as THREE from 'https://unpkg.com/three@0.158.0/build/three.module.js';
-      window.THREE = THREE; // expose for your non-module scripts
-    </script>
-    <script>
-    (() => {
-      const SECTIONS = [
-        document.querySelector('.hero'),
-        document.querySelector('.border-wrapper')
-      ].filter(Boolean);
-
-      if (SECTIONS.length < 2) return;
-
-      const SNAP_DELAY = 160;   // wait after wheel/scroll ends
-      const SNAP_MS    = 900;   // slower glide
-      let tId = null;
-
-      function ease(t){ return t<.5 ? 2*t*t : 1 - Math.pow(-2*t+2,2)/2; }
-
-      function animateScroll(from, to, dur){
-        const start = performance.now();
-        function step(now){
-          const p = Math.min(1, (now - start) / dur);
-          const e = ease(p);
-          window.scrollTo(0, from + (to - from) * e);
-          if (p < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      }
-
-      function snap(){
-        const y = window.scrollY;
-        let best = 0, bestDist = Infinity;
-        for (let i=0;i<SECTIONS.length;i++){
-          const top = SECTIONS[i].offsetTop;
-          const d = Math.abs(top - y);
-          if (d < bestDist){ bestDist = d; best = i; }
-        }
-        animateScroll(window.scrollY, SECTIONS[best].offsetTop, SNAP_MS);
-      }
-
-      window.addEventListener('scroll', () => {
-        clearTimeout(tId);
-        tId = setTimeout(snap, SNAP_DELAY);
-      }, { passive:true });
-
-      const arrow = document.getElementById('scroll-arrow');
-      if (arrow && SECTIONS[1]) {
-        arrow.addEventListener('click', e => {
-          e.preventDefault();
-          animateScroll(window.scrollY, SECTIONS[1].offsetTop, SNAP_MS);
-        });
-      }
-
-      // --- Keyboard navigation: up/down arrows for vertical section navigation ---
-      window.addEventListener('keydown', (e) => {
-        // Don't interfere with text input or if sheet is open
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-        const sheetOpen = document.querySelector('.detail-sheet.open');
-        if (sheetOpen) return;
-
-        if (e.key === 'ArrowDown') {
-          const currentY = window.scrollY;
-          const threshold = window.innerHeight * 0.5;
-          if (currentY < threshold && SECTIONS[1]) {
-            e.preventDefault();
-            e.stopPropagation();
-            animateScroll(currentY, SECTIONS[1].offsetTop, SNAP_MS);
-          }
-        } else if (e.key === 'ArrowUp') {
-          const currentY = window.scrollY;
-          const threshold = window.innerHeight * 0.5;
-          if (currentY >= threshold && SECTIONS[0]) {
-            e.preventDefault();
-            e.stopPropagation();
-            animateScroll(currentY, SECTIONS[0].offsetTop, SNAP_MS);
-          }
-        }
-      }, true);
-    })();
-    </script>
     <script src="scripts/fluid-sim.js"></script>
-    <script src="scripts/dynamic-guide.js" defer></script>
-    <script src="scripts/intro-cube.js" defer></script>
-    <script src="scripts/intro-pages.js" defer></script>
-    <script src="scripts/sheets.js" defer></script>
-    <script src="scripts/side-nav.js" defer></script>
-    <script src="scripts/header-nav.js" defer></script>
+    <script src="scripts/hero-fade.js" defer></script>
   </body>
 </html>

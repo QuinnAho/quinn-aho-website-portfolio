@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="ig-title ig-desc">
+  <title id="ig-title">IntentGraph — Five Architectural Pillars</title>
+  <desc id="ig-desc">Plugin-first, relational graph store, spec-driven loop, agent orchestration, faithfulness by architecture. Spec-driven loop and faithfulness tie back to agent orchestration.</desc>
+
+  <defs>
+    <style>
+      .ig-bg { fill: transparent; }
+      .ig-pillar { fill: #0d0d0f; stroke: rgba(255,255,255,0.55); stroke-width: 1.25; }
+      .ig-pillar-strong { fill: #14141a; stroke: rgba(255,255,255,0.9); stroke-width: 1.5; }
+      .ig-num { font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace; font-size: 14px; fill: rgba(255,255,255,0.45); letter-spacing: 0.08em; }
+      .ig-name { font-family: "Inter", "IBM Plex Sans", system-ui, sans-serif; font-size: 22px; font-weight: 600; fill: rgba(255,255,255,0.95); letter-spacing: 0.01em; }
+      .ig-tag { font-family: "Inter", "IBM Plex Sans", system-ui, sans-serif; font-size: 14px; font-weight: 400; fill: rgba(255,255,255,0.65); }
+      .ig-edge { fill: none; stroke: rgba(255,255,255,0.35); stroke-width: 1; }
+      .ig-edge-strong { fill: none; stroke: rgba(255,255,255,0.7); stroke-width: 1.25; }
+      .ig-edge-back { fill: none; stroke: rgba(255,255,255,0.45); stroke-width: 1; stroke-dasharray: 4 5; }
+      .ig-arrow { fill: rgba(255,255,255,0.7); }
+      .ig-caption { font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; fill: rgba(255,255,255,0.45); letter-spacing: 0.06em; text-transform: uppercase; }
+      .ig-figtitle { font-family: "Inter", system-ui, sans-serif; font-size: 13px; fill: rgba(255,255,255,0.55); letter-spacing: 0.18em; text-transform: uppercase; }
+    </style>
+    <marker id="ig-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="ig-arrow"/>
+    </marker>
+    <marker id="ig-arrow-back" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="rgba(255,255,255,0.45)"/>
+    </marker>
+  </defs>
+
+  <rect class="ig-bg" width="1600" height="800"/>
+
+  <!-- Figure header -->
+  <text x="80" y="78" class="ig-figtitle">IntentGraph · Architecture</text>
+  <text x="80" y="108" class="ig-caption">Five pillars · One MCP substrate · Three first-class clients</text>
+
+  <!-- Top row: Pillar 1, 2, 3 -->
+  <!-- Pillar 1: Plugin-first -->
+  <g transform="translate(80,170)">
+    <rect class="ig-pillar" width="280" height="140" rx="2"/>
+    <text x="20" y="34" class="ig-num">01</text>
+    <text x="20" y="74" class="ig-name">Plugin-first</text>
+    <text x="20" y="102" class="ig-tag">VS Code · Claude Code · Codex</text>
+    <text x="20" y="122" class="ig-tag">Three clients, one skill subprocess</text>
+  </g>
+
+  <!-- Pillar 2: Relational graph store -->
+  <g transform="translate(440,170)">
+    <rect class="ig-pillar" width="280" height="140" rx="2"/>
+    <text x="20" y="34" class="ig-num">02</text>
+    <text x="20" y="74" class="ig-name">Relational graph store</text>
+    <text x="20" y="102" class="ig-tag">SQLite + WAL substrate</text>
+    <text x="20" y="122" class="ig-tag">Heterogeneous nodes &amp; edges</text>
+  </g>
+
+  <!-- Pillar 3: Spec-driven loop -->
+  <g transform="translate(800,170)">
+    <rect class="ig-pillar-strong" width="280" height="140" rx="2"/>
+    <text x="20" y="34" class="ig-num">03</text>
+    <text x="20" y="74" class="ig-name">Spec-driven loop</text>
+    <text x="20" y="102" class="ig-tag">Forward: intent → patch</text>
+    <text x="20" y="122" class="ig-tag">Backward: code → drift &lt; 2s</text>
+  </g>
+
+  <!-- Center pillar (lower row, centered): Agent orchestration -->
+  <g transform="translate(620,470)">
+    <rect class="ig-pillar-strong" width="360" height="160" rx="2"/>
+    <text x="24" y="36" class="ig-num">04</text>
+    <text x="24" y="78" class="ig-name">Agent orchestration</text>
+    <text x="24" y="108" class="ig-tag">AgentRunner is the only path to models.</text>
+    <text x="24" y="128" class="ig-tag">Every action records concrete artifacts:</text>
+    <text x="24" y="146" class="ig-tag">tool calls · retrievals · verifier outcomes</text>
+  </g>
+
+  <!-- Pillar 5 (bottom right): Faithfulness by architecture -->
+  <g transform="translate(1160,470)">
+    <rect class="ig-pillar" width="360" height="160" rx="2"/>
+    <text x="24" y="36" class="ig-num">05</text>
+    <text x="24" y="78" class="ig-name">Faithfulness by architecture</text>
+    <text x="24" y="108" class="ig-tag">Monitor LLM gates every commit.</text>
+    <text x="24" y="128" class="ig-tag">Never trained against its own signal.</text>
+    <text x="24" y="146" class="ig-tag">(Baker et al. 2503.11926 — obfuscation tax)</text>
+  </g>
+
+  <!-- Pillar 1 mirror on bottom-left: a quiet duplicate so the lower row balances -->
+  <g transform="translate(80,470)">
+    <rect class="ig-pillar" width="360" height="160" rx="2" opacity="0.0"/>
+  </g>
+
+  <!-- Edges from Pillar 3 (Spec-driven loop) DOWN into Agent orchestration -->
+  <path class="ig-edge-strong" d="M 940 310 L 940 470" marker-end="url(#ig-arrow)"/>
+
+  <!-- Edges from Pillar 4 (Agent orch) RIGHT into Pillar 5 (Faithfulness) -->
+  <path class="ig-edge-strong" d="M 980 550 L 1160 550" marker-end="url(#ig-arrow)"/>
+
+  <!-- Back-edge: Faithfulness verdicts feed BACK to Agent orchestration -->
+  <path class="ig-edge-back" d="M 1340 590 C 1340 670, 800 680, 800 590" marker-end="url(#ig-arrow-back)"/>
+
+  <!-- Pillar 2 (graph store) connects DOWN-RIGHT into Agent orchestration -->
+  <path class="ig-edge" d="M 580 310 C 580 400, 700 400, 760 470"/>
+
+  <!-- Pillar 1 (Plugin-first) connects DOWN-RIGHT to Agent orchestration -->
+  <path class="ig-edge" d="M 220 310 C 220 420, 540 420, 620 470"/>
+
+  <!-- Edge labels -->
+  <text x="950" y="400" class="ig-caption">drives</text>
+  <text x="1050" y="540" class="ig-caption">gates</text>
+  <text x="1010" y="700" class="ig-caption">verdicts as graph nodes</text>
+
+  <!-- Footer caption -->
+  <text x="80" y="740" class="ig-caption">27 ADRs · Plugin-first · TypeScript · MCP over stdio</text>
+  <text x="80" y="762" class="ig-caption">github.com/QuinnAho/intent-graph</text>
+</svg>
